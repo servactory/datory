@@ -60,8 +60,6 @@ module Datory
             # inputs.company
 
             outputs.data = send(:collection_of_inputs).names.to_h do |input_name|
-              puts input_name
-
               [
                 input_name,
                 inputs.public_send(input_name)
@@ -73,10 +71,10 @@ module Datory
         builder_class = builder_class.dup
 
         # puts
-        # # puts builder_class.__id__.inspect
-        # # puts collection_of_attributes.names.inspect
+        # puts builder_class.__id__.inspect
+        # puts collection_of_attributes.names.inspect
         # puts builder_class.info.inspect
-        # puts builder_class.call!(**incoming_attributes).inspect
+        puts builder_class.call!(**incoming_attributes).inspect
         # puts
 
         # Tools::Unnecessary.find!(self, attributes, collection_of_attributes)
