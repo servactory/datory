@@ -5,12 +5,15 @@ module Datory
     module Workspace
       class ServiceFactory
         def self.create(model_class, class_name, collection_of_attributes) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+          return if model_class.const_defined?(class_name)
+
           class_sample = Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute|
               input attribute.name,
                     as: attribute.options.fetch(:as, attribute.name),
                     type: attribute.options.fetch(:type),
                     required: attribute.options.fetch(:required, true),
+                    consists_of: attribute.options.fetch(:consists_of, false),
                     prepare: (lambda do |value:|
                       prepare = attribute.options.fetch(:prepare, nil)
 
@@ -19,11 +22,13 @@ module Datory
                       value
                     end)
 
-              output attribute.name, type: if (type = attribute.options.fetch(:type)) == Hash
-                                             Servactory::Result
-                                           else
-                                             type
-                                           end
+              output attribute.name,
+                     consists_of: attribute.options.fetch(:consists_of, false),
+                     type: if (type = attribute.options.fetch(:type)) == Hash
+                             Servactory::Result
+                           else
+                             type
+                           end
 
               make :"assign_#{attribute.name}_output"
 
