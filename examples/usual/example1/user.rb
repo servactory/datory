@@ -9,7 +9,7 @@ module Usual
       attribute :email, type: String
       attribute :birth_date, as: :birth_date, type: Date, required: false
 
-      # attribute :company, type: Hash, prepare: ->(value:) { UserCompany.build!(**value) }
+      attribute :company, type: Hash, prepare: ->(value:) { UserCompany.build!(**value).data }
     end
   end
 end

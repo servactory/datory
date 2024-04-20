@@ -10,7 +10,7 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
       last_name: last_name,
       email: email,
       birth_date: birth_date,
-      # company: company
+      company: company
     }
   end
 
@@ -36,7 +36,9 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
   it do
     puts
     puts
+    puts :perform
     puts perform.inspect
+    puts perform.data.inspect
     puts
     puts
   end
