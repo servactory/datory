@@ -4,7 +4,7 @@ module Datory
   module Attributes
     module Workspace
       class ServiceFactory
-        def self.create(class_name, collection_of_attributes) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def self.create(model_class, class_name, collection_of_attributes) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           class_sample = Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute|
               input attribute.name,
@@ -36,7 +36,7 @@ module Datory
             end
           end
 
-          Kernel.const_set(class_name, class_sample)
+          model_class.const_set(class_name, class_sample)
         end
       end
 
@@ -45,11 +45,11 @@ module Datory
       def build!(incoming_attributes:, collection_of_attributes:, **)
         super
 
-        builder_class_name = "#{self.class.name.split('::').join}Builder"
+        builder_class_name = "GBuilder"
 
-        ServiceFactory.create(builder_class_name, collection_of_attributes)
+        ServiceFactory.create(self.class, builder_class_name, collection_of_attributes)
 
-        builder_class = builder_class_name.constantize
+        builder_class = "#{self.class.name}::#{builder_class_name}".constantize
 
         builder_class.call!(**incoming_attributes)
 

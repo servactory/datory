@@ -38,7 +38,6 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
     puts
     puts :perform
     puts perform.inspect
-    puts perform.data.inspect
     puts
     puts
   end
