@@ -18,20 +18,17 @@ module Datory
 
                       value
                     end)
-            end
 
-            output :data, type: Hash
+              output attribute.name, type: if (type = attribute.options.fetch(:type)) == Hash
+                                             Servactory::Result
+                                           else
+                                             type
+                                           end
 
-            make :build
+              make :"assign_#{attribute.name}_output"
 
-            private
-
-            def build
-              outputs.data = send(:collection_of_inputs).names.to_h do |input_name|
-                [
-                  input_name,
-                  inputs.public_send(input_name)
-                ]
+              define_method(:"assign_#{attribute.name}_output") do
+                outputs.public_send(:"#{attribute.name}=", inputs.public_send(attribute.name))
               end
             end
           end
