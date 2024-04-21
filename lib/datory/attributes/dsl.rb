@@ -29,6 +29,44 @@ module Datory
           collection_of_attributes << Attribute.new(name, **options)
         end
 
+        def string(name, **options)
+          options = options.merge(type: String)
+          attribute(name, **options)
+        end
+
+        def integer(name, **options)
+          options = options.merge(type: Integer)
+          attribute(name, **options)
+        end
+
+        def float(name, **options)
+          options = options.merge(type: Float)
+          attribute(name, **options)
+        end
+
+        def date(name, **options)
+          options = options.merge(type: Date)
+          attribute(name, **options)
+        end
+
+        def time(name, **options)
+          options = options.merge(type: Time)
+          attribute(name, **options)
+        end
+
+        def datetime(name, **options)
+          options = options.merge(type: DateTime)
+          attribute(name, **options)
+        end
+
+        def one(name, to:, as: nil)
+          attribute(name, as: as.presence || name, type: Hash, include: to)
+        end
+
+        def many(name, to:, as: nil)
+          attribute(name, as: as.presence || name, type: Array, consists_of: Hash, include: to)
+        end
+
         def collection_of_attributes
           @collection_of_attributes ||= Collection.new
         end

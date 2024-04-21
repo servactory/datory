@@ -3,12 +3,12 @@
 module Usual
   module Example1
     class UserLogin < Datory::Base
-      attribute :uuid, type: String
-      attribute :username, type: String
-      attribute :password, type: String
-      attribute :md5, type: String # rubocop:disable Naming/VariableNumber
-      attribute :sha1, type: String # rubocop:disable Naming/VariableNumber
-      attribute :registered, type: String
+      string :uuid
+      string :username
+      string :password
+      string :md5 # rubocop:disable Naming/VariableNumber
+      string :sha1 # rubocop:disable Naming/VariableNumber
+      string :registered
     end
   end
 end

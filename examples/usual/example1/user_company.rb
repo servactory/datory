@@ -3,9 +3,9 @@
 module Usual
   module Example1
     class UserCompany < Datory::Base
-      attribute :name, type: String
-      attribute :catchPhrase, as: :catch_phrase, type: String
-      attribute :bs, type: String
+      string :name
+      string :catchPhrase, as: :catch_phrase
+      string :bs
     end
   end
 end

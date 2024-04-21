@@ -3,12 +3,12 @@
 module Usual
   module Example1
     class UserAddress < Datory::Base
-      attribute :street, type: String
-      attribute :suite, type: String
-      attribute :city, type: String
-      attribute :zipcode, as: :zip_code, type: String
+      string :street
+      string :suite
+      string :city
+      string :zipcode, as: :zip_code
 
-      attribute :geo, type: Hash, include: UserAddressGeo
+      one :geo, to: UserAddressGeo
     end
   end
 end

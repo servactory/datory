@@ -3,8 +3,8 @@
 module Usual
   module Example1
     class UserAddressGeo < Datory::Base
-      attribute :lat, as: :latitude, type: String
-      attribute :lng, as: :longitude, type: String
+      string :lat, as: :latitude
+      string :lng, as: :longitude
     end
   end
 end
