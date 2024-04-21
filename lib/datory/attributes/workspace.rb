@@ -17,15 +17,15 @@ module Datory
                     required: attribute.options.fetch(:required, true),
                     consists_of: attribute.options.fetch(:consists_of, false),
                     prepare: (lambda do |value:|
-                      included_class = attribute.options.fetch(:include, nil)
-                      return value unless included_class.present?
+                      include_class = attribute.options.fetch(:include, nil)
+                      return value unless include_class.present?
 
                       type = attribute.options.fetch(:type, nil)
 
                       if [Set, Array].include?(type)
-                        value.map { |item| included_class.build(**item) }
+                        value.map { |item| include_class.build(**item) }
                       else
-                        included_class.build(**value)
+                        include_class.build(**value)
                       end
                     end)
 

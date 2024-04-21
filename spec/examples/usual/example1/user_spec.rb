@@ -1,13 +1,68 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example1::User do
-  # describe "#serialize" do
-  #   subject(:perform) { described_class.serialize(user) }
-  #
-  #   let(:user) do
-  #     # ...
-  #   end
-  # end
+  describe "#serialize" do
+    subject(:perform) { described_class.serialize(user) }
+
+    let(:user) do
+      described_class::ARModel.new(
+        first_name: "John",
+        last_name: "Doe",
+        email: "johndoe@example.com",
+        birth_date: "1973-01-22",
+        login: login,
+        addresses: addresses,
+        phone: "(555) 555-1234",
+        website: "www.johndoe.com",
+        company: company
+      )
+    end
+
+    let(:login) do
+      Usual::Example1::UserLogin::ARModel.new(
+        uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+        username: "johndoe",
+        password: "a25723600f7",
+        md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+        sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+        registered: "2023-01-10T10:03:20.022Z"
+      )
+    end
+
+    let(:addresses) do
+      [
+        Usual::Example1::UserAddress::ARModel.new(
+          street: "123 Main Street",
+          suite: "Apt. 4",
+          city: "Anytown",
+          zip_code: "12345-6789",
+          geo: Usual::Example1::UserAddressGeo::ARModel.new(
+            latitude: "42.1234",
+            longitude: "-71.2345"
+          )
+        )
+      ]
+    end
+
+    let(:company) do
+      Usual::Example1::UserCompany::ARModel.new(
+        name: "ABC Company",
+        catch_phrase: "Innovative solutions for all your needs",
+        bs: "Marketing"
+      )
+    end
+
+    it do
+      puts
+      puts
+      puts :perform
+      puts perform.inspect
+      puts
+      puts
+
+      expect(perform).to be_present
+    end
+  end
 
   describe "#deserialize" do
     subject(:perform) { described_class.deserialize(json) }
@@ -62,6 +117,7 @@ RSpec.describe Usual::Example1::User do
           last_name: "Doe",
           email: "johndoe@example.com",
           birth_date: "1973-01-22",
+          login: be_present,
           addresses: be_present,
           phone: "(555) 555-1234",
           website: "www.johndoe.com",
@@ -125,8 +181,8 @@ RSpec.describe Usual::Example1::User do
           uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
           username: "johndoe",
           password: "a25723600f7",
-          md5: "c1328472c5794a25723600f71c1b4586",
-          sha1: "35544a31cc19bd6520af116554873167117f4d94",
+          md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+          sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
           registered: "2023-01-10T10:03:20.022Z"
         },
         addresses: [
@@ -162,6 +218,7 @@ RSpec.describe Usual::Example1::User do
           last_name: "Doe",
           email: "johndoe@example.com",
           birth_date: "1973-01-22",
+          login: be_present,
           addresses: be_present,
           phone: "(555) 555-1234",
           website: "www.johndoe.com",
