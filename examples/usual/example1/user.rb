@@ -3,11 +3,16 @@
 module Usual
   module Example1
     class User < Datory::Base
+      singular :user
+      plural :users
+
       attribute :id, type: String
-      attribute :first_name, as: :first_name, type: String
-      attribute :last_name, as: :last_name, type: String
+      attribute :firstname, as: :first_name, type: String
+      attribute :lastname, as: :last_name, type: String
       attribute :email, type: String
-      attribute :birth_date, as: :birth_date, type: Date, required: false
+      attribute :birthDate, as: :birth_date, type: String, required: false
+
+      attribute :login, type: Hash, include: UserLogin
 
       attribute :addresses, type: Array, consists_of: Hash, include: UserAddress
 

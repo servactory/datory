@@ -1,115 +1,215 @@
 # frozen_string_literal: true
 
-RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoizedHelpers
-  subject(:perform) { described_class.build(**attributes) }
+RSpec.describe Usual::Example1::User do
+  # describe "#new" do
+  #   subject(:perform) { described_class.new(**attributes) }
+  #
+  #   let(:attributes) do
+  #     {
+  #
+  #     }
+  #   end
+  # end
 
-  let(:attributes) do
-    {
-      id: id,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      birth_date: birth_date,
-      addresses: addresses,
-      phone: phone,
-      website: website,
-      company: company
-    }
-  end
+  describe "#build" do
+    subject(:perform) { described_class.build(**attributes) }
 
-  let(:id) { SecureRandom.uuid }
-  let(:first_name) { "John" }
-  let(:last_name) { "Doe" }
-  let(:email) { "johndoe@example.com" }
-  let(:birth_date) { Date.parse("1973-01-22") }
-  let(:addresses) { addresses_array }
-  let(:phone) { "(555) 555-1234" }
-  let(:website) { "www.johndoe.com" }
-  let(:company) { company_hash }
-
-  let(:addresses_array) do
-    [
-      address_hash
-    ]
-  end
-
-  let(:address_hash) do
-    {
-      street: "123 Main Street",
-      suite: "Apt. 4",
-      city: "Anytown",
-      zip_code: "12345-6789",
-      geo: {
-        latitude: "42.1234",
-        longitude: "-71.2345"
+    let(:attributes) do
+      {
+        id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+        firstname: "John",
+        lastname: "Doe",
+        email: "johndoe@example.com",
+        birthDate: "1973-01-22",
+        login: {
+          uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          username: "johndoe",
+          password: "a25723600f7",
+          md5: "c1328472c5794a25723600f71c1b4586",
+          sha1: "35544a31cc19bd6520af116554873167117f4d94",
+          registered: "2023-01-10T10:03:20.022Z"
+        },
+        addresses: [
+          {
+            street: "123 Main Street",
+            suite: "Apt. 4",
+            city: "Anytown",
+            zipcode: "12345-6789",
+            geo: {
+              lat: "42.1234",
+              lng: "-71.2345"
+            }
+          }
+        ],
+        phone: "(555) 555-1234",
+        website: "www.johndoe.com",
+        company: {
+          name: "ABC Company",
+          catchPhrase: "Innovative solutions for all your needs",
+          bs: "Marketing"
+        }
       }
-    }
+    end
+
+    specify "root", :aggregate_failures do
+      expect(perform).to be_a(Servactory::Result)
+      expect(perform).to an_instance_of(Datory::Result)
+
+      expect(perform).to(
+        have_attributes(
+          id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+          first_name: "John",
+          last_name: "Doe",
+          email: "johndoe@example.com",
+          birth_date: "1973-01-22",
+          addresses: be_present,
+          phone: "(555) 555-1234",
+          website: "www.johndoe.com",
+          company: be_present
+        )
+      )
+    end
+
+    specify "addresses", :aggregate_failures do
+      expect(perform.addresses).to be_an(Array)
+
+      expect(perform.addresses.first).to be_a(Servactory::Result)
+      expect(perform.addresses.first).to an_instance_of(Datory::Result)
+
+      expect(perform.addresses.first).to(
+        have_attributes(
+          street: "123 Main Street",
+          suite: "Apt. 4",
+          city: "Anytown",
+          zip_code: "12345-6789",
+          geo: be_present
+        )
+      )
+
+      expect(perform.addresses.first.geo).to be_a(Servactory::Result)
+      expect(perform.addresses.first.geo).to an_instance_of(Datory::Result)
+
+      expect(perform.addresses.first.geo).to(
+        have_attributes(
+          latitude: "42.1234",
+          longitude: "-71.2345"
+        )
+      )
+    end
+
+    specify "company", :aggregate_failures do
+      expect(perform.company).to be_a(Servactory::Result)
+      expect(perform.company).to an_instance_of(Datory::Result)
+
+      expect(perform.company).to(
+        have_attributes(
+          name: "ABC Company",
+          catch_phrase: "Innovative solutions for all your needs",
+          bs: "Marketing"
+        )
+      )
+    end
   end
 
-  let(:company_hash) do
-    {
-      name: "ABC Company",
-      catch_phrase: "Innovative solutions for all your needs",
-      bs: "Marketing"
-    }
-  end
+  describe "#deserialize" do
+    subject(:perform) { described_class.deserialize(json) }
 
-  specify "root", :aggregate_failures do
-    expect(perform).to be_a(Servactory::Result)
-    expect(perform).to an_instance_of(Datory::Result)
+    # rubocop:disable Lint/SymbolConversion, Naming/VariableNumber
+    let(:json) do
+      {
+        "id": "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@example.com",
+        "birthDate": "1973-01-22",
+        "login": {
+          "uuid": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          "username": "johndoe",
+          "password": "a25723600f7",
+          "md5": "c1328472c5794a25723600f71c1b4586",
+          "sha1": "35544a31cc19bd6520af116554873167117f4d94",
+          "registered": "2023-01-10T10:03:20.022Z"
+        },
+        "addresses": [
+          {
+            "street": "123 Main Street",
+            "suite": "Apt. 4",
+            "city": "Anytown",
+            "zipcode": "12345-6789",
+            "geo": {
+              "lat": "42.1234",
+              "lng": "-71.2345"
+            }
+          }
+        ],
+        "phone": "(555) 555-1234",
+        "website": "www.johndoe.com",
+        "company": {
+          "name": "ABC Company",
+          "catchPhrase": "Innovative solutions for all your needs",
+          "bs": "Marketing"
+        }
+      }
+    end
+    # rubocop:enable Lint/SymbolConversion, Naming/VariableNumber
 
-    expect(perform).to(
-      have_attributes(
-        id: id,
-        first_name: first_name,
-        last_name: last_name,
-        email: email,
-        birth_date: birth_date,
-        addresses: be_present,
-        phone: phone,
-        website: website,
-        company: be_present
+    specify "root", :aggregate_failures do
+      expect(perform).to be_a(Servactory::Result)
+      expect(perform).to an_instance_of(Datory::Result)
+
+      expect(perform).to(
+        have_attributes(
+          id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+          first_name: "John",
+          last_name: "Doe",
+          email: "johndoe@example.com",
+          birth_date: "1973-01-22",
+          addresses: be_present,
+          phone: "(555) 555-1234",
+          website: "www.johndoe.com",
+          company: be_present
+        )
       )
-    )
-  end
+    end
 
-  specify "addresses", :aggregate_failures do
-    expect(perform.addresses).to be_an(Array)
+    specify "addresses", :aggregate_failures do
+      expect(perform.addresses).to be_an(Array)
 
-    expect(perform.addresses.first).to be_a(Servactory::Result)
-    expect(perform.addresses.first).to an_instance_of(Datory::Result)
+      expect(perform.addresses.first).to be_a(Servactory::Result)
+      expect(perform.addresses.first).to an_instance_of(Datory::Result)
 
-    expect(perform.addresses.first).to(
-      have_attributes(
-        street: "123 Main Street",
-        suite: "Apt. 4",
-        city: "Anytown",
-        zip_code: "12345-6789",
-        geo: be_present
+      expect(perform.addresses.first).to(
+        have_attributes(
+          street: "123 Main Street",
+          suite: "Apt. 4",
+          city: "Anytown",
+          zip_code: "12345-6789",
+          geo: be_present
+        )
       )
-    )
 
-    expect(perform.addresses.first.geo).to be_a(Servactory::Result)
-    expect(perform.addresses.first.geo).to an_instance_of(Datory::Result)
+      expect(perform.addresses.first.geo).to be_a(Servactory::Result)
+      expect(perform.addresses.first.geo).to an_instance_of(Datory::Result)
 
-    expect(perform.addresses.first.geo).to(
-      have_attributes(
-        latitude: "42.1234",
-        longitude: "-71.2345"
+      expect(perform.addresses.first.geo).to(
+        have_attributes(
+          latitude: "42.1234",
+          longitude: "-71.2345"
+        )
       )
-    )
-  end
+    end
 
-  specify "company", :aggregate_failures do
-    expect(perform.company).to be_a(Servactory::Result)
-    expect(perform.company).to an_instance_of(Datory::Result)
+    specify "company", :aggregate_failures do
+      expect(perform.company).to be_a(Servactory::Result)
+      expect(perform.company).to an_instance_of(Datory::Result)
 
-    expect(perform.company).to(
-      have_attributes(
-        name: "ABC Company",
-        catch_phrase: "Innovative solutions for all your needs",
-        bs: "Marketing"
+      expect(perform.company).to(
+        have_attributes(
+          name: "ABC Company",
+          catch_phrase: "Innovative solutions for all your needs",
+          bs: "Marketing"
+        )
       )
-    )
+    end
   end
 end

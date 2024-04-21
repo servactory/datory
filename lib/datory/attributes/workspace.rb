@@ -9,8 +9,10 @@ module Datory
 
           class_sample = Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute| # rubocop:disable Metrics/BlockLength
+              input_internal_name = attribute.options.fetch(:as, attribute.name)
+
               input attribute.name,
-                    as: attribute.options.fetch(:as, attribute.name),
+                    as: input_internal_name,
                     type: attribute.options.fetch(:type),
                     required: attribute.options.fetch(:required, true),
                     consists_of: attribute.options.fetch(:consists_of, false),
@@ -27,7 +29,7 @@ module Datory
                       end
                     end)
 
-              output attribute.name,
+              output input_internal_name,
                      consists_of: (
                        if (type = attribute.options.fetch(:consists_of, false)) == Hash
                          Datory::Result
@@ -41,10 +43,10 @@ module Datory
                              type
                            end
 
-              make :"assign_#{attribute.name}_output"
+              make :"assign_#{input_internal_name}_output"
 
-              define_method(:"assign_#{attribute.name}_output") do
-                outputs.public_send(:"#{attribute.name}=", inputs.public_send(attribute.name))
+              define_method(:"assign_#{input_internal_name}_output") do
+                outputs.public_send(:"#{input_internal_name}=", inputs.public_send(input_internal_name))
               end
             end
           end

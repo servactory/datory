@@ -17,6 +17,14 @@ module Datory
 
         private
 
+        def singular(value)
+          @singular = value
+        end
+
+        def plural(value)
+          @plural = value
+        end
+
         def attribute(name, **options)
           collection_of_attributes << Attribute.new(name, **options)
         end

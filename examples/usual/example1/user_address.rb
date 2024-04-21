@@ -6,7 +6,7 @@ module Usual
       attribute :street, type: String
       attribute :suite, type: String
       attribute :city, type: String
-      attribute :zip_code, type: String
+      attribute :zipcode, as: :zip_code, type: String
 
       attribute :geo, type: Hash, include: UserAddressGeo
     end

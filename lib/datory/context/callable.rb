@@ -15,6 +15,11 @@ module Datory
         _build!(context, **attributes)
       end
 
+      def deserialize(json)
+        hash = JSON.parse(json.to_json)
+        build(**hash)
+      end
+
       private
 
       def _build!(context, **attributes)
