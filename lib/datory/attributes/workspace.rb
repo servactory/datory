@@ -50,6 +50,19 @@ module Datory
                 outputs.public_send(:"#{input_internal_name}=", inputs.public_send(input_internal_name))
               end
             end
+
+            # output :model, type: Class
+
+            # make :assign_model_name
+
+            # def assign_model_name
+            #   model_class_name_array = self.class.name.split("::")
+            #   model_class_name_array.pop
+            #   model_class_name = model_class_name_array.join("::")
+            #   model_class = model_class_name.constantize
+            #
+            #   outputs.model = model_class
+            # end
           end
 
           model_class.const_set(class_name, class_sample)
