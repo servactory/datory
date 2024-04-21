@@ -4,9 +4,7 @@ module Datory
   module Context
     module Callable
       def serialize(model)
-        hash = {}
-
-        collection_of_attributes.each do |attribute|
+        collection_of_attributes.to_h do |attribute|
           internal_name = attribute.options.fetch(:as, attribute.name)
           include_class = attribute.options.fetch(:include, nil)
           output_formatter = attribute.options.fetch(:output, nil)
@@ -30,10 +28,8 @@ module Datory
               value
             end
 
-          hash[attribute.name] = value
+          [attribute.name, value]
         end
-
-        hash
       end
 
       def deserialize(json)
