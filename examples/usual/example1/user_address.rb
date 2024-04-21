@@ -8,7 +8,7 @@ module Usual
       attribute :city, type: String
       attribute :zip_code, type: String
 
-      attribute :geo, type: Hash, prepare: ->(value:) { UserAddressGeo.build!(**value) }
+      attribute :geo, type: Hash, include: UserAddressGeo
     end
   end
 end

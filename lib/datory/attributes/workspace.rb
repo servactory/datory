@@ -15,11 +15,16 @@ module Datory
                     required: attribute.options.fetch(:required, true),
                     consists_of: attribute.options.fetch(:consists_of, false),
                     prepare: (lambda do |value:|
-                      prepare = attribute.options.fetch(:prepare, nil)
+                      included_class = attribute.options.fetch(:include, nil)
+                      return value unless included_class.present?
 
-                      return prepare.call(value: value) if prepare.is_a?(Proc)
+                      type = attribute.options.fetch(:type, nil)
 
-                      value
+                      if [Set, Array].include?(type)
+                        value.map { |item| included_class.build!(**item) }
+                      else
+                        included_class.build!(**value)
+                      end
                     end)
 
               output attribute.name,
