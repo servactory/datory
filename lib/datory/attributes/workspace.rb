@@ -21,9 +21,9 @@ module Datory
                       type = attribute.options.fetch(:type, nil)
 
                       if [Set, Array].include?(type)
-                        value.map { |item| included_class.build!(**item) }
+                        value.map { |item| included_class.build(**item) }
                       else
-                        included_class.build!(**value)
+                        included_class.build(**value)
                       end
                     end)
 

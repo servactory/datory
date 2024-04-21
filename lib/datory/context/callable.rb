@@ -3,26 +3,16 @@
 module Datory
   module Context
     module Callable
-      def build!(attributes = {})
-        context = send(:new)
-
-        _build!(context, **attributes)
-
-        #   Servactory::Result.success_for(context: context)
-        # rescue config.success_class => e
-        #   Servactory::Result.success_for(context: e.context)
-      end
+      # def build!(attributes = {})
+      #   context = send(:new)
+      #
+      #   _build!(context, **attributes)
+      # end
 
       def build(attributes = {})
         context = send(:new)
 
         _build!(context, **attributes)
-
-        #   Servactory::Result.success_for(context: context)
-        # rescue config.success_class => e
-        #   Servactory::Result.success_for(context: e.context)
-        # rescue config.failure_class => e
-        #   Servactory::Result.failure_for(context: context, exception: e)
       end
 
       private

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoizedHelpers
-  subject(:perform) { described_class.build!(**attributes) }
+  subject(:perform) { described_class.build(**attributes) }
 
   let(:attributes) do
     {
