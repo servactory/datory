@@ -7,16 +7,16 @@ module Usual
         attr_accessor :uuid,
                       :username,
                       :password,
-                      :md5,
-                      :sha1,
+                      :md5, # rubocop:disable Naming/VariableNumber
+                      :sha1, # rubocop:disable Naming/VariableNumber
                       :registered
 
         def initialize(uuid:, username:, password:, md5:, sha1:, registered:)
           @uuid = uuid
           @username = username
           @password = password
-          @md5 = md5
-          @sha1 = sha1
+          @md5 = md5 # rubocop:disable Naming/VariableNumber
+          @sha1 = sha1 # rubocop:disable Naming/VariableNumber
           @registered = registered
         end
       end

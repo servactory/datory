@@ -8,7 +8,7 @@ module Usual
                       :catch_phrase,
                       :bs
 
-        def initialize(name:, catch_phrase:, bs:)
+        def initialize(name:, catch_phrase:, bs:) # rubocop:disable Naming/MethodParameterName
           @name = name
           @catch_phrase = catch_phrase
           @bs = bs

@@ -2,8 +2,6 @@
 
 RSpec.describe Usual::Example1::User do
   describe "#serialize" do
-    subject(:perform) { described_class.serialize(user) }
-
     let(:user) do
       described_class::ARModel.new(
         first_name: "John",
@@ -52,43 +50,92 @@ RSpec.describe Usual::Example1::User do
       )
     end
 
-    it do
-      expect(perform).to match(
-        {
-          id: be_present,
-          firstname: "John",
-          lastname: "Doe",
-          email: "johndoe@example.com",
-          birthDate: "1973-01-22",
-          login: {
-            uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-            username: "johndoe",
-            password: "a25723600f7",
-            md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
-            sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-            registered: "2023-01-10T10:03:20.022Z"
-          },
-          addresses: [
-            {
-              street: "123 Main Street",
-              suite: "Apt. 4",
-              city: "Anytown",
-              zipcode: "12345-6789",
-              geo: {
-                lat: "42.1234",
-                lng: "-71.2345"
+    describe "singular" do
+      subject(:perform) { described_class.serialize(user) }
+
+      it do
+        expect(perform).to match(
+          {
+            id: be_present,
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: "1973-01-22",
+            login: {
+              uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              registered: "2023-01-10T10:03:20.022Z"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
               }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
             }
-          ],
-          phone: "(555) 555-1234",
-          website: "www.johndoe.com",
-          company: {
-            name: "ABC Company",
-            catchPhrase: "Innovative solutions for all your needs",
-            bs: "Marketing"
           }
-        }
-      )
+        )
+      end
+    end
+
+    describe "plural" do
+      subject(:perform) { described_class.serialize(users) }
+
+      let(:users) { [user] }
+
+      it do
+        expect(perform).to contain_exactly(
+          {
+            id: be_present,
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: "1973-01-22",
+            login: {
+              uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              registered: "2023-01-10T10:03:20.022Z"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
+              }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
+            }
+          }
+        )
+      end
     end
   end
 
