@@ -24,7 +24,7 @@ module Usual
       string :city
       string :zipcode, as: :zip_code
 
-      one :geo, to: UserAddressGeo
+      one :geo, include: UserAddressGeo
     end
   end
 end

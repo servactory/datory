@@ -38,14 +38,14 @@ module Usual
       string :email
       string :birthDate, as: :birth_date
 
-      one :login, to: UserLogin
+      one :login, include: UserLogin
 
-      many :addresses, to: UserAddress
+      many :addresses, include: UserAddress
 
       string :phone
       string :website
 
-      one :company, to: UserCompany
+      one :company, include: UserCompany
     end
   end
 end
