@@ -11,6 +11,8 @@ module Datory
         output_exception_class Datory::Service::Exceptions::Output
 
         failure_class Datory::Service::Exceptions::Failure
+
+        result_class Datory::Service::Result
       end
     end
   end
