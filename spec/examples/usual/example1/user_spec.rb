@@ -1,55 +1,55 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example1::User do
-  # describe "#new" do
-  #   subject(:perform) { described_class.new(**attributes) }
+  # describe "#serialize" do
+  #   subject(:perform) { described_class.serialize(user) }
   #
-  #   let(:attributes) do
-  #     {
-  #
-  #     }
+  #   let(:user) do
+  #     # ...
   #   end
   # end
 
-  describe "#build" do
-    subject(:perform) { described_class.build(**attributes) }
+  describe "#deserialize" do
+    subject(:perform) { described_class.deserialize(json) }
 
-    let(:attributes) do
+    # rubocop:disable Lint/SymbolConversion, Naming/VariableNumber
+    let(:json) do
       {
-        id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-        firstname: "John",
-        lastname: "Doe",
-        email: "johndoe@example.com",
-        birthDate: "1973-01-22",
-        login: {
-          uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-          username: "johndoe",
-          password: "a25723600f7",
-          md5: "c1328472c5794a25723600f71c1b4586",
-          sha1: "35544a31cc19bd6520af116554873167117f4d94",
-          registered: "2023-01-10T10:03:20.022Z"
+        "id": "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@example.com",
+        "birthDate": "1973-01-22",
+        "login": {
+          "uuid": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          "username": "johndoe",
+          "password": "a25723600f7",
+          "md5": "c1328472c5794a25723600f71c1b4586",
+          "sha1": "35544a31cc19bd6520af116554873167117f4d94",
+          "registered": "2023-01-10T10:03:20.022Z"
         },
-        addresses: [
+        "addresses": [
           {
-            street: "123 Main Street",
-            suite: "Apt. 4",
-            city: "Anytown",
-            zipcode: "12345-6789",
-            geo: {
-              lat: "42.1234",
-              lng: "-71.2345"
+            "street": "123 Main Street",
+            "suite": "Apt. 4",
+            "city": "Anytown",
+            "zipcode": "12345-6789",
+            "geo": {
+              "lat": "42.1234",
+              "lng": "-71.2345"
             }
           }
         ],
-        phone: "(555) 555-1234",
-        website: "www.johndoe.com",
-        company: {
-          name: "ABC Company",
-          catchPhrase: "Innovative solutions for all your needs",
-          bs: "Marketing"
+        "phone": "(555) 555-1234",
+        "website": "www.johndoe.com",
+        "company": {
+          "name": "ABC Company",
+          "catchPhrase": "Innovative solutions for all your needs",
+          "bs": "Marketing"
         }
       }
     end
+    # rubocop:enable Lint/SymbolConversion, Naming/VariableNumber
 
     specify "root", :aggregate_failures do
       expect(perform).to be_a(Servactory::Result)
@@ -111,47 +111,45 @@ RSpec.describe Usual::Example1::User do
     end
   end
 
-  describe "#deserialize" do
-    subject(:perform) { described_class.deserialize(json) }
+  describe "#build" do
+    subject(:perform) { described_class.build(**attributes) }
 
-    # rubocop:disable Lint/SymbolConversion, Naming/VariableNumber
-    let(:json) do
+    let(:attributes) do
       {
-        "id": "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-        "firstname": "John",
-        "lastname": "Doe",
-        "email": "johndoe@example.com",
-        "birthDate": "1973-01-22",
-        "login": {
-          "uuid": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-          "username": "johndoe",
-          "password": "a25723600f7",
-          "md5": "c1328472c5794a25723600f71c1b4586",
-          "sha1": "35544a31cc19bd6520af116554873167117f4d94",
-          "registered": "2023-01-10T10:03:20.022Z"
+        id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+        firstname: "John",
+        lastname: "Doe",
+        email: "johndoe@example.com",
+        birthDate: "1973-01-22",
+        login: {
+          uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          username: "johndoe",
+          password: "a25723600f7",
+          md5: "c1328472c5794a25723600f71c1b4586",
+          sha1: "35544a31cc19bd6520af116554873167117f4d94",
+          registered: "2023-01-10T10:03:20.022Z"
         },
-        "addresses": [
+        addresses: [
           {
-            "street": "123 Main Street",
-            "suite": "Apt. 4",
-            "city": "Anytown",
-            "zipcode": "12345-6789",
-            "geo": {
-              "lat": "42.1234",
-              "lng": "-71.2345"
+            street: "123 Main Street",
+            suite: "Apt. 4",
+            city: "Anytown",
+            zipcode: "12345-6789",
+            geo: {
+              lat: "42.1234",
+              lng: "-71.2345"
             }
           }
         ],
-        "phone": "(555) 555-1234",
-        "website": "www.johndoe.com",
-        "company": {
-          "name": "ABC Company",
-          "catchPhrase": "Innovative solutions for all your needs",
-          "bs": "Marketing"
+        phone: "(555) 555-1234",
+        website: "www.johndoe.com",
+        company: {
+          name: "ABC Company",
+          catchPhrase: "Innovative solutions for all your needs",
+          bs: "Marketing"
         }
       }
     end
-    # rubocop:enable Lint/SymbolConversion, Naming/VariableNumber
 
     specify "root", :aggregate_failures do
       expect(perform).to be_a(Servactory::Result)
