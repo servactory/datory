@@ -36,7 +36,7 @@ module Usual
       string :firstname, as: :first_name
       string :lastname, as: :last_name
       string :email
-      string :birthDate, as: :birth_date
+      string :birthDate, as: :birth_date, output: ->(value:) { value.to_s }
 
       one :login, include: UserLogin
 

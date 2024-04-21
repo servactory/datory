@@ -9,6 +9,7 @@ module Datory
         collection_of_attributes.each do |attribute|
           internal_name = attribute.options.fetch(:as, attribute.name)
           include_class = attribute.options.fetch(:include, nil)
+          output_formatter = attribute.options.fetch(:output, nil)
 
           value = model.public_send(internal_name)
 
@@ -21,6 +22,8 @@ module Datory
               else
                 include_class.serialize(value)
               end
+            elsif output_formatter.is_a?(Proc)
+              output_formatter.call(value: value)
             elsif [Date, Time, DateTime].include?(value.class)
               value.to_s
             else
