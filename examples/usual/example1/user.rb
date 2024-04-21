@@ -11,7 +11,7 @@ module Usual
 
       attribute :addresses,
                 type: Array,
-                consists_of: false,
+                consists_of: Hash,
                 prepare: ->(value:) { value.map { |address| UserAddress.build!(address) } }
 
       attribute :phone, type: String, required: false

@@ -23,9 +23,15 @@ module Datory
                     end)
 
               output attribute.name,
-                     consists_of: attribute.options.fetch(:consists_of, false),
+                     consists_of: (
+                       if (type = attribute.options.fetch(:consists_of, false)) == Hash
+                         Datory::Service::Result
+                       else
+                         type
+                       end
+                     ),
                      type: if (type = attribute.options.fetch(:type)) == Hash
-                             Servactory::Result
+                             Datory::Service::Result
                            else
                              type
                            end
