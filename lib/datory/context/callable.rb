@@ -21,11 +21,13 @@ module Datory
               else
                 include_class.serialize(value)
               end
+            elsif [Date, Time, DateTime].include?(value.class)
+              value.to_s
             else
               value
             end
 
-          hash[internal_name] = value
+          hash[attribute.name] = value
         end
 
         hash
