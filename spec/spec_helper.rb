@@ -2,6 +2,7 @@
 
 require "zeitwerk"
 require "forwardable"
+require "servactory"
 require "datory"
 
 loader = Zeitwerk::Loader.new
