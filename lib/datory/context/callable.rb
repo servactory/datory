@@ -41,8 +41,14 @@ module Datory
       # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       def deserialize(json)
-        hash = JSON.parse(json.to_json)
-        build(**hash)
+        if [Set, Array].include?(json.class)
+          json.map do |json_item|
+            deserialize(json_item)
+          end
+        else
+          hash = JSON.parse(json.to_json)
+          build(**hash)
+        end
       end
 
       # def build!(attributes = {})
