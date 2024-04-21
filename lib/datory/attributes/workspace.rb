@@ -4,7 +4,8 @@ module Datory
   module Attributes
     module Workspace
       class ServiceFactory
-        def self.create(model_class, class_name, collection_of_attributes) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+        def self.create(model_class, class_name, collection_of_attributes)
           return if model_class.const_defined?(class_name)
 
           class_sample = Class.new(Datory::Service::Builder) do
@@ -53,6 +54,7 @@ module Datory
 
           model_class.const_set(class_name, class_sample)
         end
+        # rubocop:enable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       end
 
       private
