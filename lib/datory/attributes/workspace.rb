@@ -8,7 +8,7 @@ module Datory
           return if model_class.const_defined?(class_name)
 
           class_sample = Class.new(Datory::Service::Builder) do
-            collection_of_attributes.each do |attribute|
+            collection_of_attributes.each do |attribute| # rubocop:disable Metrics/BlockLength
               input attribute.name,
                     as: attribute.options.fetch(:as, attribute.name),
                     type: attribute.options.fetch(:type),
