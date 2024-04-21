@@ -3,7 +3,7 @@
   <a href="https://github.com/servactory/datory/releases"><img src="https://img.shields.io/github/release-date/servactory/datory" alt="Release Date"></a>
 </p>
 
-## Documentation
+## Documentation (soon)
 
 See [datory.servactory.com](https://datory.servactory.com) for documentation.
 
@@ -13,6 +13,56 @@ See [datory.servactory.com](https://datory.servactory.com) for documentation.
 
 ```ruby
 gem "datory"
+```
+
+### Usage
+
+#### Serialize
+
+```ruby
+user = User.find(...)
+
+UserDto.serialize(user)
+```
+
+#### Deserialize
+
+```ruby
+UserDto.deserialize(json)
+```
+
+#### Examples
+
+##### User
+
+```ruby
+class UserDto < Datory::Base
+  string :id
+  string :firstname, as: :first_name
+  string :lastname, as: :last_name
+  string :email
+  string :birthDate, as: :birth_date, output: ->(value:) { value.to_s }
+
+  one :login, include: UserLoginDto
+
+  many :addresses, include: UserAddressDto
+
+  string :phone
+  string :website
+
+  one :company, include: UserCompanyDto
+end
+```
+
+```ruby
+class UserLoginDto < Datory::Base
+  string :uuid
+  string :username
+  string :password
+  string :md5
+  string :sha1
+  string :registered
+end
 ```
 
 ## Contributing
