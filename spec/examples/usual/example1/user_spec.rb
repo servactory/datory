@@ -56,7 +56,7 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
 
   specify "root", :aggregate_failures do
     expect(perform).to be_a(Servactory::Result)
-    expect(perform).to an_instance_of(Datory::Service::Result)
+    expect(perform).to an_instance_of(Datory::Result)
 
     expect(perform).to(
       have_attributes(
@@ -77,7 +77,7 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
     expect(perform.addresses).to be_an(Array)
 
     expect(perform.addresses.first).to be_a(Servactory::Result)
-    expect(perform.addresses.first).to an_instance_of(Datory::Service::Result)
+    expect(perform.addresses.first).to an_instance_of(Datory::Result)
 
     expect(perform.addresses.first).to(
       have_attributes(
@@ -90,7 +90,7 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
     )
 
     expect(perform.addresses.first.geo).to be_a(Servactory::Result)
-    expect(perform.addresses.first.geo).to an_instance_of(Datory::Service::Result)
+    expect(perform.addresses.first.geo).to an_instance_of(Datory::Result)
 
     expect(perform.addresses.first.geo).to(
       have_attributes(
@@ -102,7 +102,7 @@ RSpec.describe Usual::Example1::User do # rubocop:disable RSpec/MultipleMemoized
 
   specify "company", :aggregate_failures do
     expect(perform.company).to be_a(Servactory::Result)
-    expect(perform.company).to an_instance_of(Datory::Service::Result)
+    expect(perform.company).to an_instance_of(Datory::Result)
 
     expect(perform.company).to(
       have_attributes(

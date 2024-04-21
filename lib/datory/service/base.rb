@@ -12,7 +12,7 @@ module Datory
 
         failure_class Datory::Service::Exceptions::Failure
 
-        result_class Datory::Service::Result
+        result_class Datory::Result
       end
     end
   end
