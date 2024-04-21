@@ -33,8 +33,6 @@ UserDto.deserialize(json)
 
 #### Examples
 
-##### User
-
 ```ruby
 class UserDto < Datory::Base
   string :id
