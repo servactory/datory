@@ -204,6 +204,22 @@ RSpec.describe Usual::Example1::User do
         )
       end
 
+      specify "login", :aggregate_failures do
+        expect(perform.login).to be_a(Servactory::Result)
+        expect(perform.login).to an_instance_of(Datory::Result)
+
+        expect(perform.login).to(
+          have_attributes(
+            uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+            username: "johndoe",
+            password: "a25723600f7",
+            md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+            sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+            registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
+          )
+        )
+      end
+
       specify "addresses", :aggregate_failures do
         expect(perform.addresses).to be_an(Array)
 
@@ -251,21 +267,39 @@ RSpec.describe Usual::Example1::User do
       specify "root", :aggregate_failures do
         expect(perform).to be_an(Array)
 
-        expect(perform.first).to be_a(Servactory::Result)
-        expect(perform.first).to an_instance_of(Datory::Result)
+        expect(perform).to all be_a(Servactory::Result)
+        expect(perform).to all an_instance_of(Datory::Result)
 
-        expect(perform.first).to(
+        expect(perform).to(
+          all(
+            have_attributes(
+              id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+              first_name: "John",
+              last_name: "Doe",
+              email: "johndoe@example.com",
+              birth_date: "1973-01-22",
+              login: be_present,
+              addresses: be_present,
+              phone: "(555) 555-1234",
+              website: "www.johndoe.com",
+              company: be_present
+            )
+          )
+        )
+      end
+
+      specify "login", :aggregate_failures do
+        expect(perform.first.login).to be_a(Servactory::Result)
+        expect(perform.first.login).to an_instance_of(Datory::Result)
+
+        expect(perform.first.login).to(
           have_attributes(
-            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-            first_name: "John",
-            last_name: "Doe",
-            email: "johndoe@example.com",
-            birth_date: "1973-01-22",
-            login: be_present,
-            addresses: be_present,
-            phone: "(555) 555-1234",
-            website: "www.johndoe.com",
-            company: be_present
+            uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+            username: "johndoe",
+            password: "a25723600f7",
+            md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+            sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+            registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
           )
         )
       end
