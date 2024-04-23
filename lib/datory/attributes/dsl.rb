@@ -29,6 +29,11 @@ module Datory
           collection_of_attributes << Attribute.new(name, **options)
         end
 
+        def symbol(name, **options)
+          options = options.merge(type: Symbol)
+          attribute(name, **options)
+        end
+
         def string(name, **options)
           options = options.merge(type: String)
           attribute(name, **options)
