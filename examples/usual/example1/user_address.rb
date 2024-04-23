@@ -19,6 +19,8 @@ module Usual
         end
       end
 
+      ##########################################################################
+
       string :street
       string :suite
       string :city

@@ -25,16 +25,16 @@ module Datory
 
               input attribute.name,
                     as: input_internal_name,
-                    type: attribute.options.fetch(:type),
+                    type: attribute.options.fetch(:from),
                     required: attribute.options.fetch(:required, true),
                     consists_of: attribute.options.fetch(:consists_of, false),
                     prepare: (lambda do |value:|
                       include_class = attribute.options.fetch(:include, nil)
                       return value unless include_class.present?
 
-                      type = attribute.options.fetch(:type, nil)
+                      from_type = attribute.options.fetch(:from, nil)
 
-                      if [Set, Array].include?(type)
+                      if [Set, Array].include?(from_type)
                         value.map { |item| include_class.build(**item) }
                       else
                         include_class.build(**value)
@@ -43,16 +43,16 @@ module Datory
 
               output input_internal_name,
                      consists_of: (
-                       if (type = attribute.options.fetch(:consists_of, false)) == Hash
+                       if (consists_of_type = attribute.options.fetch(:consists_of, false)) == Hash
                          Datory::Result
                        else
-                         type
+                         consists_of_type
                        end
                      ),
-                     type: if (type = attribute.options.fetch(:type)) == Hash
+                     type: if (from_type = attribute.options.fetch(:from)) == Hash
                              Datory::Result
                            else
-                             type
+                             from_type
                            end
 
               make :"assign_#{input_internal_name}_output"

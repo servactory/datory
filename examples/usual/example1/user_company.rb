@@ -15,6 +15,8 @@ module Usual
         end
       end
 
+      ##########################################################################
+
       string :name
       string :catchPhrase, to: :catch_phrase
       string :bs

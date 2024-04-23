@@ -30,46 +30,46 @@ module Datory
         end
 
         def symbol(name, **options)
-          options = options.merge(type: Symbol)
+          options = options.merge(from: Symbol)
           attribute(name, **options)
         end
 
         def string(name, **options)
-          options = options.merge(type: String)
+          options = options.merge(from: String)
           attribute(name, **options)
         end
 
         def integer(name, **options)
-          options = options.merge(type: Integer)
+          options = options.merge(from: Integer)
           attribute(name, **options)
         end
 
         def float(name, **options)
-          options = options.merge(type: Float)
+          options = options.merge(from: Float)
           attribute(name, **options)
         end
 
         def date(name, **options)
-          options = options.merge(type: Date)
+          options = options.merge(from: Date)
           attribute(name, **options)
         end
 
         def time(name, **options)
-          options = options.merge(type: Time)
+          options = options.merge(from: Time)
           attribute(name, **options)
         end
 
         def datetime(name, **options)
-          options = options.merge(type: DateTime)
+          options = options.merge(from: DateTime)
           attribute(name, **options)
         end
 
         def one(name, include:, to: nil)
-          attribute(name, to: to.presence || name, type: Hash, include: include)
+          attribute(name, to: to.presence || name, from: Hash, include: include)
         end
 
         def many(name, include:, to: nil)
-          attribute(name, to: to.presence || name, type: Array, consists_of: Hash, include: include)
+          attribute(name, to: to.presence || name, from: Array, consists_of: Hash, include: include)
         end
 
         def collection_of_attributes

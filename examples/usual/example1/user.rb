@@ -29,6 +29,8 @@ module Usual
         end
       end
 
+      ##########################################################################
+
       string :id
       string :firstname, to: :first_name
       string :lastname, to: :last_name

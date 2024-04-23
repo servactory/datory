@@ -13,6 +13,8 @@ module Usual
         end
       end
 
+      ##########################################################################
+
       string :lat, to: :latitude
       string :lng, to: :longitude
     end

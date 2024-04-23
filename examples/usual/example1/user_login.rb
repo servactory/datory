@@ -21,6 +21,8 @@ module Usual
         end
       end
 
+      ##########################################################################
+
       string :uuid
       string :username
       string :password
