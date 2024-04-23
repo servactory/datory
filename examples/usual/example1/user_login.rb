@@ -9,15 +9,15 @@ module Usual
                       :password,
                       :md5, # rubocop:disable Naming/VariableNumber
                       :sha1, # rubocop:disable Naming/VariableNumber
-                      :registered
+                      :registered_at
 
-        def initialize(uuid:, username:, password:, md5:, sha1:, registered:)
+        def initialize(uuid:, username:, password:, md5:, sha1:, registered_at:)
           @uuid = uuid
           @username = username
           @password = password
           @md5 = md5 # rubocop:disable Naming/VariableNumber
           @sha1 = sha1 # rubocop:disable Naming/VariableNumber
-          @registered = registered
+          @registered_at = registered_at
         end
       end
 
@@ -28,7 +28,7 @@ module Usual
       string :password
       string :md5 # rubocop:disable Naming/VariableNumber
       string :sha1 # rubocop:disable Naming/VariableNumber
-      string :registered
+      string :registered, to: :registered_at
     end
   end
 end
