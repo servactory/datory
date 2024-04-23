@@ -4,7 +4,7 @@ require "zeitwerk"
 
 require "active_support/all"
 
-require "uri"
+require "servactory"
 
 loader = Zeitwerk::Loader.for_gem
 loader.inflector.inflect(
