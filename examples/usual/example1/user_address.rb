@@ -22,7 +22,7 @@ module Usual
       string :street
       string :suite
       string :city
-      string :zipcode, as: :zip_code
+      string :zipcode, to: :zip_code
 
       one :geo, include: UserAddressGeo
     end

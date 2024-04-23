@@ -18,7 +18,7 @@ module Datory
             end
           else
             @collection_of_attributes.to_h do |attribute|
-              internal_name = attribute.options.fetch(:as, attribute.name)
+              internal_name = attribute.options.fetch(:to, attribute.name)
               include_class = attribute.options.fetch(:include, nil)
               output_formatter = attribute.options.fetch(:output, nil)
 

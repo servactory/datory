@@ -16,7 +16,7 @@ module Usual
       end
 
       string :name
-      string :catchPhrase, as: :catch_phrase
+      string :catchPhrase, to: :catch_phrase
       string :bs
     end
   end

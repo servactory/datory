@@ -64,12 +64,12 @@ module Datory
           attribute(name, **options)
         end
 
-        def one(name, include:, as: nil)
-          attribute(name, as: as.presence || name, type: Hash, include: include)
+        def one(name, include:, to: nil)
+          attribute(name, to: to.presence || name, type: Hash, include: include)
         end
 
-        def many(name, include:, as: nil)
-          attribute(name, as: as.presence || name, type: Array, consists_of: Hash, include: include)
+        def many(name, include:, to: nil)
+          attribute(name, to: to.presence || name, type: Array, consists_of: Hash, include: include)
         end
 
         def collection_of_attributes

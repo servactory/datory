@@ -29,14 +29,11 @@ module Usual
         end
       end
 
-      # singular :user
-      # plural :users
-
       string :id
-      string :firstname, as: :first_name
-      string :lastname, as: :last_name
+      string :firstname, to: :first_name
+      string :lastname, to: :last_name
       string :email
-      string :birthDate, as: :birth_date, output: ->(value:) { value.to_s }
+      string :birthDate, to: :birth_date, output: ->(value:) { value.to_s }
 
       one :login, include: UserLogin
 

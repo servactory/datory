@@ -21,7 +21,7 @@ module Datory
 
           class_sample = Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute| # rubocop:disable Metrics/BlockLength
-              input_internal_name = attribute.options.fetch(:as, attribute.name)
+              input_internal_name = attribute.options.fetch(:to, attribute.name)
 
               input attribute.name,
                     as: input_internal_name,

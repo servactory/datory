@@ -13,8 +13,8 @@ module Usual
         end
       end
 
-      string :lat, as: :latitude
-      string :lng, as: :longitude
+      string :lat, to: :latitude
+      string :lng, to: :longitude
     end
   end
 end
