@@ -42,15 +42,15 @@ module Datory
                     end)
 
               output input_internal_name,
-                     consists_of: (
-                       if (consists_of_type = attribute.options.fetch(:consists_of, false)) == Hash
-                         Datory::Result
-                       else
-                         consists_of_type
-                       end
-                     ),
+                     consists_of: if (consists_of_type = attribute.options.fetch(:consists_of, false)) == Hash
+                                    Datory::Result
+                                  else
+                                    consists_of_type
+                                  end,
                      type: if (from_type = attribute.options.fetch(:from)) == Hash
                              Datory::Result
+                           elsif (option_as = attribute.options.fetch(:as, nil)).present?
+                             option_as
                            else
                              from_type
                            end
@@ -58,7 +58,21 @@ module Datory
               make :"assign_#{input_internal_name}_output"
 
               define_method(:"assign_#{input_internal_name}_output") do
-                outputs.public_send(:"#{input_internal_name}=", inputs.public_send(input_internal_name))
+                value = inputs.public_send(input_internal_name)
+
+                option_as = attribute.options.fetch(:as, nil)
+
+                if [Date, Time, DateTime].include?(option_as)
+                  value = option_as.parse(value)
+                elsif option_as == String
+                  value = value.to_s
+                elsif option_as == Integer
+                  value = value.to_i
+                elsif option_as == Float
+                  value = value.to_f
+                end
+
+                outputs.public_send(:"#{input_internal_name}=", value)
               end
             end
 

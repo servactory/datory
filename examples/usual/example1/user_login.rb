@@ -28,7 +28,7 @@ module Usual
       string :password
       string :md5 # rubocop:disable Naming/VariableNumber
       string :sha1 # rubocop:disable Naming/VariableNumber
-      string :registered, to: :registered_at
+      string :registered, to: :registered_at, as: DateTime
     end
   end
 end
