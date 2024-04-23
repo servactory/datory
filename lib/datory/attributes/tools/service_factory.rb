@@ -62,15 +62,7 @@ module Datory
 
                 option_as = attribute.options.fetch(:as, nil)
 
-                if [Date, Time, DateTime].include?(option_as)
-                  value = option_as.parse(value)
-                elsif option_as == String
-                  value = value.to_s
-                elsif option_as == Integer
-                  value = value.to_i
-                elsif option_as == Float
-                  value = value.to_f
-                end
+                value = Datory::Utils.transform_value_with(value, option_as)
 
                 outputs.public_send(:"#{input_internal_name}=", value)
               end
