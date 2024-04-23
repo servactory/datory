@@ -39,7 +39,7 @@ class UserDto < Datory::Base
   string :firstname, to: :first_name
   string :lastname, to: :last_name
   string :email
-  string :birthDate, to: :birth_date, output: ->(value:) { value.to_s }
+  string :birthDate, to: :birth_date, as: Date
 
   one :login, include: UserLoginDto
 
@@ -59,7 +59,7 @@ class UserLoginDto < Datory::Base
   string :password
   string :md5
   string :sha1
-  string :registered
+  string :registered, to: :registered_at, as: DateTime
 end
 ```
 
