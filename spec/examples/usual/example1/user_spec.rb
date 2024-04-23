@@ -23,7 +23,7 @@ RSpec.describe Usual::Example1::User do
         password: "a25723600f7",
         md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
         sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-        registered: "2023-01-10T10:03:20.022Z"
+        registered: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
       )
     end
 
@@ -67,7 +67,7 @@ RSpec.describe Usual::Example1::User do
               password: "a25723600f7",
               md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
               sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-              registered: "2023-01-10T10:03:20.022Z"
+              registered: "2023-04-14 15:16:17 +0700"
             },
             addresses: [
               {
@@ -112,7 +112,7 @@ RSpec.describe Usual::Example1::User do
               password: "a25723600f7",
               md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
               sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-              registered: "2023-01-10T10:03:20.022Z"
+              registered: "2023-04-14 15:16:17 +0700"
             },
             addresses: [
               {
@@ -156,7 +156,7 @@ RSpec.describe Usual::Example1::User do
           "password": "a25723600f7",
           "md5": "c1328472c5794a25723600f71c1b4586",
           "sha1": "35544a31cc19bd6520af116554873167117f4d94",
-          "registered": "2023-01-10T10:03:20.022Z"
+          "registered": "2023-04-14 15:16:17 +0700"
         },
         "addresses": [
           {
@@ -328,7 +328,7 @@ RSpec.describe Usual::Example1::User do
           password: "a25723600f7",
           md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
           sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-          registered: "2023-01-10T10:03:20.022Z"
+          registered: "2023-04-14 15:16:17 +0700"
         },
         addresses: [
           {
