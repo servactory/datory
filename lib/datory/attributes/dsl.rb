@@ -60,11 +60,6 @@ module Datory
           attribute(name, **options)
         end
 
-        def duration(name, **options)
-          options = options.merge(from: ActiveSupport::Duration)
-          attribute(name, **options)
-        end
-
         def date(name, **options)
           options = options.merge(from: Date)
           attribute(name, **options)
