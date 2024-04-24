@@ -40,11 +40,6 @@ module Datory
 
         ########################################################################
 
-        def symbol(name, **options)
-          options = options.merge(from: Symbol)
-          attribute(name, **options)
-        end
-
         def string(name, **options)
           options = options.merge(from: String)
           attribute(name, **options)
@@ -57,21 +52,6 @@ module Datory
 
         def float(name, **options)
           options = options.merge(from: Float)
-          attribute(name, **options)
-        end
-
-        def date(name, **options)
-          options = options.merge(from: Date)
-          attribute(name, **options)
-        end
-
-        def time(name, **options)
-          options = options.merge(from: Time)
-          attribute(name, **options)
-        end
-
-        def datetime(name, **options)
-          options = options.merge(from: DateTime)
           attribute(name, **options)
         end
 
