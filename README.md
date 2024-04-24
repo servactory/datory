@@ -46,10 +46,10 @@ class UserDto < Datory::Base
 
   string :birthDate, to: :birth_date, as: Date
 
-  one :login, include: UserLogin
-  one :company, include: UserCompany
+  one :login, include: UserLoginDto
+  one :company, include: UserCompanyDto
 
-  many :addresses, include: UserAddress
+  many :addresses, include: UserAddressDto
 end
 ```
 
