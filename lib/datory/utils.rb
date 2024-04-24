@@ -5,13 +5,14 @@ module Datory
     module_function
 
     TRANSFORMATIONS = {
-      Date => ->(value) { Date.parse(value) },
-      Time => ->(value) { Time.parse(value) },
-      DateTime => ->(value) { DateTime.parse(value) },
       Symbol => ->(value) { value.to_sym },
       String => ->(value) { value.to_s },
       Integer => ->(value) { value.to_i },
-      Float => ->(value) { value.to_f }
+      Float => ->(value) { value.to_f },
+      Date => ->(value) { Date.parse(value) },
+      Time => ->(value) { Time.parse(value) },
+      DateTime => ->(value) { DateTime.parse(value) },
+      ActiveSupport::Duration => ->(value) { ActiveSupport::Duration.parse(value) }
     }.freeze
 
     private_constant :TRANSFORMATIONS

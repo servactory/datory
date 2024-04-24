@@ -39,6 +39,8 @@ module Datory
                   output_formatter.call(value: value)
                 elsif [Date, Time, DateTime].include?(value.class)
                   value.to_s
+                elsif ActiveSupport::Duration == value.class
+                  value.iso8601
                 else
                   value
                 end
