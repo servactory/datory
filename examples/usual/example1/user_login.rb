@@ -4,7 +4,7 @@ module Usual
   module Example1
     class UserLogin < Datory::Base
       class ARModel
-        attr_accessor :uuid,
+        attr_accessor :id,
                       :username,
                       :password,
                       :md5, # rubocop:disable Naming/VariableNumber
@@ -12,8 +12,8 @@ module Usual
                       :lifetime,
                       :registered_at
 
-        def initialize(uuid:, username:, password:, md5:, sha1:, lifetime:, registered_at:)
-          @uuid = uuid
+        def initialize(id:, username:, password:, md5:, sha1:, lifetime:, registered_at:)
+          @id = id
           @username = username
           @password = password
           @md5 = md5 # rubocop:disable Naming/VariableNumber
@@ -25,16 +25,17 @@ module Usual
 
       ##########################################################################
 
-      # EXAMPLE:
-      #    JSON: lifetime » from String » to lifetime » as Duration
+      uuid :id
 
-      uuid :uuid
       string :username
       string :password
+
       string :md5 # rubocop:disable Naming/VariableNumber
       string :sha1 # rubocop:disable Naming/VariableNumber
+
       string :lifetime, as: ActiveSupport::Duration
-      string :registered, to: :registered_at, as: DateTime
+
+      string :registered_at, as: DateTime
     end
   end
 end

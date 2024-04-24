@@ -7,7 +7,7 @@ RSpec.describe Usual::Example1::User do
         first_name: "John",
         last_name: "Doe",
         email: "johndoe@example.com",
-        birth_date: "1973-01-22",
+        birth_date: Date.new(1973, 1, 22),
         login: login,
         addresses: addresses,
         phone: "(555) 555-1234",
@@ -18,7 +18,7 @@ RSpec.describe Usual::Example1::User do
 
     let(:login) do
       Usual::Example1::UserLogin::ARModel.new(
-        uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+        id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
         username: "johndoe",
         password: "a25723600f7",
         md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
@@ -63,13 +63,13 @@ RSpec.describe Usual::Example1::User do
             email: "johndoe@example.com",
             birthDate: "1973-01-22",
             login: {
-              uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
               username: "johndoe",
               password: "a25723600f7",
               md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
               sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
               lifetime: "P3M",
-              registered: "2023-04-14 15:16:17 +0700"
+              registered_at: "2023-04-14 15:16:17 +0700"
             },
             addresses: [
               {
@@ -109,13 +109,13 @@ RSpec.describe Usual::Example1::User do
             email: "johndoe@example.com",
             birthDate: "1973-01-22",
             login: {
-              uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
               username: "johndoe",
               password: "a25723600f7",
               md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
               sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
               lifetime: "P3M",
-              registered: "2023-04-14 15:16:17 +0700"
+              registered_at: "2023-04-14 15:16:17 +0700"
             },
             addresses: [
               {
@@ -154,13 +154,13 @@ RSpec.describe Usual::Example1::User do
         "email": "johndoe@example.com",
         "birthDate": "1973-01-22",
         "login": {
-          "uuid": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          "id": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
           "username": "johndoe",
           "password": "a25723600f7",
           "md5": "c1328472c5794a25723600f71c1b4586",
           "sha1": "35544a31cc19bd6520af116554873167117f4d94",
           "lifetime": "P3M",
-          "registered": "2023-04-14 15:16:17 +0700"
+          "registered_at": "2023-04-14 15:16:17 +0700"
         },
         "addresses": [
           {
@@ -198,7 +198,7 @@ RSpec.describe Usual::Example1::User do
             first_name: "John",
             last_name: "Doe",
             email: "johndoe@example.com",
-            birth_date: "1973-01-22",
+            birth_date: Date.new(1973, 1, 22),
             login: be_present,
             addresses: be_present,
             phone: "(555) 555-1234",
@@ -214,7 +214,7 @@ RSpec.describe Usual::Example1::User do
 
         expect(perform.login).to(
           have_attributes(
-            uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+            id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
             username: "johndoe",
             password: "a25723600f7",
             md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
@@ -282,7 +282,7 @@ RSpec.describe Usual::Example1::User do
               first_name: "John",
               last_name: "Doe",
               email: "johndoe@example.com",
-              birth_date: "1973-01-22",
+              birth_date: Date.new(1973, 1, 22),
               login: be_present,
               addresses: be_present,
               phone: "(555) 555-1234",
@@ -299,7 +299,7 @@ RSpec.describe Usual::Example1::User do
 
         expect(perform.first.login).to(
           have_attributes(
-            uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+            id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
             username: "johndoe",
             password: "a25723600f7",
             md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
@@ -363,13 +363,13 @@ RSpec.describe Usual::Example1::User do
         email: "johndoe@example.com",
         birthDate: "1973-01-22",
         login: {
-          uuid: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
           username: "johndoe",
           password: "a25723600f7",
           md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
           sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
           lifetime: "P3M",
-          registered: "2023-04-14 15:16:17 +0700"
+          registered_at: "2023-04-14 15:16:17 +0700"
         },
         addresses: [
           {
@@ -403,7 +403,7 @@ RSpec.describe Usual::Example1::User do
           first_name: "John",
           last_name: "Doe",
           email: "johndoe@example.com",
-          birth_date: "1973-01-22",
+          birth_date: Date.new(1973, 1, 22),
           login: be_present,
           addresses: be_present,
           phone: "(555) 555-1234",

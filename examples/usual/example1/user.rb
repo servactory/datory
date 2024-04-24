@@ -20,7 +20,7 @@ module Usual
           @first_name = first_name
           @last_name = last_name
           @email = email
-          @birth_date = Date.parse(birth_date)
+          @birth_date = birth_date
           @login = login
           @addresses = addresses
           @phone = phone
@@ -32,19 +32,20 @@ module Usual
       ##########################################################################
 
       uuid :id
+
       string :firstname, to: :first_name
       string :lastname, to: :last_name
+
       string :email
-      string :birthDate, to: :birth_date, output: ->(value:) { value.to_s }
-
-      one :login, include: UserLogin
-
-      many :addresses, include: UserAddress
-
       string :phone
       string :website
 
+      string :birthDate, to: :birth_date, as: Date
+
+      one :login, include: UserLogin
       one :company, include: UserCompany
+
+      many :addresses, include: UserAddress
     end
   end
 end

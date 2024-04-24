@@ -36,30 +36,34 @@ UserDto.deserialize(json)
 ```ruby
 class UserDto < Datory::Base
   uuid :id
+
   string :firstname, to: :first_name
   string :lastname, to: :last_name
+
   string :email
-  string :birthDate, to: :birth_date, as: Date
-
-  one :login, include: UserLoginDto
-
-  many :addresses, include: UserAddressDto
-
   string :phone
   string :website
 
-  one :company, include: UserCompanyDto
+  string :birthDate, to: :birth_date, as: Date
+
+  one :login, include: UserLogin
+  one :company, include: UserCompany
+
+  many :addresses, include: UserAddress
 end
 ```
 
 ```ruby
 class UserLoginDto < Datory::Base
-  string :uuid
+  uuid :id
+  
   string :username
   string :password
+  
   string :md5
   string :sha1
-  string :registered, to: :registered_at, as: DateTime
+  
+  string :registered_at, as: DateTime
 end
 ```
 
