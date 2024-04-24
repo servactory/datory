@@ -21,6 +21,8 @@ module Datory
         output_option_helpers [
           Servactory::ToolKit::DynamicOptions::Format.use
         ]
+
+        predicate_methods_enabled false
       end
     end
   end
