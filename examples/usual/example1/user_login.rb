@@ -23,7 +23,7 @@ module Usual
 
       ##########################################################################
 
-      string :uuid
+      uuid :uuid
       string :username
       string :password
       string :md5 # rubocop:disable Naming/VariableNumber

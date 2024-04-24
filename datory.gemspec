@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "activesupport", ">= 5.1", "< 7.2"
   spec.add_runtime_dependency "i18n", "~> 1.14"
-  spec.add_runtime_dependency "servactory", "2.5.0.rc2"
+  spec.add_runtime_dependency "servactory", "2.5.0.rc5"
   spec.add_runtime_dependency "zeitwerk", "~> 2.6"
 
   spec.add_development_dependency "appraisal", "~> 2.5"

@@ -17,17 +17,28 @@ module Datory
 
         private
 
-        def singular(value)
-          @singular = value
-        end
-
-        def plural(value)
-          @plural = value
-        end
-
         def attribute(name, **options)
           collection_of_attributes << Attribute.new(name, **options)
         end
+
+        ########################################################################
+
+        def one(name, include:, to: nil)
+          attribute(name, to: to.presence || name, from: Hash, include: include)
+        end
+
+        def many(name, include:, to: nil)
+          attribute(name, to: to.presence || name, from: Array, consists_of: Hash, include: include)
+        end
+
+        ########################################################################
+
+        def uuid(name, **options)
+          options = options.merge(format: :uuid)
+          string(name, **options)
+        end
+
+        ########################################################################
 
         def symbol(name, **options)
           options = options.merge(from: Symbol)
@@ -64,13 +75,7 @@ module Datory
           attribute(name, **options)
         end
 
-        def one(name, include:, to: nil)
-          attribute(name, to: to.presence || name, from: Hash, include: include)
-        end
-
-        def many(name, include:, to: nil)
-          attribute(name, to: to.presence || name, from: Array, consists_of: Hash, include: include)
-        end
+        ########################################################################
 
         def collection_of_attributes
           @collection_of_attributes ||= Collection.new

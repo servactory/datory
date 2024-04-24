@@ -31,7 +31,7 @@ module Usual
 
       ##########################################################################
 
-      string :id
+      uuid :id
       string :firstname, to: :first_name
       string :lastname, to: :last_name
       string :email

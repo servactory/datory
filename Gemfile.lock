@@ -4,7 +4,7 @@ PATH
     datory (1.0.0.rc4)
       activesupport (>= 5.1, < 7.2)
       i18n (~> 1.14)
-      servactory (= 2.5.0.rc2)
+      servactory (= 2.5.0.rc5)
       zeitwerk (~> 2.6)
 
 GEM
@@ -92,7 +92,7 @@ GEM
     rubocop-rspec_rails (2.28.3)
       rubocop (~> 1.40)
     ruby-progressbar (1.13.0)
-    servactory (2.5.0.rc2)
+    servactory (2.5.0.rc5)
       activesupport (>= 5.1, < 7.2)
       i18n (~> 1.14)
       zeitwerk (~> 2.6)

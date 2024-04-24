@@ -13,6 +13,14 @@ module Datory
         failure_class Datory::Service::Exceptions::Failure
 
         result_class Datory::Result
+
+        input_option_helpers [
+          Servactory::ToolKit::DynamicOptions::Format.use
+        ]
+
+        output_option_helpers [
+          Servactory::ToolKit::DynamicOptions::Format.use
+        ]
       end
     end
   end
