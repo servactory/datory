@@ -4,11 +4,15 @@ module Datory
   module Context
     module Callable
       def serialize(model)
-        model = Datory::Attributes::Serialization::Model.prepare(model)
-
-        context = send(:new)
-
-        _serialize(context, model)
+        if [Set, Array].include?(model.class)
+          model.map do |model_item|
+            serialize(model_item)
+          end
+        else
+          context = send(:new)
+          model = Datory::Attributes::Serialization::Model.prepare(model)
+          _serialize(context, model)
+        end
       end
 
       def deserialize(json)

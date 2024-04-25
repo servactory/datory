@@ -8,16 +8,8 @@ module Datory
           new.prepare(...)
         end
 
-        def prepare(data) # rubocop:disable Metrics/MethodLength
-          if data.is_a?(Array)
-            data.map do |item|
-              if item.is_a?(Hash)
-                build(item)
-              else
-                item
-              end
-            end
-          elsif data.is_a?(Hash)
+        def prepare(data)
+          if data.is_a?(Hash)
             build(data)
           else
             data
