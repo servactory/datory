@@ -21,6 +21,16 @@ module Datory
         end
       end
 
+      def to_model(**attributes)
+        context = send(:new)
+
+        attributes.each do |attribute_name, attribute_value|
+          context.define_singleton_method(attribute_name) { attribute_value }
+        end
+
+        context
+      end
+
       # def build!(attributes = {})
       #   context = send(:new)
       #

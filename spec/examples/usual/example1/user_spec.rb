@@ -3,7 +3,8 @@
 RSpec.describe Usual::Example1::User do
   describe "#serialize" do
     let(:user) do
-      described_class::ARModel.new(
+      Usual::Example1::User.to_model(
+        id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
         first_name: "John",
         last_name: "Doe",
         email: "johndoe@example.com",
@@ -12,12 +13,13 @@ RSpec.describe Usual::Example1::User do
         addresses: addresses,
         phone: "(555) 555-1234",
         website: "www.johndoe.com",
-        company: company
+        company: company,
+        unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore."
       )
     end
 
     let(:login) do
-      Usual::Example1::UserLogin::ARModel.new(
+      Usual::Example1::UserLogin.to_model(
         id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
         username: "johndoe",
         password: "a25723600f7",
@@ -30,12 +32,12 @@ RSpec.describe Usual::Example1::User do
 
     let(:addresses) do
       [
-        Usual::Example1::UserAddress::ARModel.new(
+        Usual::Example1::UserAddress.to_model(
           street: "123 Main Street",
           suite: "Apt. 4",
           city: "Anytown",
           zip_code: "12345-6789",
-          geo: Usual::Example1::UserAddressGeo::ARModel.new(
+          geo: Usual::Example1::UserAddressGeo.to_model(
             latitude: "42.1234",
             longitude: "-71.2345"
           )
@@ -44,7 +46,7 @@ RSpec.describe Usual::Example1::User do
     end
 
     let(:company) do
-      Usual::Example1::UserCompany::ARModel.new(
+      Usual::Example1::UserCompany.to_model(
         name: "ABC Company",
         catch_phrase: "Innovative solutions for all your needs",
         bs: "Marketing"
@@ -57,7 +59,7 @@ RSpec.describe Usual::Example1::User do
       it do
         expect(perform).to match(
           {
-            id: be_present,
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             firstname: "John",
             lastname: "Doe",
             email: "johndoe@example.com",
@@ -103,7 +105,7 @@ RSpec.describe Usual::Example1::User do
       it do
         expect(perform).to contain_exactly(
           {
-            id: be_present,
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             firstname: "John",
             lastname: "Doe",
             email: "johndoe@example.com",
