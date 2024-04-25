@@ -6,10 +6,9 @@ module Datory
       def serialize(model)
         model = Datory::Attributes::Serialization::Model.prepare(model)
 
-        Datory::Attributes::Serialization::Serializator.serialize(
-          model: model,
-          collection_of_attributes: collection_of_attributes
-        )
+        context = send(:new)
+
+        _serialize(context, model)
       end
 
       def deserialize(json)
@@ -41,6 +40,14 @@ module Datory
       end
 
       private
+
+      def _serialize(context, model)
+        context.send(
+          :_serialize,
+          model: model,
+          collection_of_attributes: collection_of_attributes
+        )
+      end
 
       def _deserialize(context, **attributes)
         context.send(

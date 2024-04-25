@@ -5,6 +5,15 @@ module Datory
     module Workspace
       private
 
+      def serialize(model:, collection_of_attributes:, **)
+        super
+
+        Serialization::Serializator.serialize(
+          model: model,
+          collection_of_attributes: collection_of_attributes
+        )
+      end
+
       def deserialize(incoming_attributes:, collection_of_attributes:, **)
         super
 

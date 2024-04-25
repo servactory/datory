@@ -16,21 +16,26 @@ module Datory
       attr_reader :incoming_attributes,
                   :collection_of_attributes
 
-      def _deserialize(
-        incoming_attributes:,
-        collection_of_attributes:
-      )
+      def _serialize(model:, collection_of_attributes:)
+        serialize(
+          model: model,
+          collection_of_attributes: collection_of_attributes
+        )
+      end
+
+      def _deserialize(incoming_attributes:, collection_of_attributes:)
         deserialize(
           incoming_attributes: incoming_attributes,
           collection_of_attributes: collection_of_attributes
         )
       end
 
-      def deserialize(
-        incoming_attributes:,
-        collection_of_attributes:,
-        **
-      )
+      def serialize(model:, collection_of_attributes:, **)
+        @model = model
+        @collection_of_attributes = collection_of_attributes
+      end
+
+      def deserialize(incoming_attributes:, collection_of_attributes:, **)
         @incoming_attributes = incoming_attributes
         @collection_of_attributes = collection_of_attributes
       end
