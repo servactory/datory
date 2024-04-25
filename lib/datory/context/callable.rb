@@ -45,6 +45,12 @@ module Datory
         _build!(context, **attributes)
       end
 
+      def describe
+        Datory::Attributes::Descriptor.describe(
+          collection_of_attributes: collection_of_attributes
+        )
+      end
+
       private
 
       def _build!(context, **attributes)

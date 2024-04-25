@@ -504,4 +504,10 @@ RSpec.describe Usual::Example1::User do
       )
     end
   end
+
+  describe "#describe" do
+    subject(:perform) { described_class.describe }
+
+    it { expect { perform }.not_to raise_error }
+  end
 end
