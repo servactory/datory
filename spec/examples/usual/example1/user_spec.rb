@@ -184,7 +184,8 @@ RSpec.describe Usual::Example1::User do
             name: "ABC Company",
             catch_phrase: "Innovative solutions for all your needs",
             bs: "Marketing"
-          }
+          },
+          unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore."
         }
       end
 
