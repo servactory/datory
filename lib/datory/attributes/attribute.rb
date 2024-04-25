@@ -23,9 +23,9 @@ module Datory
             from_type = options.fetch(:from, nil)
 
             if [Set, Array].include?(from_type)
-              value.map { |item| include_class.build(**item) }
+              value.map { |item| include_class.deserialize(**item) }
             else
-              include_class.build(**value)
+              include_class.deserialize(**value)
             end
           end)
         }

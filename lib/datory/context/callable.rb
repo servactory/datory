@@ -18,8 +18,9 @@ module Datory
             deserialize(json_item)
           end
         else
+          context = send(:new)
           hash = JSON.parse(json.to_json)
-          build(**hash)
+          _deserialize(context, **hash)
         end
       end
 
@@ -33,18 +34,6 @@ module Datory
         context
       end
 
-      # def build!(attributes = {})
-      #   context = send(:new)
-      #
-      #   _build!(context, **attributes)
-      # end
-
-      def build(attributes = {})
-        context = send(:new)
-
-        _build!(context, **attributes)
-      end
-
       def describe
         Datory::Attributes::Descriptor.describe(
           collection_of_attributes: collection_of_attributes
@@ -53,9 +42,9 @@ module Datory
 
       private
 
-      def _build!(context, **attributes)
+      def _deserialize(context, **attributes)
         context.send(
-          :_build!,
+          :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
           collection_of_attributes: collection_of_attributes
         )

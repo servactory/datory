@@ -5,7 +5,7 @@ module Datory
     module Workspace
       private
 
-      def build!(incoming_attributes:, collection_of_attributes:, **)
+      def deserialize(incoming_attributes:, collection_of_attributes:, **)
         super
 
         Tools::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)

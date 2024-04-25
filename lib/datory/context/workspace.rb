@@ -16,17 +16,17 @@ module Datory
       attr_reader :incoming_attributes,
                   :collection_of_attributes
 
-      def _build!(
+      def _deserialize(
         incoming_attributes:,
         collection_of_attributes:
       )
-        build!(
+        deserialize(
           incoming_attributes: incoming_attributes,
           collection_of_attributes: collection_of_attributes
         )
       end
 
-      def build!(
+      def deserialize(
         incoming_attributes:,
         collection_of_attributes:,
         **
