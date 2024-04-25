@@ -4,7 +4,7 @@ module Datory
   module Context
     module Callable
       def serialize(model)
-        model = Datory::Attributes::Serialization::HashToObject.prepare(model)
+        model = Datory::Attributes::Serialization::Model.prepare(model)
 
         Datory::Attributes::Serialization::Serializator.serialize(
           model: model,

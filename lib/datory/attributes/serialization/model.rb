@@ -3,7 +3,7 @@
 module Datory
   module Attributes
     module Serialization
-      class HashToObject
+      class Model
         def self.prepare(...)
           new.prepare(...)
         end
@@ -31,10 +31,10 @@ module Datory
             instance_variable_set(:"@#{key}", value)
 
             if value.is_a?(Array)
-              value.map! { |item| Datory::Attributes::Serialization::HashToObject.prepare(item) }
+              value.map! { |item| Datory::Attributes::Serialization::Model.prepare(item) }
               instance_variable_set(:"@#{key}", value)
             elsif value.is_a?(Hash)
-              instance_variable_set(:"@#{key}", Datory::Attributes::Serialization::HashToObject.prepare(value))
+              instance_variable_set(:"@#{key}", Datory::Attributes::Serialization::Model.prepare(value))
             else
               instance_variable_set(:"@#{key}", value)
             end
