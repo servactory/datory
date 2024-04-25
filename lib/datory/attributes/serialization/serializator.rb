@@ -28,9 +28,9 @@ module Datory
 
               value =
                 if include_class.present?
-                  type = attribute.options.fetch(:type, nil)
+                  from_type = attribute.options.fetch(:from)
 
-                  if [Set, Array].include?(type)
+                  if [Set, Array].include?(from_type)
                     value.map { |item| include_class.serialize(item) }
                   else
                     include_class.serialize(value)
