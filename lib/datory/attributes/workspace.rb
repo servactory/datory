@@ -8,6 +8,8 @@ module Datory
       def serialize(model:, collection_of_attributes:)
         super
 
+        model = Serialization::ServiceBuilder.build!(self, model, collection_of_attributes)
+
         Serialization::Serializator.serialize(
           model: model,
           collection_of_attributes: collection_of_attributes

@@ -8,9 +8,21 @@ module Datory
           new.prepare(...)
         end
 
+        def self.to_hash(...)
+          new.to_hash(...)
+        end
+
         def prepare(data)
           if data.is_a?(Hash)
             build(data)
+          else
+            data
+          end
+        end
+
+        def to_hash(data)
+          if data.is_a?(Datory::Attributes::Serialization::Model)
+            parse(data)
           else
             data
           end
@@ -33,6 +45,23 @@ module Datory
           end
 
           self
+        end
+
+        def parse(data) # rubocop:disable Metrics/MethodLength
+          data.instance_variables.to_h do |key|
+            value = data.instance_variable_get(key)
+
+            value =
+              if value.is_a?(Array)
+                value.map! { |item| Datory::Attributes::Serialization::Model.to_hash(item) }
+              elsif value.is_a?(Datory::Attributes::Serialization::Model)
+                Datory::Attributes::Serialization::Model.to_hash(value)
+              else
+                value
+              end
+
+            [key.to_s.delete_prefix("@").to_sym, value]
+          end
         end
       end
     end

@@ -28,18 +28,18 @@ module Datory
             collection_of_attributes.each do |attribute|
               input_internal_name = attribute.options.fetch(:to, attribute.name)
 
-              input attribute.name, **attribute.input_options
+              input attribute.name, **attribute.input_deserialization_options
 
-              output input_internal_name, **attribute.output_options
+              output input_internal_name, **attribute.output_deserialization_options
 
               make :"assign_#{input_internal_name}_output"
 
               define_method(:"assign_#{input_internal_name}_output") do
                 value = inputs.public_send(input_internal_name)
 
-                option_as = attribute.options.fetch(:as, nil)
+                type_as = attribute.options.fetch(:as, nil)
 
-                value = Datory::Utils.transform_value_with(value, option_as)
+                value = Datory::Utils.transform_value_with(:d, value, type_as)
 
                 outputs.public_send(:"#{input_internal_name}=", value)
               end

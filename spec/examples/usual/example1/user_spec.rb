@@ -21,7 +21,7 @@ RSpec.describe Usual::Example1::User do
                 md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
                 sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
                 lifetime: "P3M",
-                registered_at: "2023-04-14 15:16:17 +0700"
+                registered_at: "2023-04-14T15:16:17+00:00"
               },
               addresses: [
                 {
@@ -67,7 +67,7 @@ RSpec.describe Usual::Example1::User do
                 md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
                 sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
                 lifetime: "P3M",
-                registered_at: "2023-04-14 15:16:17 +0700"
+                registered_at: "2023-04-14T15:16:17+00:00"
               },
               addresses: [
                 {
@@ -119,7 +119,7 @@ RSpec.describe Usual::Example1::User do
           md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
           sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
           lifetime: 3.months,
-          registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
+          registered_at: DateTime.new(2023, 4, 14, 15, 16, 17)
         )
       end
 
@@ -156,15 +156,15 @@ RSpec.describe Usual::Example1::User do
           first_name: "John",
           last_name: "Doe",
           email: "johndoe@example.com",
-          birth_date: "1973-01-22",
+          birth_date: Date.new(1973, 1, 22),
           login: {
             id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
             username: "johndoe",
             password: "a25723600f7",
             md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
             sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-            lifetime: "P3M",
-            registered_at: "2023-04-14 15:16:17 +0700"
+            lifetime: 3.months,
+            registered_at: DateTime.new(2023, 4, 14, 15, 16, 17)
           },
           addresses: [
             {
@@ -211,7 +211,7 @@ RSpec.describe Usual::Example1::User do
           "md5": "c1328472c5794a25723600f71c1b4586",
           "sha1": "35544a31cc19bd6520af116554873167117f4d94",
           "lifetime": "P3M",
-          "registered_at": "2023-04-14 15:16:17 +0700"
+          "registered_at": "2023-04-14T15:16:17+00:00"
         },
         "addresses": [
           {
@@ -271,7 +271,7 @@ RSpec.describe Usual::Example1::User do
             md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
             sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
             lifetime: 3.months,
-            registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
+            registered_at: DateTime.new(2023, 4, 14, 15, 16, 17)
           )
         )
       end
@@ -356,7 +356,7 @@ RSpec.describe Usual::Example1::User do
             md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
             sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
             lifetime: 3.months,
-            registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
+            registered_at: DateTime.new(2023, 4, 14, 15, 16, 17)
           )
         )
       end

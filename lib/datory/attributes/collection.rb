@@ -13,6 +13,10 @@ module Datory
       def names
         map(&:name)
       end
+
+      def internal_names
+        map { |attribute| attribute.options.fetch(:to, attribute.name) }
+      end
     end
   end
 end

@@ -4,7 +4,7 @@ module Datory
   module Attributes
     module Deserialization
       class ServiceBuilder
-        SERVICE_CLASS_NAME = "Builder"
+        SERVICE_CLASS_NAME = "DBuilder"
 
         def self.build!(...)
           new(...).build!
