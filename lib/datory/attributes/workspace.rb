@@ -17,7 +17,7 @@ module Datory
       def deserialize(incoming_attributes:, collection_of_attributes:)
         super
 
-        Tools::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
+        Deserialization::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
       end
 
       def to_model(attributes:)

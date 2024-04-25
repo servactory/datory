@@ -2,7 +2,7 @@
 
 module Datory
   module Attributes
-    module Tools
+    module Deserialization
       class ServiceBuilder
         SERVICE_CLASS_NAME = "Builder"
 

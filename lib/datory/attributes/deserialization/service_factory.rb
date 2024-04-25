@@ -2,7 +2,7 @@
 
 module Datory
   module Attributes
-    module Tools
+    module Deserialization
       class ServiceFactory
         def self.create(...)
           new(...).create
