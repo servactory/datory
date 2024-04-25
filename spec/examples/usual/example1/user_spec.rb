@@ -2,7 +2,7 @@
 
 RSpec.describe Usual::Example1::User do
   describe "#serialize" do
-    shared_examples "ss" do
+    shared_examples "successful results" do
       describe "singular" do
         subject(:perform) { described_class.serialize(user) }
 
@@ -146,7 +146,7 @@ RSpec.describe Usual::Example1::User do
         )
       end
 
-      it_behaves_like "ss"
+      it_behaves_like "successful results"
     end
 
     describe "hash" do
@@ -189,7 +189,7 @@ RSpec.describe Usual::Example1::User do
         }
       end
 
-      it_behaves_like "ss"
+      it_behaves_like "successful results"
     end
   end
 
