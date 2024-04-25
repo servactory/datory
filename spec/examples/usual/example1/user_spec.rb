@@ -96,7 +96,7 @@ RSpec.describe Usual::Example1::User do
 
     describe "objects" do
       let(:user) do
-        Usual::Example1::User.to_model(
+        Usual::Example1::User.to_model( # rubocop:disable RSpec/DescribedClass
           id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
           first_name: "John",
           last_name: "Doe",

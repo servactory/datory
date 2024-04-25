@@ -3,18 +3,8 @@
 module Datory
   module Context
     module Callable
-      def serialize(model) # rubocop:disable Metrics/MethodLength
-        if model.is_a?(Array)
-          model = model.map do |item|
-            if item.is_a?(Hash)
-              Datory::Attributes::Serialization::HashToObject.build(item)
-            else
-              item
-            end
-          end
-        elsif model.is_a?(Hash)
-          model = Datory::Attributes::Serialization::HashToObject.build(model)
-        end
+      def serialize(model)
+        model = Datory::Attributes::Serialization::HashToObject.prepare(model)
 
         Datory::Attributes::Serialization::Serializator.serialize(
           model: model,
