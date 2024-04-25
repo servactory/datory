@@ -26,11 +26,7 @@ module Datory
       def to_model(**attributes)
         context = send(:new)
 
-        attributes.each do |attribute_name, attribute_value|
-          context.define_singleton_method(attribute_name) { attribute_value }
-        end
-
-        context
+        _to_model(context, **attributes)
       end
 
       def describe
@@ -54,6 +50,13 @@ module Datory
           :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
           collection_of_attributes: collection_of_attributes
+        )
+      end
+
+      def _to_model(context, **attributes)
+        context.send(
+          :_to_model,
+          attributes: attributes
         )
       end
     end
