@@ -2,145 +2,193 @@
 
 RSpec.describe Usual::Example1::User do
   describe "#serialize" do
-    let(:user) do
-      Usual::Example1::User.to_model(
-        id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-        first_name: "John",
-        last_name: "Doe",
-        email: "johndoe@example.com",
-        birth_date: Date.new(1973, 1, 22),
-        login: login,
-        addresses: addresses,
-        phone: "(555) 555-1234",
-        website: "www.johndoe.com",
-        company: company,
-        unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore."
-      )
-    end
+    shared_examples "ss" do
+      describe "singular" do
+        subject(:perform) { described_class.serialize(user) }
 
-    let(:login) do
-      Usual::Example1::UserLogin.to_model(
-        id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-        username: "johndoe",
-        password: "a25723600f7",
-        md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
-        sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-        lifetime: 3.months,
-        registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
-      )
-    end
-
-    let(:addresses) do
-      [
-        Usual::Example1::UserAddress.to_model(
-          street: "123 Main Street",
-          suite: "Apt. 4",
-          city: "Anytown",
-          zip_code: "12345-6789",
-          geo: Usual::Example1::UserAddressGeo.to_model(
-            latitude: "42.1234",
-            longitude: "-71.2345"
+        it do
+          expect(perform).to match(
+            {
+              id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+              firstname: "John",
+              lastname: "Doe",
+              email: "johndoe@example.com",
+              birthDate: "1973-01-22",
+              login: {
+                id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+                username: "johndoe",
+                password: "a25723600f7",
+                md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+                sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+                lifetime: "P3M",
+                registered_at: "2023-04-14 15:16:17 +0700"
+              },
+              addresses: [
+                {
+                  street: "123 Main Street",
+                  suite: "Apt. 4",
+                  city: "Anytown",
+                  zipcode: "12345-6789",
+                  geo: {
+                    lat: "42.1234",
+                    lng: "-71.2345"
+                  }
+                }
+              ],
+              phone: "(555) 555-1234",
+              website: "www.johndoe.com",
+              company: {
+                name: "ABC Company",
+                catchPhrase: "Innovative solutions for all your needs",
+                bs: "Marketing"
+              }
+            }
           )
-        )
-      ]
-    end
+        end
+      end
 
-    let(:company) do
-      Usual::Example1::UserCompany.to_model(
-        name: "ABC Company",
-        catch_phrase: "Innovative solutions for all your needs",
-        bs: "Marketing"
-      )
-    end
+      describe "plural" do
+        subject(:perform) { described_class.serialize(users) }
 
-    describe "singular" do
-      subject(:perform) { described_class.serialize(user) }
+        let(:users) { [user] }
 
-      it do
-        expect(perform).to match(
-          {
-            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-            firstname: "John",
-            lastname: "Doe",
-            email: "johndoe@example.com",
-            birthDate: "1973-01-22",
-            login: {
-              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-              username: "johndoe",
-              password: "a25723600f7",
-              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
-              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-              lifetime: "P3M",
-              registered_at: "2023-04-14 15:16:17 +0700"
-            },
-            addresses: [
-              {
-                street: "123 Main Street",
-                suite: "Apt. 4",
-                city: "Anytown",
-                zipcode: "12345-6789",
-                geo: {
-                  lat: "42.1234",
-                  lng: "-71.2345"
+        it do
+          expect(perform).to contain_exactly(
+            {
+              id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+              firstname: "John",
+              lastname: "Doe",
+              email: "johndoe@example.com",
+              birthDate: "1973-01-22",
+              login: {
+                id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+                username: "johndoe",
+                password: "a25723600f7",
+                md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+                sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+                lifetime: "P3M",
+                registered_at: "2023-04-14 15:16:17 +0700"
+              },
+              addresses: [
+                {
+                  street: "123 Main Street",
+                  suite: "Apt. 4",
+                  city: "Anytown",
+                  zipcode: "12345-6789",
+                  geo: {
+                    lat: "42.1234",
+                    lng: "-71.2345"
+                  }
                 }
+              ],
+              phone: "(555) 555-1234",
+              website: "www.johndoe.com",
+              company: {
+                name: "ABC Company",
+                catchPhrase: "Innovative solutions for all your needs",
+                bs: "Marketing"
               }
-            ],
-            phone: "(555) 555-1234",
-            website: "www.johndoe.com",
-            company: {
-              name: "ABC Company",
-              catchPhrase: "Innovative solutions for all your needs",
-              bs: "Marketing"
             }
-          }
-        )
+          )
+        end
       end
     end
 
-    describe "plural" do
-      subject(:perform) { described_class.serialize(users) }
-
-      let(:users) { [user] }
-
-      it do
-        expect(perform).to contain_exactly(
-          {
-            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-            firstname: "John",
-            lastname: "Doe",
-            email: "johndoe@example.com",
-            birthDate: "1973-01-22",
-            login: {
-              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-              username: "johndoe",
-              password: "a25723600f7",
-              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
-              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
-              lifetime: "P3M",
-              registered_at: "2023-04-14 15:16:17 +0700"
-            },
-            addresses: [
-              {
-                street: "123 Main Street",
-                suite: "Apt. 4",
-                city: "Anytown",
-                zipcode: "12345-6789",
-                geo: {
-                  lat: "42.1234",
-                  lng: "-71.2345"
-                }
-              }
-            ],
-            phone: "(555) 555-1234",
-            website: "www.johndoe.com",
-            company: {
-              name: "ABC Company",
-              catchPhrase: "Innovative solutions for all your needs",
-              bs: "Marketing"
-            }
-          }
+    describe "objects" do
+      let(:user) do
+        Usual::Example1::User.to_model(
+          id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+          first_name: "John",
+          last_name: "Doe",
+          email: "johndoe@example.com",
+          birth_date: Date.new(1973, 1, 22),
+          login: login,
+          addresses: addresses,
+          phone: "(555) 555-1234",
+          website: "www.johndoe.com",
+          company: company,
+          unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore."
         )
       end
+
+      let(:login) do
+        Usual::Example1::UserLogin.to_model(
+          id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+          username: "johndoe",
+          password: "a25723600f7",
+          md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+          sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+          lifetime: 3.months,
+          registered_at: Time.new(2023, 4, 14, 15, 16, 17, "+07:00")
+        )
+      end
+
+      let(:addresses) do
+        [
+          Usual::Example1::UserAddress.to_model(
+            street: "123 Main Street",
+            suite: "Apt. 4",
+            city: "Anytown",
+            zip_code: "12345-6789",
+            geo: Usual::Example1::UserAddressGeo.to_model(
+              latitude: "42.1234",
+              longitude: "-71.2345"
+            )
+          )
+        ]
+      end
+
+      let(:company) do
+        Usual::Example1::UserCompany.to_model(
+          name: "ABC Company",
+          catch_phrase: "Innovative solutions for all your needs",
+          bs: "Marketing"
+        )
+      end
+
+      it_behaves_like "ss"
+    end
+
+    describe "hash" do
+      let(:user) do
+        {
+          id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+          first_name: "John",
+          last_name: "Doe",
+          email: "johndoe@example.com",
+          birth_date: "1973-01-22",
+          login: {
+            id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+            username: "johndoe",
+            password: "a25723600f7",
+            md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+            sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+            lifetime: "P3M",
+            registered_at: "2023-04-14 15:16:17 +0700"
+          },
+          addresses: [
+            {
+              street: "123 Main Street",
+              suite: "Apt. 4",
+              city: "Anytown",
+              zip_code: "12345-6789",
+              geo: {
+                latitude: "42.1234",
+                longitude: "-71.2345"
+              }
+            }
+          ],
+          phone: "(555) 555-1234",
+          website: "www.johndoe.com",
+          company: {
+            name: "ABC Company",
+            catch_phrase: "Innovative solutions for all your needs",
+            bs: "Marketing"
+          }
+        }
+      end
+
+      it_behaves_like "ss"
     end
   end
 
