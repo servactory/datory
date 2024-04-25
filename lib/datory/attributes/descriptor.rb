@@ -7,19 +7,7 @@ module Datory
         new.describe(...)
       end
 
-      def describe(collection_of_attributes:)
-        # results = collection_of_attributes.map do |attribute|
-        #   [
-        #     attribute.name
-        #   ].join(" » ")
-        # end
-        #
-        # results.each do |result|
-        #   puts result
-        # end
-        #
-        # nil
-
+      def describe(collection_of_attributes:) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         headings = []
         rows = []
 
