@@ -67,6 +67,31 @@ class UserLoginDto < Datory::Base
 end
 ```
 
+### Object information
+
+```ruby
+UserDto.describe
+```
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                         UserDto                          |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Attribute | From   | To         | As                     |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| id        | String | id         | String                 |
+| firstname | String | first_name | String                 |
+| lastname  | String | last_name  | String                 |
+| email     | String | email      | String                 |
+| phone     | String | phone      | String                 |
+| website   | String | website    | String                 |
+| birthDate | String | birth_date | Date                   |
+| login     | Hash   | login      | [Datory::Result, Hash] |
+| company   | Hash   | company    | [Datory::Result, Hash] |
+| addresses | Array  | addresses  | Array                  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
 ## Contributing
 
 This project is intended to be a safe, welcoming space for collaboration. 
