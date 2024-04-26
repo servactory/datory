@@ -3,7 +3,7 @@
 module Datory
   module Context
     module Callable
-      def serialize(model)
+      def serialize(model) # rubocop:disable Metrics/MethodLength
         if [Set, Array].include?(model.class)
           model.map do |model_item|
             serialize(model_item)
@@ -19,7 +19,7 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(json)
+      def deserialize(json) # rubocop:disable Metrics/MethodLength
         if [Set, Array].include?(json.class)
           json.map do |json_item|
             deserialize(json_item)

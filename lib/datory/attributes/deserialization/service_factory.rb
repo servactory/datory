@@ -4,6 +4,19 @@ module Datory
   module Attributes
     module Deserialization
       class ServiceFactory
+        TRANSFORMATIONS = {
+          Symbol => ->(value) { value.to_sym },
+          String => ->(value) { value.to_s },
+          Integer => ->(value) { value.to_i },
+          Float => ->(value) { value.to_f },
+          Date => ->(value) { Date.parse(value) },
+          Time => ->(value) { Time.parse(value) },
+          DateTime => ->(value) { DateTime.parse(value) },
+          ActiveSupport::Duration => ->(value) { ActiveSupport::Duration.parse(value) }
+        }.freeze
+
+        private_constant :TRANSFORMATIONS
+
         def self.create(...)
           new(...).create
         end
@@ -39,7 +52,7 @@ module Datory
 
                 type_as = attribute.options.fetch(:as, nil)
 
-                value = Datory::Utils.transform_value_with(:d, value, type_as)
+                value = TRANSFORMATIONS.fetch(type_as, ->(v) { v }).call(value)
 
                 outputs.public_send(:"#{input_internal_name}=", value)
               end
