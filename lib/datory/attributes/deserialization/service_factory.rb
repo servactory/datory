@@ -4,19 +4,6 @@ module Datory
   module Attributes
     module Deserialization
       class ServiceFactory
-        TRANSFORMATIONS = {
-          Symbol => ->(value) { value.to_sym },
-          String => ->(value) { value.to_s },
-          Integer => ->(value) { value.to_i },
-          Float => ->(value) { value.to_f },
-          Date => ->(value) { Date.parse(value) },
-          Time => ->(value) { Time.parse(value) },
-          DateTime => ->(value) { DateTime.parse(value) },
-          ActiveSupport::Duration => ->(value) { ActiveSupport::Duration.parse(value) }
-        }.freeze
-
-        private_constant :TRANSFORMATIONS
-
         def self.create(...)
           new(...).create
         end
@@ -34,30 +21,12 @@ module Datory
           @model_class.const_set(ServiceBuilder::SERVICE_CLASS_NAME, class_sample)
         end
 
-        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def create_service_class
           collection_of_attributes = @collection_of_attributes
 
           Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute|
-              serialized_name = attribute.name
-              deserialized_name = attribute.options.fetch(:to, serialized_name)
-              method_name = :"assign_#{deserialized_name}_output"
-
-              input serialized_name, **attribute.input_deserialization_options
-
-              output deserialized_name, **attribute.output_deserialization_options
-
-              make method_name
-
-              define_method(method_name) do
-                value = inputs.public_send(deserialized_name)
-
-                type_as = attribute.options.fetch(:as, nil)
-
-                value = TRANSFORMATIONS.fetch(type_as, ->(v) { v }).call(value)
-
-                outputs.public_send(:"#{deserialized_name}=", value)
-              end
+              prepare_deserialization_data_for(attribute)
             end
           end
         end
