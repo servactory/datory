@@ -2,24 +2,32 @@
 
 module Datory
   module Attributes
-    module Tools
+    module Serialization
       class ServiceBuilder
-        SERVICE_CLASS_NAME = "Builder"
+        SERVICE_CLASS_NAME = "SBuilder"
 
         def self.build!(...)
           new(...).build!
         end
 
-        def initialize(context, incoming_attributes, collection_of_attributes)
+        def initialize(context, model, collection_of_attributes)
           @context = context
-          @incoming_attributes = incoming_attributes
+          @model = model
           @collection_of_attributes = collection_of_attributes
         end
 
         def build!
           ServiceFactory.create(@context.class, @collection_of_attributes)
 
-          builder_class.call!(**@incoming_attributes)
+          attributes = Datory::Attributes::Serialization::Model.to_hash(@model)
+
+          unnecessary_attributes = attributes.keys.difference(@collection_of_attributes.internal_names)
+
+          unnecessary_attributes.each do |key|
+            attributes.delete(key)
+          end
+
+          builder_class.call!(**attributes)
         end
 
         private

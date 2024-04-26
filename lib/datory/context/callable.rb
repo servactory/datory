@@ -4,12 +4,15 @@ module Datory
   module Context
     module Callable
       def serialize(model)
-        model = Datory::Attributes::Serialization::Model.prepare(model)
-
-        Datory::Attributes::Serialization::Serializator.serialize(
-          model: model,
-          collection_of_attributes: collection_of_attributes
-        )
+        if [Set, Array].include?(model.class)
+          model.map do |model_item|
+            serialize(model_item)
+          end
+        else
+          context = send(:new)
+          model = Datory::Attributes::Serialization::Model.prepare(model)
+          _serialize(context, model)
+        end
       end
 
       def deserialize(json)
@@ -18,46 +21,47 @@ module Datory
             deserialize(json_item)
           end
         else
+          context = send(:new)
           hash = JSON.parse(json.to_json)
-          build(**hash)
+          _deserialize(context, **hash)
         end
       end
 
       def to_model(**attributes)
         context = send(:new)
 
-        attributes.each do |attribute_name, attribute_value|
-          context.define_singleton_method(attribute_name) { attribute_value }
-        end
-
-        context
-      end
-
-      # def build!(attributes = {})
-      #   context = send(:new)
-      #
-      #   _build!(context, **attributes)
-      # end
-
-      def build(attributes = {})
-        context = send(:new)
-
-        _build!(context, **attributes)
+        _to_model(context, **attributes)
       end
 
       def describe
         Datory::Attributes::Descriptor.describe(
+          service_class_name: name,
           collection_of_attributes: collection_of_attributes
         )
       end
 
       private
 
-      def _build!(context, **attributes)
+      def _serialize(context, model)
         context.send(
-          :_build!,
+          :_serialize,
+          model: model,
+          collection_of_attributes: collection_of_attributes
+        )
+      end
+
+      def _deserialize(context, **attributes)
+        context.send(
+          :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
           collection_of_attributes: collection_of_attributes
+        )
+      end
+
+      def _to_model(context, **attributes)
+        context.send(
+          :_to_model,
+          attributes: attributes
         )
       end
     end

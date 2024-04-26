@@ -24,11 +24,24 @@ module Datory
         ########################################################################
 
         def one(name, include:, to: nil)
-          attribute(name, to: to.presence || name, from: Hash, include: include)
+          attribute(
+            name,
+            to: to.presence || name,
+            from: Hash,
+            include: include,
+            as: [Datory::Result, Hash]
+          )
         end
 
         def many(name, include:, to: nil)
-          attribute(name, to: to.presence || name, from: Array, consists_of: Hash, include: include)
+          attribute(
+            name,
+            to: to.presence || name,
+            from: Array,
+            consists_of: [Datory::Result, Hash],
+            include: include,
+            as: Array
+          )
         end
 
         ########################################################################

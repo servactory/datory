@@ -20,17 +20,17 @@ module Datory
             end
           else
             @collection_of_attributes.to_h do |attribute|
-              internal_name = attribute.options.fetch(:to, attribute.name)
+              attribute.options.fetch(:to, attribute.name)
               include_class = attribute.options.fetch(:include, nil)
               output_formatter = attribute.options.fetch(:output, nil)
 
-              value = model.public_send(internal_name)
+              value = model.public_send(attribute.name)
 
               value =
                 if include_class.present?
-                  type = attribute.options.fetch(:type, nil)
+                  from_type = attribute.options.fetch(:from)
 
-                  if [Set, Array].include?(type)
+                  if [Set, Array].include?(from_type)
                     value.map { |item| include_class.serialize(item) }
                   else
                     include_class.serialize(value)

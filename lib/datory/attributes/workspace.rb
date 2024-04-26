@@ -5,10 +5,29 @@ module Datory
     module Workspace
       private
 
-      def build!(incoming_attributes:, collection_of_attributes:, **)
+      def serialize(model:, collection_of_attributes:)
         super
 
-        Tools::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
+        model = Serialization::ServiceBuilder.build!(self, model, collection_of_attributes)
+
+        Serialization::Serializator.serialize(
+          model: model,
+          collection_of_attributes: collection_of_attributes
+        )
+      end
+
+      def deserialize(incoming_attributes:, collection_of_attributes:)
+        super
+
+        Deserialization::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
+      end
+
+      def to_model(attributes:)
+        super
+
+        attributes.each do |attribute_name, attribute_value|
+          define_singleton_method(attribute_name) { attribute_value }
+        end
       end
     end
   end
