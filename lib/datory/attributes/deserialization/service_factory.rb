@@ -40,14 +40,15 @@ module Datory
           Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute|
               input_internal_name = attribute.options.fetch(:to, attribute.name)
+              method_name = :"assign_#{input_internal_name}_output"
 
               input attribute.name, **attribute.input_deserialization_options
 
               output input_internal_name, **attribute.output_deserialization_options
 
-              make :"assign_#{input_internal_name}_output"
+              make method_name
 
-              define_method(:"assign_#{input_internal_name}_output") do
+              define_method(method_name) do
                 value = inputs.public_send(input_internal_name)
 
                 type_as = attribute.options.fetch(:as, nil)
