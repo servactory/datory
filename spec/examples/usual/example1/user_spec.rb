@@ -404,8 +404,97 @@ RSpec.describe Usual::Example1::User do
   end
 
   describe "#describe" do
-    subject(:perform) { described_class.describe }
+    describe "Usual::Example1::User" do
+      subject(:perform) { Usual::Example1::User.describe } # rubocop:disable RSpec/DescribedClass
 
-    it { expect { perform }.not_to raise_error }
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute | From   | To         | As                     |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id        | String | id         | String                 |
+              | firstname | String | first_name | String                 |
+              | lastname  | String | last_name  | String                 |
+              | email     | String | email      | String                 |
+              | phone     | String | phone      | String                 |
+              | website   | String | website    | String                 |
+              | birthDate | String | birth_date | Date                   |
+              | login     | Hash   | login      | [Datory::Result, Hash] |
+              | company   | Hash   | company    | [Datory::Result, Hash] |
+              | addresses | Array  | addresses  | Array                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::UserLogin" do
+      subject(:perform) { Usual::Example1::UserLogin.describe }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute     | From   | To            | As                      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id            | String | id            | String                  |
+              | username      | String | username      | String                  |
+              | password      | String | password      | String                  |
+              | md5           | String | md5           | String                  |
+              | sha1          | String | sha1          | String                  |
+              | lifetime      | String | lifetime      | ActiveSupport::Duration |
+              | registered_at | String | registered_at | DateTime                |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::UserAddress" do
+      subject(:perform) { Usual::Example1::UserAddress.describe }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute | From   | To       | As                     |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | street    | String | street   | String                 |
+              | suite     | String | suite    | String                 |
+              | city      | String | city     | String                 |
+              | zipcode   | String | zip_code | String                 |
+              | geo       | Hash   | geo      | [Datory::Result, Hash] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::UserCompany" do
+      subject(:perform) { Usual::Example1::UserCompany.describe }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From   | To           | As     |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | name        | String | name         | String |
+              | catchPhrase | String | catch_phrase | String |
+              | bs          | String | bs           | String |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
   end
 end
