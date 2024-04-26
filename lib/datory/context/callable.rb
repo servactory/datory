@@ -13,6 +13,10 @@ module Datory
           model = Datory::Attributes::Serialization::Model.prepare(model)
           _serialize(context, model)
         end
+      rescue Datory::Service::Exceptions::Input,
+             Datory::Service::Exceptions::Internal,
+             Datory::Service::Exceptions::Output => e
+        raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
       def deserialize(json)
@@ -23,8 +27,13 @@ module Datory
         else
           context = send(:new)
           hash = JSON.parse(json.to_json)
+
           _deserialize(context, **hash)
         end
+      rescue Datory::Service::Exceptions::Input,
+             Datory::Service::Exceptions::Internal,
+             Datory::Service::Exceptions::Output => e
+        raise Datory::Exceptions::DeserializationError.new(message: e.message)
       end
 
       def to_model(**attributes)
