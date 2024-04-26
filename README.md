@@ -74,22 +74,22 @@ UserDto.describe
 ```
 
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|                         UserDto                          |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| Attribute | From   | To         | As                     |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| id        | String | id         | String                 |
-| firstname | String | first_name | String                 |
-| lastname  | String | last_name  | String                 |
-| email     | String | email      | String                 |
-| phone     | String | phone      | String                 |
-| website   | String | website    | String                 |
-| birthDate | String | birth_date | Date                   |
-| login     | Hash   | login      | [Datory::Result, Hash] |
-| company   | Hash   | company    | [Datory::Result, Hash] |
-| addresses | Array  | addresses  | Array                  |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                                         UserDto                                         |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Attribute | From   | To         | As                     | Include                      |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| id        | String | id         | String                 |                              |
+| firstname | String | first_name | String                 |                              |
+| lastname  | String | last_name  | String                 |                              |
+| email     | String | email      | String                 |                              |
+| phone     | String | phone      | String                 |                              |
+| website   | String | website    | String                 |                              |
+| birthDate | String | birth_date | Date                   |                              |
+| login     | Hash   | login      | [Datory::Result, Hash] | Usual::Example1::UserLogin   |
+| company   | Hash   | company    | [Datory::Result, Hash] | Usual::Example1::UserCompany |
+| addresses | Array  | addresses  | Array                  | Usual::Example1::UserAddress |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 ## Contributing
