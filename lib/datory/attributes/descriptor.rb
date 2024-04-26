@@ -7,7 +7,7 @@ module Datory
         new.describe(...)
       end
 
-      def describe(service_class:, collection_of_attributes:) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def describe(service_class_name:, collection_of_attributes:) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         headings = []
         rows = []
 
@@ -30,7 +30,7 @@ module Datory
           rows << row
         end
 
-        Datory::Console.print_table(title: service_class, headings: headings.uniq, rows: rows)
+        Datory::Console.print_table(title: service_class_name, headings: headings.uniq, rows: rows)
       end
     end
   end
