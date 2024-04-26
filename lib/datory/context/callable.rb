@@ -35,6 +35,7 @@ module Datory
 
       def describe
         Datory::Attributes::Descriptor.describe(
+          service_class: self,
           collection_of_attributes: collection_of_attributes
         )
       end

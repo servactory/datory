@@ -412,6 +412,8 @@ RSpec.describe Usual::Example1::User do
           output(
             <<~TABLE
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                  Usual::Example1::User                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | Attribute | From   | To         | As                     |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id        | String | id         | String                 |
@@ -439,6 +441,8 @@ RSpec.describe Usual::Example1::User do
           output(
             <<~TABLE
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                    Usual::Example1::UserLogin                    |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | Attribute     | From   | To            | As                      |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id            | String | id            | String                  |
@@ -463,6 +467,8 @@ RSpec.describe Usual::Example1::User do
           output(
             <<~TABLE
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |              Usual::Example1::UserAddress              |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | Attribute | From   | To       | As                     |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | street    | String | street   | String                 |
@@ -484,6 +490,8 @@ RSpec.describe Usual::Example1::User do
         expect { perform }.to(
           output(
             <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |         Usual::Example1::UserCompany         |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | Attribute   | From   | To           | As     |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
