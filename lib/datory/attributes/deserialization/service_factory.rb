@@ -39,23 +39,24 @@ module Datory
 
           Class.new(Datory::Service::Builder) do
             collection_of_attributes.each do |attribute|
-              input_internal_name = attribute.options.fetch(:to, attribute.name)
-              method_name = :"assign_#{input_internal_name}_output"
+              serialized_name = attribute.name
+              deserialized_name = attribute.options.fetch(:to, serialized_name)
+              method_name = :"assign_#{deserialized_name}_output"
 
-              input attribute.name, **attribute.input_deserialization_options
+              input serialized_name, **attribute.input_deserialization_options
 
-              output input_internal_name, **attribute.output_deserialization_options
+              output deserialized_name, **attribute.output_deserialization_options
 
               make method_name
 
               define_method(method_name) do
-                value = inputs.public_send(input_internal_name)
+                value = inputs.public_send(deserialized_name)
 
                 type_as = attribute.options.fetch(:as, nil)
 
                 value = TRANSFORMATIONS.fetch(type_as, ->(v) { v }).call(value)
 
-                outputs.public_send(:"#{input_internal_name}=", value)
+                outputs.public_send(:"#{deserialized_name}=", value)
               end
             end
           end
