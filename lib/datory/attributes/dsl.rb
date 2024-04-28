@@ -51,6 +51,14 @@ module Datory
           string(name, **options)
         end
 
+        def money(name, **options)
+          options_for_cents = options.merge(from: Integer)
+          options_for_currency = options.merge(from: [Symbol, String])
+
+          attribute(:"#{name}_cents", **options_for_cents)
+          attribute(:"#{name}_currency", **options_for_currency)
+        end
+
         ########################################################################
 
         def string(name, **options)
