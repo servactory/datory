@@ -11,7 +11,7 @@ module Datory
       end
 
       def prepare_options(options) # rubocop:disable Metrics/MethodLength
-        if (format = options.fetch(:format, nil)).present?
+        unless (format = options.fetch(:format, nil)).nil?
           options[:format] = if format.is_a?(Hash)
                                {
                                  from: format.fetch(:from, nil),
