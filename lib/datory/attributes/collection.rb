@@ -20,7 +20,15 @@ module Datory
 
       def include_exist?
         @include_exist ||= filter do |attribute| # rubocop:disable Performance/Count
-          attribute.options.fetch(:include, attribute.options.fetch(:from)) <= Datory::Base
+          include_class = attribute.options.fetch(:include, nil)
+
+          next false if include_class.nil?
+
+          if [Set, Array].include?(include_class)
+            include_class.any? { |item| item <= Datory::Base }
+          else
+            include_class <= Datory::Base
+          end
         end.size.positive?
       end
     end
