@@ -59,6 +59,26 @@ module Datory
           attribute(:"#{name}_currency", **options_for_currency)
         end
 
+        def duration(name, **options)
+          options = options.merge(from: String, as: ActiveSupport::Duration) # TODO: Add `format: :duration`
+          string(name, **options)
+        end
+
+        def date(name, **options)
+          options = options.merge(from: String, as: Date) # TODO: Add `format: :date`
+          string(name, **options)
+        end
+
+        def time(name, **options)
+          options = options.merge(from: String, as: Time) # TODO: Add `format: :time`
+          string(name, **options)
+        end
+
+        def datetime(name, **options)
+          options = options.merge(from: String, as: DateTime) # TODO: Add `format: :datetime`
+          string(name, **options)
+        end
+
         ########################################################################
 
         def string(name, **options)

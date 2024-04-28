@@ -12,7 +12,7 @@ module Usual
       string :phone
       string :website
 
-      string :birthDate, to: :birth_date, as: Date
+      date :birthDate, to: :birth_date
 
       one :login, include: UserLogin
       one :company, include: UserCompany
