@@ -86,13 +86,13 @@ string :first_name
 #### integer
 
 ```ruby
-integer :attempts
+integer :attempts, min: 1, max: 10
 ```
 
 #### float
 
 ```ruby
-integer :interest_rate
+float :interest_rate
 ```
 
 ### Helpers

@@ -603,60 +603,80 @@ RSpec.describe Usual::Example1::User do
                 from: String,
                 to: :id,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               firstname: {
                 from: String,
                 to: :first_name,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               lastname: {
                 from: String,
                 to: :last_name,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               email: {
                 from: String,
                 to: :email,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               phone: {
                 from: String,
                 to: :phone,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               website: {
                 from: String,
                 to: :website,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               birthDate: {
                 from: String,
                 to: :birth_date,
                 as: Date,
+                min: nil,
+                max: nil,
                 include: nil
               },
               login: {
                 from: Hash,
                 to: :login,
                 as: [Datory::Result, Hash],
+                min: nil,
+                max: nil,
                 include: Usual::Example1::UserLogin
               },
               company: {
                 from: Hash,
                 to: :company,
                 as: [Datory::Result, Hash],
+                min: nil,
+                max: nil,
                 include: Usual::Example1::UserCompany
               },
               addresses: {
                 from: Array,
                 to: :addresses,
                 as: Array,
+                min: nil,
+                max: nil,
                 include: Usual::Example1::UserAddress
               }
             }

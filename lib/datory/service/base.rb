@@ -15,11 +15,15 @@ module Datory
         result_class Datory::Result
 
         input_option_helpers [
-          Servactory::ToolKit::DynamicOptions::Format.use
+          Servactory::ToolKit::DynamicOptions::Format.use,
+          Servactory::ToolKit::DynamicOptions::Min.use,
+          Servactory::ToolKit::DynamicOptions::Max.use
         ]
 
         output_option_helpers [
-          Servactory::ToolKit::DynamicOptions::Format.use
+          Servactory::ToolKit::DynamicOptions::Format.use,
+          Servactory::ToolKit::DynamicOptions::Min.use,
+          Servactory::ToolKit::DynamicOptions::Max.use
         ]
 
         predicate_methods_enabled false

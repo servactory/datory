@@ -2,7 +2,7 @@
 
 module Datory
   module Attributes
-    class Attribute
+    class Attribute # rubocop:disable Metrics/ClassLength
       attr_reader :name, :options
 
       def initialize(name, **options)
@@ -10,13 +10,21 @@ module Datory
         @options = options
       end
 
-      def input_serialization_options
+      def input_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         hash = {
           as: options.fetch(:to, name),
           type: options.fetch(:as, options.fetch(:from)),
           required: options.fetch(:required, true),
           consists_of: options.fetch(:consists_of, false)
         }
+
+        if (min = options.fetch(:min, nil)).present?
+          hash[:min] = min
+        end
+
+        if (max = options.fetch(:max, nil)).present?
+          hash[:max] = max
+        end
 
         if (format = options.fetch(:format, nil)).present?
           hash[:format] = format
@@ -45,6 +53,14 @@ module Datory
           end)
         }
 
+        if (min = options.fetch(:min, nil)).present?
+          hash[:min] = min
+        end
+
+        if (max = options.fetch(:max, nil)).present?
+          hash[:max] = max
+        end
+
         if (format = options.fetch(:format, nil)).present?
           hash[:format] = format
         end
@@ -52,7 +68,7 @@ module Datory
         hash
       end
 
-      def output_serialization_options # rubocop:disable Metrics/MethodLength
+      def output_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
         hash = {
           consists_of: if (consists_of_type = options.fetch(:consists_of, false)) == Hash
                          Datory::Result
@@ -68,6 +84,14 @@ module Datory
                 end
         }
 
+        if (min = options.fetch(:min, nil)).present?
+          hash[:min] = min
+        end
+
+        if (max = options.fetch(:max, nil)).present?
+          hash[:max] = max
+        end
+
         if (format = options.fetch(:format, nil)).present?
           hash[:format] = format
         end
@@ -75,7 +99,7 @@ module Datory
         hash
       end
 
-      def output_deserialization_options # rubocop:disable Metrics/MethodLength
+      def output_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
         hash = {
           consists_of: if (consists_of_type = options.fetch(:consists_of, false)) == Hash
                          Datory::Result
@@ -90,6 +114,14 @@ module Datory
                   from_type
                 end
         }
+
+        if (min = options.fetch(:min, nil)).present?
+          hash[:min] = min
+        end
+
+        if (max = options.fetch(:max, nil)).present?
+          hash[:max] = max
+        end
 
         if (format = options.fetch(:format, nil)).present?
           hash[:format] = format

@@ -8,6 +8,8 @@ module Usual
       string :title
 
       money :price
+
+      integer :quantity, min: 1, max: 10
     end
   end
 end

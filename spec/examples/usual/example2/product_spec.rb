@@ -12,7 +12,8 @@ RSpec.describe Usual::Example2::Product do
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
               price_cents: 999_00,
-              price_currency: "USD"
+              price_currency: "USD",
+              quantity: 5
             }
           )
         end
@@ -29,7 +30,8 @@ RSpec.describe Usual::Example2::Product do
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
               price_cents: 999_00,
-              price_currency: "USD"
+              price_currency: "USD",
+              quantity: 5
             }
           )
         end
@@ -48,7 +50,8 @@ RSpec.describe Usual::Example2::Product do
           id: "55363a14-aa9a-4eba-9276-7f7cec432123",
           title: "iPhone 15 Pro",
           price_cents: 999_00,
-          price_currency: "USD"
+          price_currency: "USD",
+          quantity: 5
         )
       end
 
@@ -62,7 +65,8 @@ RSpec.describe Usual::Example2::Product do
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
             price_cents: "999.00",
-            price_currency: "USD"
+            price_currency: "USD",
+            quantity: 5
           )
         end
 
@@ -76,7 +80,8 @@ RSpec.describe Usual::Example2::Product do
           id: "55363a14-aa9a-4eba-9276-7f7cec432123",
           title: "iPhone 15 Pro",
           price_cents: 999_00,
-          price_currency: "USD"
+          price_currency: "USD",
+          quantity: 5
         }
       end
 
@@ -100,7 +105,8 @@ RSpec.describe Usual::Example2::Product do
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
               price_cents: 999_00,
-              price_currency: "USD"
+              price_currency: "USD",
+              quantity: 5
             )
           )
         end
@@ -121,7 +127,8 @@ RSpec.describe Usual::Example2::Product do
                 id: "55363a14-aa9a-4eba-9276-7f7cec432123",
                 title: "iPhone 15 Pro",
                 price_cents: 999_00,
-                price_currency: "USD"
+                price_currency: "USD",
+                quantity: 5
               )
             )
           )
@@ -141,7 +148,8 @@ RSpec.describe Usual::Example2::Product do
         "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
         "title": "iPhone 15 Pro",
         "price_cents": 999_00,
-        "price_currency": "USD"
+        "price_currency": "USD",
+        "quantity": 5
       }
     end
     # rubocop:enable Lint/SymbolConversion
@@ -157,7 +165,8 @@ RSpec.describe Usual::Example2::Product do
           "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
           "title": "iPhone 15 Pro",
           "price_cents": "999.00",
-          "price_currency": "USD"
+          "price_currency": "USD",
+          "quantity": 5
         }
       end
       # rubocop:enable Lint/SymbolConversion
@@ -183,6 +192,7 @@ RSpec.describe Usual::Example2::Product do
               | title          | String           | title          | String           |
               | price_cents    | Integer          | price_cents    | Integer          |
               | price_currency | [Symbol, String] | price_currency | [Symbol, String] |
+              | quantity       | Integer          | quantity       | Integer          |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
@@ -204,25 +214,41 @@ RSpec.describe Usual::Example2::Product do
                 from: String,
                 to: :id,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               title: {
                 from: String,
                 to: :title,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               price_cents: {
                 from: Integer,
                 to: :price_cents,
                 as: Integer,
+                min: nil,
+                max: nil,
                 include: nil
               },
               price_currency: {
                 from: [Symbol, String],
                 to: :price_currency,
                 as: [Symbol, String],
+                min: nil,
+                max: nil,
                 include: nil
+              },
+              quantity: {
+                as: Integer,
+                from: Integer,
+                include: nil,
+                min: 1,
+                max: 10,
+                to: :quantity
               }
             }
           )
