@@ -15,12 +15,12 @@ module Datory
       end
 
       def internal_names
-        map { |attribute| attribute.options.fetch(:to, attribute.name) }
+        map(&:name_to)
       end
 
-      def include_exist?
-        @include_exist ||= filter do |attribute| # rubocop:disable Performance/Count
-          include_class = attribute.options.fetch(:include, nil)
+      def include_class_exist?
+        @include_class_exist ||= filter do |attribute| # rubocop:disable Performance/Count
+          include_class = attribute.include_class
 
           next false if include_class.nil?
 

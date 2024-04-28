@@ -216,6 +216,10 @@ RSpec.describe Usual::Example2::Product do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: :uuid,
+                  to: :uuid
+                },
                 include: nil
               },
               title: {
@@ -224,6 +228,10 @@ RSpec.describe Usual::Example2::Product do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               price_cents: {
@@ -232,6 +240,10 @@ RSpec.describe Usual::Example2::Product do
                 as: Integer,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               price_currency: {
@@ -240,6 +252,10 @@ RSpec.describe Usual::Example2::Product do
                 as: [Symbol, String],
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               quantity: {
@@ -248,6 +264,10 @@ RSpec.describe Usual::Example2::Product do
                 include: nil,
                 min: 1,
                 max: 10,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 to: :quantity
               }
             }

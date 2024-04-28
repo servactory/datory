@@ -2,84 +2,80 @@
 
 module Datory
   module Attributes
-    class Attribute # rubocop:disable Metrics/ClassLength
-      attr_reader :name, :options
+    class Attribute
+      attr_reader :name,
+                  :name_to,
+                  :type_from,
+                  :type_to,
+                  :required,
+                  :consists_of,
+                  :min,
+                  :max,
+                  :format_from,
+                  :format_to,
+                  :include_class
 
       def initialize(name, **options)
         @name = name
-        @options = prepare_options(options)
+        @name_to = options.fetch(:to, name)
+
+        @type_from = options.fetch(:from)
+        @type_to = options.fetch(:as, type_from)
+
+        @required = options.fetch(:required, true)
+
+        @consists_of = options.fetch(:consists_of, false)
+
+        @min = options.fetch(:min, nil)
+        @max = options.fetch(:max, nil)
+
+        prepare_format_from_options(options)
+
+        @include_class = options.fetch(:include, nil)
       end
 
-      def prepare_options(options) # rubocop:disable Metrics/MethodLength
-        unless (format = options.fetch(:format, nil)).nil?
-          options[:format] = if format.is_a?(Hash)
-                               {
-                                 from: format.fetch(:from, nil),
-                                 to: format.fetch(:to, nil)
-                               }
-                             else
-                               {
-                                 from: format,
-                                 to: format
-                               }
-                             end
-        end
+      def prepare_format_from_options(options)
+        return if (format = options.fetch(:format, nil)).nil?
 
-        options
+        if format.is_a?(Hash)
+          @format_from = format.fetch(:from, nil)
+          @format_to = format.fetch(:to, nil)
+        else
+          @format_from = format
+          @format_to = format
+        end
       end
 
       ##########################################################################
 
-      def input_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def input_serialization_options
         hash = {
-          as: options.fetch(:to, name),
-          type: options.fetch(:as, options.fetch(:from)),
-          required: options.fetch(:required, true),
-          consists_of: options.fetch(:consists_of, false)
+          as: name_to,
+          type: type_to,
+          required: required,
+          consists_of: consists_of
         }
 
-        if (min = options.fetch(:min, nil)).present?
-          hash[:min] = min
-        end
+        hash[:min] = min if min.present?
 
-        if (max = options.fetch(:max, nil)).present?
-          hash[:max] = max
-        end
+        hash[:max] = max if max.present?
 
-        if (format = options.dig(:format, :to)).present?
-          hash[:format] = format
-        end
+        hash[:format] = format_to if format_to.present?
 
         hash
       end
 
-      def output_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
+      def output_serialization_options # rubocop:disable Metrics/AbcSize
         hash = {
-          consists_of: if (consists_of_type = options.fetch(:consists_of, false)) == Hash
-                         Datory::Result
-                       else
-                         consists_of_type
-                       end,
-          type: if (as_type = options.fetch(:as, options.fetch(:from))) == Datory::Result
-                  Hash
-                elsif (from_type = options.fetch(:from)).present?
-                  from_type
-                else
-                  as_type
-                end
+          consists_of: consists_of == Hash ? Datory::Result : consists_of,
+          type: type_to == Datory::Result ? Hash : type_from
         }
 
-        if (min = options.fetch(:min, nil)).present?
-          hash[:min] = min
-        end
+        hash[:min] = min if min.present?
 
-        if (max = options.fetch(:max, nil)).present?
-          hash[:max] = max
-        end
+        hash[:max] = max if max.present?
 
-        if (format = options.dig(:format, :from)).present?
-          hash[:format] = format
-        end
+        hash[:format] = format_from if format_from.present?
 
         hash
       end
@@ -88,17 +84,14 @@ module Datory
 
       def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         hash = {
-          as: options.fetch(:to, name),
-          type: options.fetch(:from),
-          required: options.fetch(:required, true),
-          consists_of: options.fetch(:consists_of, false),
+          as: name_to,
+          type: type_from,
+          required: required,
+          consists_of: consists_of,
           prepare: (lambda do |value:|
-            include_class = options.fetch(:include, nil)
             return value unless include_class.present?
 
-            from_type = options.fetch(:from, nil)
-
-            if [Set, Array].include?(from_type)
+            if [Set, Array].include?(type_from)
               value.map { |item| include_class.deserialize(**item) }
             else
               include_class.deserialize(**value)
@@ -106,48 +99,26 @@ module Datory
           end)
         }
 
-        if (min = options.fetch(:min, nil)).present?
-          hash[:min] = min
-        end
+        hash[:min] = min if min.present?
 
-        if (max = options.fetch(:max, nil)).present?
-          hash[:max] = max
-        end
+        hash[:max] = max if max.present?
 
-        if (format = options.dig(:format, :from)).present?
-          hash[:format] = format
-        end
+        hash[:format] = format_from if format_from.present?
 
         hash
       end
 
-      def output_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
+      def output_deserialization_options # rubocop:disable Metrics/AbcSize
         hash = {
-          consists_of: if (consists_of_type = options.fetch(:consists_of, false)) == Hash
-                         Datory::Result
-                       else
-                         consists_of_type
-                       end,
-          type: if (from_type = options.fetch(:from)) == Hash
-                  Datory::Result
-                elsif (option_as = options.fetch(:as, nil)).present?
-                  option_as
-                else
-                  from_type
-                end
+          consists_of: consists_of == Hash ? Datory::Result : consists_of,
+          type: type_from == Hash ? Datory::Result : type_to
         }
 
-        if (min = options.fetch(:min, nil)).present?
-          hash[:min] = min
-        end
+        hash[:min] = min if min.present?
 
-        if (max = options.fetch(:max, nil)).present?
-          hash[:max] = max
-        end
+        hash[:max] = max if max.present?
 
-        if (format = options.dig(:format, :to)).present?
-          hash[:format] = format
-        end
+        hash[:format] = format_to if format_to.present?
 
         hash
       end

@@ -605,6 +605,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: :uuid,
+                  to: :uuid
+                },
                 include: nil
               },
               firstname: {
@@ -613,6 +617,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               lastname: {
@@ -621,6 +629,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               email: {
@@ -629,6 +641,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               phone: {
@@ -637,6 +653,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               website: {
@@ -645,6 +665,10 @@ RSpec.describe Usual::Example1::User do
                 as: String,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: nil
               },
               birthDate: {
@@ -653,6 +677,10 @@ RSpec.describe Usual::Example1::User do
                 as: Date,
                 min: nil,
                 max: nil,
+                format: {
+                  from: :date,
+                  to: nil
+                },
                 include: nil
               },
               login: {
@@ -661,6 +689,10 @@ RSpec.describe Usual::Example1::User do
                 as: [Datory::Result, Hash],
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: Usual::Example1::UserLogin
               },
               company: {
@@ -669,6 +701,10 @@ RSpec.describe Usual::Example1::User do
                 as: [Datory::Result, Hash],
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: Usual::Example1::UserCompany
               },
               addresses: {
@@ -677,6 +713,10 @@ RSpec.describe Usual::Example1::User do
                 as: Array,
                 min: nil,
                 max: nil,
+                format: {
+                  from: nil,
+                  to: nil
+                },
                 include: Usual::Example1::UserAddress
               }
             }

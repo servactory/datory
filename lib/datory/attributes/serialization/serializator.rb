@@ -20,23 +20,23 @@ module Datory
             end
           else
             @collection_of_attributes.to_h do |attribute|
-              attribute.options.fetch(:to, attribute.name)
-              include_class = attribute.options.fetch(:include, nil)
-              output_formatter = attribute.options.fetch(:output, nil)
+              attribute.name_to
+              include_class = attribute.include_class
+              # output_formatter = attribute.options.fetch(:output, nil) # FIXME
 
               value = model.public_send(attribute.name)
 
               value =
                 if include_class.present?
-                  from_type = attribute.options.fetch(:from)
+                  type_from = attribute.type_from
 
-                  if [Set, Array].include?(from_type)
+                  if [Set, Array].include?(type_from)
                     value.map { |item| include_class.serialize(item) }
                   else
                     include_class.serialize(value)
                   end
-                elsif output_formatter.is_a?(Proc)
-                  output_formatter.call(value: value)
+                # elsif output_formatter.is_a?(Proc) # FIXME
+                #   output_formatter.call(value: value)
                 elsif [Date, Time, DateTime].include?(value.class)
                   value.to_s
                 elsif value.instance_of?(ActiveSupport::Duration)
