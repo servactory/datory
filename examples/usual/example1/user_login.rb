@@ -11,9 +11,9 @@ module Usual
       string :md5 # rubocop:disable Naming/VariableNumber
       string :sha1 # rubocop:disable Naming/VariableNumber
 
-      string :lifetime, as: ActiveSupport::Duration
+      duration :lifetime
 
-      string :registered_at, as: DateTime
+      datetime :registered_at
     end
   end
 end
