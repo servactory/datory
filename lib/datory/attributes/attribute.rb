@@ -7,7 +7,25 @@ module Datory
 
       def initialize(name, **options)
         @name = name
-        @options = options
+        @options = prepare_options(options)
+      end
+
+      def prepare_options(options)
+        if (format = options.fetch(:format, nil)).present?
+          options[:format] = if format.is_a?(Hash)
+                               {
+                                 from: format.fetch(:from),
+                                 to: format.fetch(:to)
+                               }
+                             else
+                               {
+                                 from: format,
+                                 to: format
+                               }
+                             end
+        end
+
+        options
       end
 
       def input_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -26,7 +44,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :from)).present?
           hash[:format] = format
         end
 
@@ -61,7 +79,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :from)).present?
           hash[:format] = format
         end
 
@@ -92,7 +110,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :to)).present?
           hash[:format] = format
         end
 
@@ -123,7 +141,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :from)).present?
           hash[:format] = format
         end
 
