@@ -214,30 +214,40 @@ RSpec.describe Usual::Example2::Product do
                 from: String,
                 to: :id,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               title: {
                 from: String,
                 to: :title,
                 as: String,
+                min: nil,
+                max: nil,
                 include: nil
               },
               price_cents: {
                 from: Integer,
                 to: :price_cents,
                 as: Integer,
+                min: nil,
+                max: nil,
                 include: nil
               },
               price_currency: {
                 from: [Symbol, String],
                 to: :price_currency,
                 as: [Symbol, String],
+                min: nil,
+                max: nil,
                 include: nil
               },
               quantity: {
                 as: Integer,
                 from: Integer,
                 include: nil,
+                min: 1,
+                max: 10,
                 to: :quantity
               }
             }
