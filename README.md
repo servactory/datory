@@ -67,7 +67,67 @@ class UserLoginDto < Datory::Base
 end
 ```
 
-### Object information
+## Attribute declaration
+
+### Basic
+
+#### attribute
+
+```ruby
+attribute :firstname, from: String, to: :first_name, as: String
+```
+
+#### string
+
+```ruby
+string :first_name
+```
+
+#### integer
+
+```ruby
+integer :attempts
+```
+
+#### float
+
+```ruby
+integer :interest_rate
+```
+
+### Helpers
+
+#### uuid
+
+It will also check that the value matches the UUID format.
+
+```ruby
+uuid :id
+```
+
+#### money
+
+It will prepare two attributes `*_cents` and `*_currency`.
+
+```ruby
+money :price
+```
+
+### Nesting
+
+#### one
+
+```ruby
+one :company, include: UserCompanyDto
+```
+
+#### many
+
+```ruby
+many :addresses, include: UserAddressDto
+```
+
+## Object information
 
 ```ruby
 UserDto.describe
