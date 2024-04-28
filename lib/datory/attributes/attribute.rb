@@ -7,8 +7,28 @@ module Datory
 
       def initialize(name, **options)
         @name = name
-        @options = options
+        @options = prepare_options(options)
       end
+
+      def prepare_options(options) # rubocop:disable Metrics/MethodLength
+        unless (format = options.fetch(:format, nil)).nil?
+          options[:format] = if format.is_a?(Hash)
+                               {
+                                 from: format.fetch(:from, nil),
+                                 to: format.fetch(:to, nil)
+                               }
+                             else
+                               {
+                                 from: format,
+                                 to: format
+                               }
+                             end
+        end
+
+        options
+      end
+
+      ##########################################################################
 
       def input_serialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         hash = {
@@ -26,42 +46,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
-          hash[:format] = format
-        end
-
-        hash
-      end
-
-      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        hash = {
-          as: options.fetch(:to, name),
-          type: options.fetch(:from),
-          required: options.fetch(:required, true),
-          consists_of: options.fetch(:consists_of, false),
-          prepare: (lambda do |value:|
-            include_class = options.fetch(:include, nil)
-            return value unless include_class.present?
-
-            from_type = options.fetch(:from, nil)
-
-            if [Set, Array].include?(from_type)
-              value.map { |item| include_class.deserialize(**item) }
-            else
-              include_class.deserialize(**value)
-            end
-          end)
-        }
-
-        if (min = options.fetch(:min, nil)).present?
-          hash[:min] = min
-        end
-
-        if (max = options.fetch(:max, nil)).present?
-          hash[:max] = max
-        end
-
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :to)).present?
           hash[:format] = format
         end
 
@@ -92,7 +77,44 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :from)).present?
+          hash[:format] = format
+        end
+
+        hash
+      end
+
+      ##########################################################################
+
+      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        hash = {
+          as: options.fetch(:to, name),
+          type: options.fetch(:from),
+          required: options.fetch(:required, true),
+          consists_of: options.fetch(:consists_of, false),
+          prepare: (lambda do |value:|
+            include_class = options.fetch(:include, nil)
+            return value unless include_class.present?
+
+            from_type = options.fetch(:from, nil)
+
+            if [Set, Array].include?(from_type)
+              value.map { |item| include_class.deserialize(**item) }
+            else
+              include_class.deserialize(**value)
+            end
+          end)
+        }
+
+        if (min = options.fetch(:min, nil)).present?
+          hash[:min] = min
+        end
+
+        if (max = options.fetch(:max, nil)).present?
+          hash[:max] = max
+        end
+
+        if (format = options.dig(:format, :from)).present?
           hash[:format] = format
         end
 
@@ -123,7 +145,7 @@ module Datory
           hash[:max] = max
         end
 
-        if (format = options.fetch(:format, nil)).present?
+        if (format = options.dig(:format, :to)).present?
           hash[:format] = format
         end
 

@@ -60,22 +60,22 @@ module Datory
         end
 
         def duration(name, **options)
-          options = options.merge(from: String, as: ActiveSupport::Duration) # TODO: Add `format: :duration`
+          options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
           string(name, **options)
         end
 
         def date(name, **options)
-          options = options.merge(from: String, as: Date) # TODO: Add `format: :date`
+          options = options.merge(from: String, as: Date, format: { from: :date })
           string(name, **options)
         end
 
         def time(name, **options)
-          options = options.merge(from: String, as: Time) # TODO: Add `format: :time`
+          options = options.merge(from: String, as: Time, format: { from: :time })
           string(name, **options)
         end
 
         def datetime(name, **options)
-          options = options.merge(from: String, as: DateTime) # TODO: Add `format: :datetime`
+          options = options.merge(from: String, as: DateTime, format: { from: :datetime })
           string(name, **options)
         end
 
