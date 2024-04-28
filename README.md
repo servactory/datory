@@ -113,6 +113,30 @@ It will prepare two attributes `*_cents` and `*_currency`.
 money :price
 ```
 
+#### duration
+
+```ruby
+duration :lifetime
+```
+
+#### date
+
+```ruby
+date :birth_date
+```
+
+#### time
+
+```ruby
+time :registered_at
+```
+
+#### datetime
+
+```ruby
+datetime :registered_at
+```
+
 ### Nesting
 
 #### one
