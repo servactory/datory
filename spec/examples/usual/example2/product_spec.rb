@@ -190,4 +190,44 @@ RSpec.describe Usual::Example2::Product do
       end
     end
   end
+
+  describe "#info" do
+    describe "Usual::Example2::Product" do
+      subject(:perform) { Usual::Example2::Product.info } # rubocop:disable RSpec/DescribedClass
+
+      it :aggregate_failures do
+        expect(perform).to be_instance_of(Datory::Info::Result)
+        expect(perform.attributes).to(
+          match(
+            {
+              id: {
+                from: String,
+                to: :id,
+                as: String,
+                include: nil
+              },
+              title: {
+                from: String,
+                to: :title,
+                as: String,
+                include: nil
+              },
+              price_cents: {
+                from: Integer,
+                to: :price_cents,
+                as: Integer,
+                include: nil
+              },
+              price_currency: {
+                from: [Symbol, String],
+                to: :price_currency,
+                as: [Symbol, String],
+                include: nil
+              }
+            }
+          )
+        )
+      end
+    end
+  end
 end

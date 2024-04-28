@@ -589,4 +589,80 @@ RSpec.describe Usual::Example1::User do
       end
     end
   end
+
+  describe "#info" do
+    describe "Usual::Example1::User" do
+      subject(:perform) { Usual::Example1::User.info } # rubocop:disable RSpec/DescribedClass
+
+      it :aggregate_failures do
+        expect(perform).to be_instance_of(Datory::Info::Result)
+        expect(perform.attributes).to(
+          match(
+            {
+              id: {
+                from: String,
+                to: :id,
+                as: String,
+                include: nil
+              },
+              firstname: {
+                from: String,
+                to: :first_name,
+                as: String,
+                include: nil
+              },
+              lastname: {
+                from: String,
+                to: :last_name,
+                as: String,
+                include: nil
+              },
+              email: {
+                from: String,
+                to: :email,
+                as: String,
+                include: nil
+              },
+              phone: {
+                from: String,
+                to: :phone,
+                as: String,
+                include: nil
+              },
+              website: {
+                from: String,
+                to: :website,
+                as: String,
+                include: nil
+              },
+              birthDate: {
+                from: String,
+                to: :birth_date,
+                as: Date,
+                include: nil
+              },
+              login: {
+                from: Hash,
+                to: :login,
+                as: [Datory::Result, Hash],
+                include: Usual::Example1::UserLogin
+              },
+              company: {
+                from: Hash,
+                to: :company,
+                as: [Datory::Result, Hash],
+                include: Usual::Example1::UserCompany
+              },
+              addresses: {
+                from: Array,
+                to: :addresses,
+                as: Array,
+                include: Usual::Example1::UserAddress
+              }
+            }
+          )
+        )
+      end
+    end
+  end
 end
