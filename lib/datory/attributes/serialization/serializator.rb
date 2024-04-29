@@ -20,15 +20,15 @@ module Datory
             end
           else
             @collection_of_attributes.to_h do |attribute|
-              attribute.name_to
-              include_class = attribute.include_class
+              attribute.to.name
+              include_class = attribute.to.include_class
               # output_formatter = attribute.options.fetch(:output, nil) # FIXME
 
-              value = model.public_send(attribute.name)
+              value = model.public_send(attribute.from.name)
 
               value =
                 if include_class.present?
-                  type_from = attribute.type_from
+                  type_from = attribute.from.types
 
                   if [Set, Array].include?(type_from)
                     value.map { |item| include_class.serialize(item) }
@@ -45,7 +45,7 @@ module Datory
                   value
                 end
 
-              [attribute.name, value]
+              [attribute.from.name, value]
             end
           end
         end

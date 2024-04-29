@@ -8,25 +8,32 @@ module Datory
       end
 
       module ClassMethods
-        def info # rubocop:disable Metrics/MethodLength
+        def info # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           Datory::Info::Result.new(
             attributes: collection_of_attributes.to_h do |attribute|
-              type_from = attribute.type_from
-
-              options = {
-                from: type_from,
-                to: attribute.name_to,
-                as: attribute.type_to,
-                min: attribute.min,
-                max: attribute.max,
-                format: {
-                  from: attribute.format_from,
-                  to: attribute.format_to
-                },
-                include: attribute.include_class
+              from = {
+                name: attribute.from.name,
+                types: attribute.from.types,
+                min: attribute.from.min,
+                max: attribute.from.max,
+                consists_of: attribute.from.consists_of,
+                format: attribute.from.format
               }
 
-              [attribute.name, options]
+              to = {
+                name: attribute.to.name,
+                types: attribute.to.types,
+                required: attribute.to.required,
+                min: attribute.to.min,
+                max: attribute.to.max,
+                consists_of: attribute.to.consists_of,
+                format: attribute.to.format,
+                include: attribute.to.include_class
+              }
+
+              data = { from: from, to: to }
+
+              [attribute.from.name, data]
             end
           )
         end

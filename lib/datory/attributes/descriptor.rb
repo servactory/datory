@@ -20,14 +20,14 @@ module Datory
         collection_of_attributes.each do |attribute|
           row = []
 
-          row << attribute.name
+          row << attribute.from.name
 
-          type_from = attribute.type_from
-          include_class = attribute.include_class.presence || type_from
+          type_from = attribute.from.types
+          include_class = attribute.to.include_class.presence || type_from
 
           row << type_from
-          row << attribute.name_to
-          row << attribute.type_to
+          row << attribute.to.name
+          row << attribute.to.types
 
           row << (include_class if include_class <= Datory::Base) if collection_of_attributes.include_class_exist?
 

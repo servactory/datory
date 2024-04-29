@@ -600,124 +600,202 @@ RSpec.describe Usual::Example1::User do
           match(
             {
               id: {
-                from: String,
-                to: :id,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: :uuid,
-                  to: :uuid
+                from: {
+                  name: :id,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid
                 },
-                include: nil
+                to: {
+                  name: :id,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid,
+                  include: nil
+                }
               },
               firstname: {
-                from: String,
-                to: :first_name,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :firstname,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :first_name,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               lastname: {
-                from: String,
-                to: :last_name,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :lastname,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :last_name,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               email: {
-                from: String,
-                to: :email,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :email,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :email,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               phone: {
-                from: String,
-                to: :phone,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :phone,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :phone,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil, include: nil
+                }
               },
               website: {
-                from: String,
-                to: :website,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :website,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :website,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               birthDate: {
-                from: String,
-                to: :birth_date,
-                as: Date,
-                min: nil,
-                max: nil,
-                format: {
-                  from: :date,
-                  to: nil
+                from: {
+                  name: :birthDate,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :date
                 },
-                include: nil
+                to: {
+                  name: :birth_date,
+                  types: Date,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               login: {
-                from: Hash,
-                to: :login,
-                as: [Datory::Result, Hash],
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :login,
+                  types: Hash,
+                  min: nil, max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: Usual::Example1::UserLogin
+                to: {
+                  name: :login,
+                  types: [Datory::Result, Hash],
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: Usual::Example1::UserLogin
+                }
               },
               company: {
-                from: Hash,
-                to: :company,
-                as: [Datory::Result, Hash],
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :company,
+                  types: Hash,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: Usual::Example1::UserCompany
+                to: {
+                  name: :company,
+                  types: [Datory::Result, Hash],
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: Usual::Example1::UserCompany
+                }
               },
               addresses: {
-                from: Array,
-                to: :addresses,
-                as: Array,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :addresses,
+                  types: Array,
+                  min: nil,
+                  max: nil,
+                  consists_of: [Datory::Result, Hash],
+                  format: nil
                 },
-                include: Usual::Example1::UserAddress
+                to: {
+                  name: :addresses,
+                  types: Array,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: [Datory::Result, Hash],
+                  format: nil,
+                  include: Usual::Example1::UserAddress
+                }
               }
             }
           )

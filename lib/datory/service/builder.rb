@@ -29,8 +29,8 @@ module Datory
       private_constant :TRANSFORMATIONS
 
       def self.prepare_serialization_data_for(attribute) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        serialized_name = attribute.name
-        deserialized_name = attribute.name_to
+        serialized_name = attribute.from.name
+        deserialized_name = attribute.to.name
         method_name = :"assign_#{serialized_name}_output"
 
         input deserialized_name, **attribute.input_serialization_options
@@ -49,8 +49,8 @@ module Datory
       end
 
       def self.prepare_deserialization_data_for(attribute) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        serialized_name = attribute.name
-        deserialized_name = attribute.name_to
+        serialized_name = attribute.from.name
+        deserialized_name = attribute.to.name
         method_name = :"assign_#{deserialized_name}_output"
 
         input serialized_name, **attribute.input_deserialization_options
@@ -62,7 +62,7 @@ module Datory
         define_method(method_name) do
           value = inputs.public_send(deserialized_name)
 
-          value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(attribute.type_to, ->(v) { v }).call(value)
+          value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(attribute.to.types, ->(v) { v }).call(value)
 
           outputs.public_send(:"#{deserialized_name}=", value)
         end

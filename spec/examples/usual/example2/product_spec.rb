@@ -211,64 +211,103 @@ RSpec.describe Usual::Example2::Product do
           match(
             {
               id: {
-                from: String,
-                to: :id,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: :uuid,
-                  to: :uuid
+                from: {
+                  name: :id,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid
                 },
-                include: nil
+                to: {
+                  name: :id,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid,
+                  include: nil
+                }
               },
               title: {
-                from: String,
-                to: :title,
-                as: String,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :title,
+                  types: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :title,
+                  types: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               price_cents: {
-                from: Integer,
-                to: :price_cents,
-                as: Integer,
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :price_cents,
+                  types: Integer,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :price_cents,
+                  types: Integer,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               price_currency: {
-                from: [Symbol, String],
-                to: :price_currency,
-                as: [Symbol, String],
-                min: nil,
-                max: nil,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :price_currency,
+                  types: [Symbol, String],
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
                 },
-                include: nil
+                to: {
+                  name: :price_currency,
+                  types: [Symbol, String],
+                  required: true,
+                  min: nil, max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               quantity: {
-                as: Integer,
-                from: Integer,
-                include: nil,
-                min: 1,
-                max: 10,
-                format: {
-                  from: nil,
-                  to: nil
+                from: {
+                  name: :quantity,
+                  types: Integer,
+                  min: 1,
+                  max: 10,
+                  consists_of: false,
+                  format: nil
                 },
-                to: :quantity
+                to: {
+                  name: :quantity,
+                  types: Integer,
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               }
             }
           )
