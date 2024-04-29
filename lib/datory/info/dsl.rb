@@ -31,9 +31,7 @@ module Datory
                 include: attribute.to.include_class
               }
 
-              data = { from: from, to: to }
-
-              [attribute.from.name, data]
+              [attribute.from.name, { from: from, to: to }]
             end
           )
         end
