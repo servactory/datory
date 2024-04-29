@@ -213,7 +213,7 @@ RSpec.describe Usual::Example2::Product do
               id: {
                 from: {
                   name: :id,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -221,7 +221,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :id,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -233,7 +233,7 @@ RSpec.describe Usual::Example2::Product do
               title: {
                 from: {
                   name: :title,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -241,7 +241,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :title,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -253,7 +253,7 @@ RSpec.describe Usual::Example2::Product do
               price_cents: {
                 from: {
                   name: :price_cents,
-                  types: Integer,
+                  type: Integer,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -261,7 +261,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :price_cents,
-                  types: Integer,
+                  type: Integer,
                   required: true,
                   min: nil,
                   max: nil,
@@ -273,7 +273,7 @@ RSpec.describe Usual::Example2::Product do
               price_currency: {
                 from: {
                   name: :price_currency,
-                  types: [Symbol, String],
+                  type: [Symbol, String],
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -281,7 +281,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :price_currency,
-                  types: [Symbol, String],
+                  type: [Symbol, String],
                   required: true,
                   min: nil, max: nil,
                   consists_of: false,
@@ -292,7 +292,7 @@ RSpec.describe Usual::Example2::Product do
               quantity: {
                 from: {
                   name: :quantity,
-                  types: Integer,
+                  type: Integer,
                   min: 1,
                   max: 10,
                   consists_of: false,
@@ -300,7 +300,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :quantity,
-                  types: Integer,
+                  type: Integer,
                   required: true,
                   min: 1,
                   max: 10,

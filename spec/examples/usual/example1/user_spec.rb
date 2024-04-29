@@ -602,7 +602,7 @@ RSpec.describe Usual::Example1::User do
               id: {
                 from: {
                   name: :id,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -610,7 +610,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :id,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -622,7 +622,7 @@ RSpec.describe Usual::Example1::User do
               firstname: {
                 from: {
                   name: :firstname,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -630,7 +630,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :first_name,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -642,7 +642,7 @@ RSpec.describe Usual::Example1::User do
               lastname: {
                 from: {
                   name: :lastname,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -650,7 +650,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :last_name,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -662,7 +662,7 @@ RSpec.describe Usual::Example1::User do
               email: {
                 from: {
                   name: :email,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -670,7 +670,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :email,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -682,7 +682,7 @@ RSpec.describe Usual::Example1::User do
               phone: {
                 from: {
                   name: :phone,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -690,7 +690,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :phone,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -701,7 +701,7 @@ RSpec.describe Usual::Example1::User do
               website: {
                 from: {
                   name: :website,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -709,7 +709,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :website,
-                  types: String,
+                  type: String,
                   required: true,
                   min: nil,
                   max: nil,
@@ -721,7 +721,7 @@ RSpec.describe Usual::Example1::User do
               birthDate: {
                 from: {
                   name: :birthDate,
-                  types: String,
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -729,7 +729,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :birth_date,
-                  types: Date,
+                  type: Date,
                   required: true,
                   min: nil,
                   max: nil,
@@ -741,14 +741,14 @@ RSpec.describe Usual::Example1::User do
               login: {
                 from: {
                   name: :login,
-                  types: Hash,
+                  type: Hash,
                   min: nil, max: nil,
                   consists_of: false,
                   format: nil
                 },
                 to: {
                   name: :login,
-                  types: [Datory::Result, Hash],
+                  type: [Datory::Result, Hash],
                   required: true,
                   min: nil,
                   max: nil,
@@ -760,7 +760,7 @@ RSpec.describe Usual::Example1::User do
               company: {
                 from: {
                   name: :company,
-                  types: Hash,
+                  type: Hash,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -768,7 +768,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :company,
-                  types: [Datory::Result, Hash],
+                  type: [Datory::Result, Hash],
                   required: true,
                   min: nil,
                   max: nil,
@@ -780,7 +780,7 @@ RSpec.describe Usual::Example1::User do
               addresses: {
                 from: {
                   name: :addresses,
-                  types: Array,
+                  type: Array,
                   min: nil,
                   max: nil,
                   consists_of: [Datory::Result, Hash],
@@ -788,7 +788,7 @@ RSpec.describe Usual::Example1::User do
                 },
                 to: {
                   name: :addresses,
-                  types: Array,
+                  type: Array,
                   required: true,
                   min: nil,
                   max: nil,

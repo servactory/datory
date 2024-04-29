@@ -13,7 +13,7 @@ module Datory
             attributes: collection_of_attributes.to_h do |attribute|
               from = {
                 name: attribute.from.name,
-                types: attribute.from.types,
+                type: attribute.from.type,
                 min: attribute.from.min,
                 max: attribute.from.max,
                 consists_of: attribute.from.consists_of,
@@ -22,7 +22,7 @@ module Datory
 
               to = {
                 name: attribute.to.name,
-                types: attribute.to.types,
+                type: attribute.to.type,
                 required: attribute.to.required,
                 min: attribute.to.min,
                 max: attribute.to.max,

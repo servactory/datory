@@ -5,11 +5,11 @@ module Datory
     class Attribute
       class Work
         attr_accessor :format
-        attr_reader :name, :types, :consists_of, :min, :max
+        attr_reader :name, :type, :consists_of, :min, :max
 
-        def initialize(name:, types:, consists_of:, min:, max:)
+        def initialize(name:, type:, consists_of:, min:, max:)
           @name = name
-          @types = types # Array(types) TODO
+          @type = type
           @consists_of = consists_of
           @min = min
           @max = max
@@ -20,24 +20,22 @@ module Datory
       class From < Work; end
 
       class To < Work
-        attr_reader :required,
-                    :include_class
+        attr_reader :required, :include_class
 
-        def initialize(name:, types:, required:, consists_of:, min:, max:, include_class:)
+        def initialize(name:, type:, required:, consists_of:, min:, max:, include_class:)
           @required = required
           @include_class = include_class
 
-          super(name: name, types: types, consists_of: consists_of, min: min, max: max)
+          super(name: name, type: type, consists_of: consists_of, min: min, max: max)
         end
       end
 
-      attr_reader :from,
-                  :to
+      attr_reader :from, :to
 
       def initialize(name, **options) # rubocop:disable Metrics/MethodLength
         @from = From.new(
           name: name,
-          types: options.fetch(:from),
+          type: options.fetch(:from),
           consists_of: options.fetch(:consists_of, false),
           min: options.fetch(:min, nil),
           max: options.fetch(:max, nil)
@@ -45,7 +43,7 @@ module Datory
 
         @to = To.new(
           name: options.fetch(:to, name),
-          types: options.fetch(:as, @from.types),
+          type: options.fetch(:as, @from.type),
           # TODO: It is necessary to implement NilClass support for optional
           required: options.fetch(:required, true),
           consists_of: @from.consists_of,
@@ -74,7 +72,7 @@ module Datory
       def input_serialization_options # rubocop:disable Metrics/AbcSize
         hash = {
           as: to.name,
-          type: to.types,
+          type: to.type,
           required: to.required,
           consists_of: to.consists_of
         }
@@ -91,7 +89,7 @@ module Datory
       def output_serialization_options # rubocop:disable Metrics/AbcSize
         hash = {
           consists_of: to.consists_of == Hash ? Datory::Result : from.consists_of,
-          type: to.types == Datory::Result ? Hash : from.types
+          type: to.type == Datory::Result ? Hash : from.type
         }
 
         hash[:min] = from.min if from.min.present?
@@ -108,13 +106,13 @@ module Datory
       def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         hash = {
           as: to.name,
-          type: from.types,
+          type: from.type,
           required: to.required,
           consists_of: from.consists_of,
           prepare: (lambda do |value:|
             return value unless to.include_class.present?
 
-            if [Set, Array].include?(from.types)
+            if [Set, Array].include?(from.type)
               value.map { |item| to.include_class.deserialize(**item) }
             else
               to.include_class.deserialize(**value)
@@ -134,7 +132,7 @@ module Datory
       def output_deserialization_options # rubocop:disable Metrics/AbcSize
         hash = {
           consists_of: from.consists_of == Hash ? Datory::Result : to.consists_of,
-          type: from.types == Hash ? Datory::Result : to.types
+          type: from.type == Hash ? Datory::Result : to.type
         }
 
         hash[:min] = to.min if to.min.present?

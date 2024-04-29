@@ -62,7 +62,7 @@ module Datory
         define_method(method_name) do
           value = inputs.public_send(deserialized_name)
 
-          value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(attribute.to.types, ->(v) { v }).call(value)
+          value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(attribute.to.type, ->(v) { v }).call(value)
 
           outputs.public_send(:"#{deserialized_name}=", value)
         end

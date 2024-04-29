@@ -22,12 +22,12 @@ module Datory
 
           row << attribute.from.name
 
-          type_from = attribute.from.types
+          type_from = attribute.from.type
           include_class = attribute.to.include_class.presence || type_from
 
           row << type_from
           row << attribute.to.name
-          row << attribute.to.types
+          row << attribute.to.type
 
           row << (include_class if include_class <= Datory::Base) if collection_of_attributes.include_class_exist?
 
