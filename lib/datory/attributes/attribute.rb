@@ -3,7 +3,7 @@
 module Datory
   module Attributes
     class Attribute
-      class Work
+      class Options
         attr_accessor :format
         attr_reader :name, :type, :consists_of, :min, :max
 
@@ -28,9 +28,9 @@ module Datory
         end
       end
 
-      class From < Work; end
+      class From < Options; end
 
-      class To < Work
+      class To < Options
         attr_reader :required, :include_class
 
         def initialize(name:, type:, required:, consists_of:, min:, max:, include_class:)
