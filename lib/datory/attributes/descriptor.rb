@@ -15,21 +15,18 @@ module Datory
         headings << "From"
         headings << "To"
         headings << "As"
-        headings << "Include" if collection_of_attributes.include_exist?
+        headings << "Include" if collection_of_attributes.include_class_exist?
 
         collection_of_attributes.each do |attribute|
           row = []
 
-          row << attribute.name
+          include_class = attribute.to.include_class.presence || attribute.from.type
 
-          from_type = attribute.options.fetch(:from)
-          include = attribute.options.fetch(:include, from_type)
-
-          row << from_type
-          row << attribute.options.fetch(:to, attribute.name)
-          row << attribute.options.fetch(:as, include)
-
-          row << (include if include <= Datory::Base) if collection_of_attributes.include_exist?
+          row << attribute.from.name
+          row << attribute.from.type
+          row << attribute.to.name
+          row << attribute.to.type
+          row << (include_class if include_class <= Datory::Base) if collection_of_attributes.include_class_exist?
 
           rows << row
         end

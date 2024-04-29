@@ -44,7 +44,7 @@ class UserDto < Datory::Base
   string :phone
   string :website
 
-  string :birthDate, to: :birth_date, as: Date
+  date :birthDate, to: :birth_date
 
   one :login, include: UserLoginDto
   one :company, include: UserCompanyDto
@@ -62,8 +62,10 @@ class UserLoginDto < Datory::Base
   
   string :md5
   string :sha1
+
+  duration :lifetime
   
-  string :registered_at, as: DateTime
+  datetime :registered_at
 end
 ```
 

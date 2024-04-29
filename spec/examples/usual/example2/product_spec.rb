@@ -211,44 +211,103 @@ RSpec.describe Usual::Example2::Product do
           match(
             {
               id: {
-                from: String,
-                to: :id,
-                as: String,
-                min: nil,
-                max: nil,
-                include: nil
+                from: {
+                  name: :id,
+                  type: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid
+                },
+                to: {
+                  name: :id,
+                  type: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: :uuid,
+                  include: nil
+                }
               },
               title: {
-                from: String,
-                to: :title,
-                as: String,
-                min: nil,
-                max: nil,
-                include: nil
+                from: {
+                  name: :title,
+                  type: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :title,
+                  type: String,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               price_cents: {
-                from: Integer,
-                to: :price_cents,
-                as: Integer,
-                min: nil,
-                max: nil,
-                include: nil
+                from: {
+                  name: :price_cents,
+                  type: Integer,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :price_cents,
+                  type: Integer,
+                  required: true,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               price_currency: {
-                from: [Symbol, String],
-                to: :price_currency,
-                as: [Symbol, String],
-                min: nil,
-                max: nil,
-                include: nil
+                from: {
+                  name: :price_currency,
+                  type: [Symbol, String],
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :price_currency,
+                  type: [Symbol, String],
+                  required: true,
+                  min: nil, max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               },
               quantity: {
-                as: Integer,
-                from: Integer,
-                include: nil,
-                min: 1,
-                max: 10,
-                to: :quantity
+                from: {
+                  name: :quantity,
+                  type: Integer,
+                  min: 1,
+                  max: 10,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :quantity,
+                  type: Integer,
+                  required: true,
+                  min: 1,
+                  max: 10,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
               }
             }
           )
