@@ -15,6 +15,17 @@ module Datory
           @max = max
           @format = nil
         end
+
+        def info
+          {
+            name: name,
+            type: type,
+            min: min,
+            max: max,
+            consists_of: consists_of,
+            format: format
+          }
+        end
       end
 
       class From < Work; end
@@ -27,6 +38,13 @@ module Datory
           @include_class = include_class
 
           super(name: name, type: type, consists_of: consists_of, min: min, max: max)
+        end
+
+        def info
+          super.merge(
+            required: required,
+            include: include_class
+          )
         end
       end
 
