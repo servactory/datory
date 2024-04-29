@@ -3,15 +3,15 @@
 module Datory
   module Context
     module Callable
-      def serialize(model) # rubocop:disable Metrics/MethodLength
+      def serialize!(model) # rubocop:disable Metrics/MethodLength
         if [Set, Array].include?(model.class)
           model.map do |model_item|
-            serialize(model_item)
+            serialize!(model_item)
           end
         else
           context = send(:new)
           model = Datory::Attributes::Serialization::Model.prepare(model)
-          _serialize(context, model)
+          _serialize!(context, model)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
@@ -19,16 +19,16 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(json) # rubocop:disable Metrics/MethodLength
+      def deserialize!(json) # rubocop:disable Metrics/MethodLength
         if [Set, Array].include?(json.class)
           json.map do |json_item|
-            deserialize(json_item)
+            deserialize!(json_item)
           end
         else
           context = send(:new)
           hash = JSON.parse(json.to_json)
 
-          _deserialize(context, **hash)
+          _deserialize!(context, **hash)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
@@ -51,17 +51,17 @@ module Datory
 
       private
 
-      def _serialize(context, model)
+      def _serialize!(context, model)
         context.send(
-          :_serialize,
+          :_serialize!,
           model: model,
           collection_of_attributes: collection_of_attributes
         )
       end
 
-      def _deserialize(context, **attributes)
+      def _deserialize!(context, **attributes)
         context.send(
-          :_deserialize,
+          :_deserialize!,
           incoming_attributes: attributes.symbolize_keys,
           collection_of_attributes: collection_of_attributes
         )

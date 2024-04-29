@@ -4,7 +4,7 @@ RSpec.describe Usual::Example1::User do
   describe "#serialize" do
     shared_examples "successful results" do
       describe "singular" do
-        subject(:perform) { described_class.serialize(user) }
+        subject(:perform) { described_class.serialize!(user) }
 
         it do
           expect(perform).to match(
@@ -48,7 +48,7 @@ RSpec.describe Usual::Example1::User do
       end
 
       describe "plural" do
-        subject(:perform) { described_class.serialize(users) }
+        subject(:perform) { described_class.serialize!(users) }
 
         let(:users) { [user] }
 
@@ -95,7 +95,7 @@ RSpec.describe Usual::Example1::User do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.serialize(user) }
+      subject(:perform) { described_class.serialize!(user) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::SerializationError) }
     end
@@ -223,7 +223,7 @@ RSpec.describe Usual::Example1::User do
 
   describe "#deserialize" do
     shared_examples "successful results" do
-      subject(:perform) { described_class.deserialize(json) }
+      subject(:perform) { described_class.deserialize!(json) }
 
       describe "singular" do
         let(:json) { user }
@@ -393,7 +393,7 @@ RSpec.describe Usual::Example1::User do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.deserialize(user) }
+      subject(:perform) { described_class.deserialize!(user) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end

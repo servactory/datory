@@ -22,13 +22,13 @@ gem "datory"
 ```ruby
 user = User.find(...)
 
-UserDto.serialize(user)
+UserDto.serialize!(user)
 ```
 
 #### Deserialize
 
 ```ruby
-UserDto.deserialize(json)
+UserDto.deserialize!(json)
 ```
 
 #### Examples

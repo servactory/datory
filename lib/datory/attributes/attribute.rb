@@ -74,9 +74,9 @@ module Datory
             return value unless to.include_class.present?
 
             if [Set, Array].include?(from.type)
-              value.map { |item| to.include_class.deserialize(**item) }
+              value.map { |item| to.include_class.deserialize!(**item) }
             else
-              to.include_class.deserialize(**value)
+              to.include_class.deserialize!(**value)
             end
           end)
         }
