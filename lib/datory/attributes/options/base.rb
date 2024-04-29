@@ -4,16 +4,15 @@ module Datory
   module Attributes
     module Options
       class Base
-        attr_accessor :format
-        attr_reader :name, :type, :consists_of, :min, :max
+        attr_reader :name, :type, :consists_of, :min, :max, :format
 
-        def initialize(name:, type:, consists_of:, min:, max:)
+        def initialize(name:, type:, consists_of:, min:, max:, format:)
           @name = name
           @type = type
           @consists_of = consists_of
           @min = min
           @max = max
-          @format = nil
+          @format = format
         end
 
         def info

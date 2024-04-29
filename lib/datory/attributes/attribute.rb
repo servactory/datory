@@ -11,7 +11,8 @@ module Datory
           type: options.fetch(:from),
           consists_of: options.fetch(:consists_of, false),
           min: options.fetch(:min, nil),
-          max: options.fetch(:max, nil)
+          max: options.fetch(:max, nil),
+          format: options.fetch(:format, nil)
         )
 
         @to = Options::To.new(
@@ -22,22 +23,9 @@ module Datory
           consists_of: @from.consists_of,
           min: @from.min,
           max: @from.max,
+          format: options.fetch(:format, nil),
           include_class: options.fetch(:include, nil)
         )
-
-        prepare_format_from_options(options)
-      end
-
-      def prepare_format_from_options(options)
-        return if (format = options.fetch(:format, nil)).nil?
-
-        if format.is_a?(Hash)
-          @from.format = format.fetch(:from, nil)
-          @to.format = format.fetch(:to, nil)
-        else
-          @from.format = format
-          @to.format = format
-        end
       end
 
       ##########################################################################
