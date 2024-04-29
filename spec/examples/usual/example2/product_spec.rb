@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example2::Product do
-  describe "#serialize" do
+  describe "#serialize!" do
     shared_examples "successful results" do
       describe "singular" do
         subject(:perform) { described_class.serialize!(user) }
@@ -89,7 +89,7 @@ RSpec.describe Usual::Example2::Product do
     end
   end
 
-  describe "#deserialize" do
+  describe "#deserialize!" do
     shared_examples "successful results" do
       subject(:perform) { described_class.deserialize!(json) }
 
