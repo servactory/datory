@@ -3,55 +3,10 @@
 module Datory
   module Attributes
     class Attribute
-      class Options
-        attr_accessor :format
-        attr_reader :name, :type, :consists_of, :min, :max
-
-        def initialize(name:, type:, consists_of:, min:, max:)
-          @name = name
-          @type = type
-          @consists_of = consists_of
-          @min = min
-          @max = max
-          @format = nil
-        end
-
-        def info
-          {
-            name: name,
-            type: type,
-            min: min,
-            max: max,
-            consists_of: consists_of,
-            format: format
-          }
-        end
-      end
-
-      class From < Options; end
-
-      class To < Options
-        attr_reader :required, :include_class
-
-        def initialize(name:, type:, required:, consists_of:, min:, max:, include_class:)
-          @required = required
-          @include_class = include_class
-
-          super(name: name, type: type, consists_of: consists_of, min: min, max: max)
-        end
-
-        def info
-          super.merge(
-            required: required,
-            include: include_class
-          )
-        end
-      end
-
       attr_reader :from, :to
 
       def initialize(name, **options) # rubocop:disable Metrics/MethodLength
-        @from = From.new(
+        @from = Options::From.new(
           name: name,
           type: options.fetch(:from),
           consists_of: options.fetch(:consists_of, false),
@@ -59,7 +14,7 @@ module Datory
           max: options.fetch(:max, nil)
         )
 
-        @to = To.new(
+        @to = Options::To.new(
           name: options.fetch(:to, name),
           type: options.fetch(:as, @from.type),
           # TODO: It is necessary to implement NilClass support for optional
