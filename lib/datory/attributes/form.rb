@@ -23,7 +23,7 @@ module Datory
 
       def update_by(index, **attributes) # rubocop:disable Metrics/MethodLength
         unless [Set, Array].include?(@model.class)
-          raise Datory::Exceptions::MisuseError, "The `update_by` method cannot be used with a collection. " \
+          raise Datory::Exceptions::MisuseError, "The `update_by` method cannot be used without a collection. " \
                                                  "Instead, use the `update` method."
         end
 
