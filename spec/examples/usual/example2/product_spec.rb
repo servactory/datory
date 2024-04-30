@@ -4,28 +4,51 @@ RSpec.describe Usual::Example2::Product do
   describe "#form" do
     shared_examples "successful results" do
       describe "singular" do
-        subject(:perform) { described_class.form(user) }
+        subject(:perform) { described_class.form(product) }
 
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
+
+        it :aggregate_failures do
+          expect { perform.update(id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
+            change { perform.serialize.fetch(:id) }
+              .from("55363a14-aa9a-4eba-9276-7f7cec432123")
+              .to("5baebc74-f680-4598-b077-7a5c13dd1543")
+          )
+
+          expect { perform.update(id: "a88e0182-e0c9-466a-9816-7321699de97b") }.to(
+            change { perform.serialize.fetch(:id) }
+              .from("5baebc74-f680-4598-b077-7a5c13dd1543")
+              .to("a88e0182-e0c9-466a-9816-7321699de97b")
+          )
+        end
       end
 
       describe "plural" do
-        subject(:perform) { described_class.form(users) }
+        subject(:perform) { described_class.form(products) }
 
-        let(:users) { [user] }
+        let(:products) { [product] }
 
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
+
+        it :aggregate_failures do
+          expect { perform.update(id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
+            raise_error do |exception|
+              expect(exception).to be_an(ArgumentError)
+              expect(exception.message).to eq("The `update` method cannot be used with a collection")
+            end
+          )
+        end
       end
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.form(user) }
+      subject(:perform) { described_class.form(product) }
 
       it { expect(perform.valid?).to be(false) }
 
@@ -34,7 +57,7 @@ RSpec.describe Usual::Example2::Product do
 
     describe "objects" do
       context "when the data required for work is valid" do
-        let(:user) do
+        let(:product) do
           Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -48,7 +71,7 @@ RSpec.describe Usual::Example2::Product do
       end
 
       context "when the data required for work is invalid" do
-        let(:user) do
+        let(:product) do
           Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -64,7 +87,7 @@ RSpec.describe Usual::Example2::Product do
 
     describe "hash" do
       context "when the data required for work is valid" do
-        let(:user) do
+        let(:product) do
           {
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -78,7 +101,7 @@ RSpec.describe Usual::Example2::Product do
       end
 
       context "when the data required for work is invalid" do
-        let(:user) do
+        let(:product) do
           {
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -96,7 +119,7 @@ RSpec.describe Usual::Example2::Product do
   describe "#serialize" do
     shared_examples "successful results" do
       describe "singular" do
-        subject(:perform) { described_class.serialize(user) }
+        subject(:perform) { described_class.serialize(product) }
 
         it do
           expect(perform).to match(
@@ -112,9 +135,9 @@ RSpec.describe Usual::Example2::Product do
       end
 
       describe "plural" do
-        subject(:perform) { described_class.serialize(users) }
+        subject(:perform) { described_class.serialize(products) }
 
-        let(:users) { [user] }
+        let(:products) { [product] }
 
         it do
           expect(perform).to contain_exactly(
@@ -131,14 +154,14 @@ RSpec.describe Usual::Example2::Product do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.serialize(user) }
+      subject(:perform) { described_class.serialize(product) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::SerializationError) }
     end
 
     describe "objects" do
       context "when the data required for work is valid" do
-        let(:user) do
+        let(:product) do
           Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -152,7 +175,7 @@ RSpec.describe Usual::Example2::Product do
       end
 
       context "when the data required for work is invalid" do
-        let(:user) do
+        let(:product) do
           Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
@@ -167,7 +190,7 @@ RSpec.describe Usual::Example2::Product do
     end
 
     describe "hash" do
-      let(:user) do
+      let(:product) do
         {
           id: "55363a14-aa9a-4eba-9276-7f7cec432123",
           title: "iPhone 15 Pro",
@@ -186,7 +209,7 @@ RSpec.describe Usual::Example2::Product do
       subject(:perform) { described_class.deserialize(json) }
 
       describe "singular" do
-        let(:json) { user }
+        let(:json) { product }
 
         specify "root", :aggregate_failures do
           expect(perform).to be_a(Servactory::Result)
@@ -205,7 +228,7 @@ RSpec.describe Usual::Example2::Product do
       end
 
       describe "plural" do
-        let(:json) { [user] }
+        let(:json) { [product] }
 
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
@@ -229,14 +252,14 @@ RSpec.describe Usual::Example2::Product do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.deserialize(user) }
+      subject(:perform) { described_class.deserialize(product) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
     context "when the data required for work is valid" do
       # rubocop:disable Lint/SymbolConversion
-      let(:user) do
+      let(:product) do
         {
           "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
           "title": "iPhone 15 Pro",
@@ -252,7 +275,7 @@ RSpec.describe Usual::Example2::Product do
 
     context "when the data required for work is invalid", skip: "Need to implement" do
       # rubocop:disable Lint/SymbolConversion
-      let(:user) do
+      let(:product) do
         {
           "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
           "title": "iPhone 15 Pro",
