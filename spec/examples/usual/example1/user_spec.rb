@@ -37,11 +37,16 @@ RSpec.describe Usual::Example1::User do
         it { expect(perform.serialize).to be_present }
 
         it :aggregate_failures do
-          expect { perform.update(id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
-            raise_error do |exception|
-              expect(exception).to be_an(ArgumentError)
-              expect(exception.message).to eq("The `update` method cannot be used with a collection")
-            end
+          expect { perform.update_by(0, id: "ed9bef42-9e17-4956-9c19-37c378349e6f") }.to(
+            change { perform.serialize[0].fetch(:id) }
+              .from("5eb3c7c2-2fbf-4266-9de9-36c6df823edd")
+              .to("ed9bef42-9e17-4956-9c19-37c378349e6f")
+          )
+
+          expect { perform.update_by(0, id: "cef10b9c-a756-475d-ad68-cbf770bc6680") }.to(
+            change { perform.serialize[0].fetch(:id) }
+              .from("ed9bef42-9e17-4956-9c19-37c378349e6f")
+              .to("cef10b9c-a756-475d-ad68-cbf770bc6680")
           )
         end
       end
