@@ -25,22 +25,27 @@ user = User.find(...)
 UserDto.serialize(user) # => { ... }
 ```
 
+#### Deserialize
+
+```ruby
+UserDto.deserialize(json) # => Datory::Result
+```
+
+#### Form
+
 For serialization, the `form` method is also available.
 This prepares a `Form` object, which has a set of additional methods such as `valid?` and `invalid?`.
 
 ```ruby
 form = UserDto.form(user)
 
+form.target # => UserDto
+form.model # => { ... }
+
 form.valid? # => true
 form.invalid? # => false
 
 form.serialize # => { ... }
-```
-
-#### Deserialize
-
-```ruby
-UserDto.deserialize(json) # => Datory::Result
 ```
 
 #### Examples
