@@ -6,6 +6,8 @@ RSpec.describe Usual::Example2::Product do
       describe "singular" do
         subject(:perform) { described_class.form(product) }
 
+        it { expect(perform.target).to eq(described_class) }
+
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
@@ -30,6 +32,8 @@ RSpec.describe Usual::Example2::Product do
         subject(:perform) { described_class.form(products) }
 
         let(:products) { [product] }
+
+        it { expect(perform.target).to eq(described_class) }
 
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }

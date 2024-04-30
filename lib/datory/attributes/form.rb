@@ -8,6 +8,10 @@ module Datory
         @model = model
       end
 
+      def target
+        @context
+      end
+
       def update(**attributes)
         if model_collection?
           raise_misuse "The `update` method cannot be used with a collection. Instead, use the `update_by` method."

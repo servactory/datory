@@ -6,6 +6,8 @@ RSpec.describe Usual::Example1::User do
       describe "singular" do
         subject(:perform) { described_class.form(user) }
 
+        it { expect(perform.target).to eq(described_class) }
+
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
@@ -30,6 +32,8 @@ RSpec.describe Usual::Example1::User do
         subject(:perform) { described_class.form(users) }
 
         let(:users) { [user] }
+
+        it { expect(perform.target).to eq(described_class) }
 
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
