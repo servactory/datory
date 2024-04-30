@@ -1,6 +1,42 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example2::Product do
+  describe "#form" do
+    subject(:perform) { described_class.form(user) }
+
+    let(:user) do
+      Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+        id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+        title: "iPhone 15 Pro",
+        price_cents: 999_00,
+        price_currency: "USD",
+        quantity: 5
+      )
+    end
+
+    context "when the data required for work is valid" do
+      it { expect(perform.valid?).to be(true) }
+
+      it { expect(perform.serialize).to be_present }
+    end
+
+    context "when the data required for work is invalid" do
+      let(:user) do
+        Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+          id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+          title: "iPhone 15 Pro",
+          price_cents: "999.00",
+          price_currency: "USD",
+          quantity: 5
+        )
+      end
+
+      it { expect(perform.valid?).to be(false) }
+
+      it { expect { perform.serialize }.to raise_error(Datory::Exceptions::SerializationError) }
+    end
+  end
+
   describe "#serialize" do
     shared_examples "successful results" do
       describe "singular" do

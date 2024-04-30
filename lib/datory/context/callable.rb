@@ -3,6 +3,10 @@
 module Datory
   module Context
     module Callable
+      def form(model)
+        Datory::Attributes::Form.new(self, model)
+      end
+
       def serialize(model) # rubocop:disable Metrics/MethodLength
         if [Set, Array].include?(model.class)
           model.map do |model_item|
