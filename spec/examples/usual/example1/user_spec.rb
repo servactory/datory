@@ -6,10 +6,27 @@ RSpec.describe Usual::Example1::User do
       describe "singular" do
         subject(:perform) { described_class.form(user) }
 
+        it { expect(perform.target).to eq(described_class) }
+        it { expect(perform.model).to be_present }
+
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
+
+        it :aggregate_failures do
+          expect { perform.update(id: "ed9bef42-9e17-4956-9c19-37c378349e6f") }.to(
+            change { perform.serialize.fetch(:id) }
+              .from("5eb3c7c2-2fbf-4266-9de9-36c6df823edd")
+              .to("ed9bef42-9e17-4956-9c19-37c378349e6f")
+          )
+
+          expect { perform.update(id: "cef10b9c-a756-475d-ad68-cbf770bc6680") }.to(
+            change { perform.serialize.fetch(:id) }
+              .from("ed9bef42-9e17-4956-9c19-37c378349e6f")
+              .to("cef10b9c-a756-475d-ad68-cbf770bc6680")
+          )
+        end
       end
 
       describe "plural" do
@@ -17,10 +34,27 @@ RSpec.describe Usual::Example1::User do
 
         let(:users) { [user] }
 
+        it { expect(perform.target).to eq(described_class) }
+        it { expect(perform.model).to be_present }
+
         it { expect(perform.valid?).to be(true) }
         it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
+
+        it :aggregate_failures do
+          expect { perform.update_by(0, id: "ed9bef42-9e17-4956-9c19-37c378349e6f") }.to(
+            change { perform.serialize[0].fetch(:id) }
+              .from("5eb3c7c2-2fbf-4266-9de9-36c6df823edd")
+              .to("ed9bef42-9e17-4956-9c19-37c378349e6f")
+          )
+
+          expect { perform.update_by(0, id: "cef10b9c-a756-475d-ad68-cbf770bc6680") }.to(
+            change { perform.serialize[0].fetch(:id) }
+              .from("ed9bef42-9e17-4956-9c19-37c378349e6f")
+              .to("cef10b9c-a756-475d-ad68-cbf770bc6680")
+          )
+        end
       end
     end
 
