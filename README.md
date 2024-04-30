@@ -22,13 +22,25 @@ gem "datory"
 ```ruby
 user = User.find(...)
 
-UserDto.serialize(user)
+UserDto.serialize(user) # => { ... }
+```
+
+For serialization, the `form` method is also available.
+This prepares a `Form` object, which has a set of additional methods such as `valid?` and `invalid?`.
+
+```ruby
+form = UserDto.form(user)
+
+form.valid? # => true
+form.invalid? # => false
+
+form.serialize # => { ... }
 ```
 
 #### Deserialize
 
 ```ruby
-UserDto.deserialize(json)
+UserDto.deserialize(json) # => Datory::Result
 ```
 
 #### Examples
