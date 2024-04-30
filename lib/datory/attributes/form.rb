@@ -3,6 +3,8 @@
 module Datory
   module Attributes
     class Form
+      attr_reader :model
+
       def initialize(context, model)
         @context = context
         @model = model
@@ -17,11 +19,11 @@ module Datory
           raise_misuse "The `update` method cannot be used with a collection. Instead, use the `update_by` method."
         end
 
-        found_keys = @model.keys & attributes.keys
+        found_keys = model.keys & attributes.keys
 
         reset!
 
-        @model.merge!(attributes.slice(*found_keys))
+        model.merge!(attributes.slice(*found_keys))
       end
 
       def update_by(index, **attributes) # rubocop:disable Metrics/MethodLength
@@ -31,7 +33,7 @@ module Datory
 
         reset!
 
-        @model.map!.with_index do |model_item, model_index|
+        model.map!.with_index do |model_item, model_index|
           if model_index == index
             found_keys = model_item.keys & attributes.keys
 
@@ -43,7 +45,7 @@ module Datory
       end
 
       def serialize
-        @serialize ||= @context.serialize(@model)
+        @serialize ||= @context.serialize(model)
       end
 
       def valid?
@@ -65,7 +67,7 @@ module Datory
       end
 
       def model_collection?
-        [Set, Array].include?(@model.class)
+        [Set, Array].include?(model.class)
       end
 
       def reset!
