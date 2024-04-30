@@ -9,7 +9,7 @@ module Datory
       end
 
       def update(**attributes)
-        if [Set, Array].include?(@model.class)
+        if model_collection?
           raise Datory::Exceptions::MisuseError, "The `update` method cannot be used with a collection. " \
                                                  "Instead, use the `update_by` method."
         end
@@ -22,7 +22,7 @@ module Datory
       end
 
       def update_by(index, **attributes) # rubocop:disable Metrics/MethodLength
-        unless [Set, Array].include?(@model.class)
+        unless model_collection?
           raise Datory::Exceptions::MisuseError, "The `update_by` method cannot be used without a collection. " \
                                                  "Instead, use the `update` method."
         end
@@ -57,6 +57,10 @@ module Datory
       end
 
       private
+
+      def model_collection?
+        [Set, Array].include?(@model.class)
+      end
 
       def reset!
         @serialize = nil
