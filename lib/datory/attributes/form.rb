@@ -29,8 +29,8 @@ module Datory
 
         reset!
 
-        @model.map!.with_index do |model_item, map_index|
-          if map_index == index
+        @model.map!.with_index do |model_item, model_index|
+          if model_index == index
             found_keys = model_item.keys & attributes.keys
 
             model_item.merge(attributes.slice(*found_keys))
