@@ -7,6 +7,7 @@ RSpec.describe Usual::Example1::User do
         subject(:perform) { described_class.form(user) }
 
         it { expect(perform.valid?).to be(true) }
+        it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
       end
@@ -17,6 +18,7 @@ RSpec.describe Usual::Example1::User do
         let(:users) { [user] }
 
         it { expect(perform.valid?).to be(true) }
+        it { expect(perform.invalid?).to be(false) }
 
         it { expect(perform.serialize).to be_present }
       end

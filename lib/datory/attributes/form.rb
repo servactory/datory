@@ -19,6 +19,10 @@ module Datory
       rescue Datory::Exceptions::SerializationError
         false
       end
+
+      def invalid?
+        !valid?
+      end
     end
   end
 end
