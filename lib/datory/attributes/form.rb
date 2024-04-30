@@ -9,7 +9,7 @@ module Datory
       end
 
       def serialize
-        @context.serialize(@model)
+        @serialize ||= @context.serialize(@model)
       end
 
       def valid?
