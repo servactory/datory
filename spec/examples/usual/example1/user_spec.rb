@@ -629,92 +629,176 @@ RSpec.describe Usual::Example1::User do
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
-    context "when the data required for work is valid" do
-      # rubocop:disable Lint/SymbolConversion, Naming/VariableNumber
-      let(:user) do
-        {
-          "id": "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-          "firstname": "John",
-          "lastname": "Doe",
-          "email": "johndoe@example.com",
-          "birthDate": "1973-01-22",
-          "login": {
-            "id": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-            "username": "johndoe",
-            "password": "a25723600f7",
-            "md5": "c1328472c5794a25723600f71c1b4586",
-            "sha1": "35544a31cc19bd6520af116554873167117f4d94",
-            "lifetime": "P3M",
-            "registered_at": "2023-04-14T15:16:17+00:00"
-          },
-          "addresses": [
-            {
-              "street": "123 Main Street",
-              "suite": "Apt. 4",
-              "city": "Anytown",
-              "zipcode": "12345-6789",
-              "geo": {
-                "lat": "42.1234",
-                "lng": "-71.2345"
+    describe "hash" do
+      context "when the data required for work is valid" do
+        let(:user) do
+          {
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: "1973-01-22",
+            login: {
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              lifetime: "P3M",
+              registered_at: "2023-04-14T15:16:17+00:00"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
               }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
             }
-          ],
-          "phone": "(555) 555-1234",
-          "website": "www.johndoe.com",
-          "company": {
-            "name": "ABC Company",
-            "catchPhrase": "Innovative solutions for all your needs",
-            "bs": "Marketing"
           }
-        }
-      end
-      # rubocop:enable Lint/SymbolConversion, Naming/VariableNumber
+        end
 
-      it_behaves_like "successful results"
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid", skip: "Need to implement" do
+        let(:user) do
+          {
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: Date.new(1973, 1, 22),
+            login: {
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              lifetime: "P3M",
+              registered_at: "2023-04-14T15:16:17+00:00"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
+              }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
+            }
+          }
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
-    context "when the data required for work is invalid", skip: "Need to implement" do
-      # rubocop:disable Lint/SymbolConversion, Naming/VariableNumber
-      let(:user) do
-        {
-          "id": "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
-          "firstname": "John",
-          "lastname": "Doe",
-          "email": "johndoe@example.com",
-          "birthDate": Date.new(1973, 1, 22),
-          "login": {
-            "id": "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
-            "username": "johndoe",
-            "password": "a25723600f7",
-            "md5": "c1328472c5794a25723600f71c1b4586",
-            "sha1": "35544a31cc19bd6520af116554873167117f4d94",
-            "lifetime": "P3M",
-            "registered_at": "2023-04-14T15:16:17+00:00"
-          },
-          "addresses": [
-            {
-              "street": "123 Main Street",
-              "suite": "Apt. 4",
-              "city": "Anytown",
-              "zipcode": "12345-6789",
-              "geo": {
-                "lat": "42.1234",
-                "lng": "-71.2345"
+    describe "json" do
+      context "when the data required for work is valid" do
+        let(:user) do
+          {
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: "1973-01-22",
+            login: {
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              lifetime: "P3M",
+              registered_at: "2023-04-14T15:16:17+00:00"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
               }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
             }
-          ],
-          "phone": "(555) 555-1234",
-          "website": "www.johndoe.com",
-          "company": {
-            "name": "ABC Company",
-            "catchPhrase": "Innovative solutions for all your needs",
-            "bs": "Marketing"
-          }
-        }
-      end
-      # rubocop:enable Lint/SymbolConversion, Naming/VariableNumber
+          }.to_json
+        end
 
-      it_behaves_like "unsuccessful results"
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid", skip: "Need to implement" do
+        let(:user) do
+          {
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            firstname: "John",
+            lastname: "Doe",
+            email: "johndoe@example.com",
+            birthDate: Date.new(1973, 1, 22),
+            login: {
+              id: "1a0eed01-9430-4d68-901f-c0d4c1c3bf22",
+              username: "johndoe",
+              password: "a25723600f7",
+              md5: "c1328472c5794a25723600f71c1b4586", # rubocop:disable Naming/VariableNumber
+              sha1: "35544a31cc19bd6520af116554873167117f4d94", # rubocop:disable Naming/VariableNumber
+              lifetime: "P3M",
+              registered_at: "2023-04-14T15:16:17+00:00"
+            },
+            addresses: [
+              {
+                street: "123 Main Street",
+                suite: "Apt. 4",
+                city: "Anytown",
+                zipcode: "12345-6789",
+                geo: {
+                  lat: "42.1234",
+                  lng: "-71.2345"
+                }
+              }
+            ],
+            phone: "(555) 555-1234",
+            website: "www.johndoe.com",
+            company: {
+              name: "ABC Company",
+              catchPhrase: "Innovative solutions for all your needs",
+              bs: "Marketing"
+            }
+          }.to_json
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
   end
 

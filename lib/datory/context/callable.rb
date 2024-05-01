@@ -24,15 +24,17 @@ module Datory
       end
 
       def deserialize(json) # rubocop:disable Metrics/MethodLength
-        if [Set, Array].include?(json.class)
-          json.map do |json_item|
-            deserialize(json_item)
+        # TODO: Need to improve this place by adding more checks and an error exception.
+        parsed_data = json.is_a?(String) ? JSON.parse(json) : json
+
+        if [Set, Array].include?(parsed_data.class)
+          parsed_data.map do |item|
+            deserialize(item)
           end
         else
           context = send(:new)
-          hash = JSON.parse(json.to_json)
 
-          _deserialize(context, **hash)
+          _deserialize(context, **parsed_data)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
