@@ -268,36 +268,64 @@ RSpec.describe Usual::Example2::Product do
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
-    context "when the data required for work is valid" do
-      # rubocop:disable Lint/SymbolConversion
-      let(:product) do
-        {
-          "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
-          "title": "iPhone 15 Pro",
-          "price_cents": 999_00,
-          "price_currency": "USD",
-          "quantity": 5
-        }
-      end
-      # rubocop:enable Lint/SymbolConversion
+    describe "hash" do
+      context "when the data required for work is valid" do
+        let(:product) do
+          {
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: 999_00,
+            price_currency: "USD",
+            quantity: 5
+          }
+        end
 
-      it_behaves_like "successful results"
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid", skip: "Need to implement" do
+        let(:product) do
+          {
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: "999.00",
+            price_currency: "USD",
+            quantity: 5
+          }
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
-    context "when the data required for work is invalid", skip: "Need to implement" do
-      # rubocop:disable Lint/SymbolConversion
-      let(:product) do
-        {
-          "id": "55363a14-aa9a-4eba-9276-7f7cec432123",
-          "title": "iPhone 15 Pro",
-          "price_cents": "999.00",
-          "price_currency": "USD",
-          "quantity": 5
-        }
-      end
-      # rubocop:enable Lint/SymbolConversion
+    describe "json" do
+      context "when the data required for work is valid" do
+        let(:product) do
+          {
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: 999_00,
+            price_currency: "USD",
+            quantity: 5
+          }.to_json
+        end
 
-      it_behaves_like "unsuccessful results"
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid", skip: "Need to implement" do
+        let(:product) do
+          {
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: "999.00",
+            price_currency: "USD",
+            quantity: 5
+          }.to_json
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
   end
 
