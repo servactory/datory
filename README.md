@@ -20,15 +20,15 @@ gem "datory"
 #### Serialize
 
 ```ruby
-user = User.find(...)
+serial = Serial.find(id)
 
-UserDto.serialize(user) # => { ... }
+SerialDto.serialize(serial) # => { ... }
 ```
 
 #### Deserialize
 
 ```ruby
-UserDto.deserialize(json) # => Datory::Result
+SerialDto.deserialize(json) # => Datory::Result
 ```
 
 #### Form
@@ -37,9 +37,9 @@ For serialization, the `form` method is also available.
 This prepares a `Form` object, which has a set of additional methods such as `valid?` and `invalid?`.
 
 ```ruby
-form = UserDto.form(user)
+form = SerialDto.form(serial)
 
-form.target # => UserDto
+form.target # => SerialDto
 form.model # => { ... }
 
 form.valid? # => true
@@ -51,38 +51,34 @@ form.serialize # => { ... }
 #### Examples
 
 ```ruby
-class UserDto < Datory::Base
+class SerialDto < Datory::Base
   uuid :id
 
-  string :firstname, to: :first_name
-  string :lastname, to: :last_name
+  string :status
+  string :title
 
-  string :email
-  string :phone
-  string :website
+  one :poster, include: ImageDto
 
-  date :birthDate, to: :birth_date
+  one :ratings, include: RatingsDto
 
-  one :login, include: UserLoginDto
-  one :company, include: UserCompanyDto
+  many :countries, include: CountryDto
+  many :genres, include: GenreDto
+  many :seasons, include: SeasonDto
 
-  many :addresses, include: UserAddressDto
+  date :premieredOn, to: :premiered_on
 end
 ```
 
 ```ruby
-class UserLoginDto < Datory::Base
+class SeasonDto < Datory::Base
   uuid :id
-  
-  string :username
-  string :password
-  
-  string :md5
-  string :sha1
+  uuid :serial_id
 
-  duration :lifetime
-  
-  datetime :registered_at
+  integer :number
+
+  many :episodes, include: EpisodeDto
+
+  date :premiered_on
 end
 ```
 
@@ -93,25 +89,31 @@ end
 #### attribute
 
 ```ruby
-attribute :firstname, from: String, to: :first_name, as: String
+attribute :uuid, from: String, to: :id, as: String, format: :uuid
 ```
 
 #### string
 
 ```ruby
-string :first_name
+string :uuid, to: :id
 ```
 
 #### integer
 
 ```ruby
-integer :attempts, min: 1, max: 10
+integer :rating, min: 1, max: 10
 ```
 
 #### float
 
 ```ruby
-float :interest_rate
+float :rating
+```
+
+#### boolean
+
+```ruby
+boolean :default
 ```
 
 ### Helpers
@@ -129,31 +131,31 @@ uuid :id
 It will prepare two attributes `*_cents` and `*_currency`.
 
 ```ruby
-money :price
+money :box_office
 ```
 
 #### duration
 
 ```ruby
-duration :lifetime
+duration :episode_duration
 ```
 
 #### date
 
 ```ruby
-date :birth_date
+date :premiered_on
 ```
 
 #### time
 
 ```ruby
-time :registered_at
+time :premiered_at
 ```
 
 #### datetime
 
 ```ruby
-datetime :registered_at
+time :premiered_at
 ```
 
 ### Nesting
@@ -161,13 +163,13 @@ datetime :registered_at
 #### one
 
 ```ruby
-one :company, include: UserCompanyDto
+one :poster, include: ImageDto
 ```
 
 #### many
 
 ```ruby
-many :addresses, include: UserAddressDto
+many :seasons, include: SeasonDto
 ```
 
 ## Object information
@@ -175,35 +177,34 @@ many :addresses, include: UserAddressDto
 ### Info
 
 ```ruby
-UserDto.info
+SerialDto.info
 ```
 
 ```
-#<Datory::Info::Result:0x000000011eecd7d0 @attributes={:id=>{:from=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid}, :to=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid, :required=>true, :include=>nil}}, :firstname=>{:from=>{:name=>:firstname, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:first_name, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :lastname=>{:from=>{:name=>:lastname, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:last_name, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :email=>{:from=>{:name=>:email, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:email, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :phone=>{:from=>{:name=>:phone, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:phone, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :website=>{:from=>{:name=>:website, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:website, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :birthDate=>{:from=>{:name=>:birthDate, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:date}, :to=>{:name=>:birth_date, :type=>Date, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :login=>{:from=>{:name=>:login, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:login, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::UserLogin}}, :company=>{:from=>{:name=>:company, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:company, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::UserCompany}}, :addresses=>{:from=>{:name=>:addresses, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:addresses, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::UserAddress}}}>
+#<Datory::Info::Result:0x0000000124aa7bc8 @attributes={:id=>{:from=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid}, :to=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid, :required=>true, :include=>nil}}, :status=>{:from=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :title=>{:from=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :poster=>{:from=>{:name=>:poster, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:poster, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::Image}}, :ratings=>{:from=>{:name=>:ratings, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:ratings, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::Ratings}}, :countries=>{:from=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Country}}, :genres=>{:from=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Genre}}, :seasons=>{:from=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Season}}, :premieredOn=>{:from=>{:name=>:premieredOn, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:date}, :to=>{:name=>:premiered_on, :type=>Date, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}}>
 ```
 
 ### Describe
 
 ```ruby
-UserDto.describe
+SerialDto.describe
 ```
 
 ```
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|                                         UserDto                                         |
+|                                        SerialDto                                        |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| Attribute | From   | To         | As                     | Include                      |
+| Attribute   | From   | To           | As                     | Include                  |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| id        | String | id         | String                 |                              |
-| firstname | String | first_name | String                 |                              |
-| lastname  | String | last_name  | String                 |                              |
-| email     | String | email      | String                 |                              |
-| phone     | String | phone      | String                 |                              |
-| website   | String | website    | String                 |                              |
-| birthDate | String | birth_date | Date                   |                              |
-| login     | Hash   | login      | [Datory::Result, Hash] | Usual::Example1::UserLogin   |
-| company   | Hash   | company    | [Datory::Result, Hash] | Usual::Example1::UserCompany |
-| addresses | Array  | addresses  | Array                  | Usual::Example1::UserAddress |
+| id          | String | id           | String                 |                          |
+| status      | String | status       | String                 |                          |
+| title       | String | title        | String                 |                          |
+| poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
+| ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
+| countries   | Array  | countries    | Array                  | Usual::Example1::Country |
+| genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
+| seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
+| premieredOn | String | premiered_on | Date                   |                          |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
