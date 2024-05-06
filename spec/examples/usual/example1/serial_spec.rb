@@ -110,6 +110,15 @@ RSpec.describe Usual::Example1::Serial do
         ]
       end
 
+      let(:ratings) do
+        Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Ratings.to_model(
+            value: 8.6,
+            quantity: 324_000
+          )
+        )
+      end
+
       context "when the data required for work is valid" do
         let(:serial) do
           Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
@@ -120,6 +129,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: Date.new(2008, 9, 3)
           )
@@ -138,6 +148,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: "2008-09-03" # THIS
           )
@@ -191,6 +202,15 @@ RSpec.describe Usual::Example1::Serial do
         ]
       end
 
+      let(:ratings) do
+        Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Ratings.to_model(
+            value: 8.6,
+            quantity: 324_000
+          )
+        )
+      end
+
       context "when the data required for work is valid" do
         let(:serial) do
           {
@@ -201,6 +221,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: Date.new(2008, 9, 3)
           }
@@ -219,6 +240,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: "2008-09-03" # THIS
           }
@@ -271,6 +293,12 @@ RSpec.describe Usual::Example1::Serial do
                   premieredOn: "2008-09-03"
                 }
               ],
+              ratings: {
+                imdb: {
+                  value: 8.6,
+                  quantity: 324_000
+                }
+              },
               premieredOn: "2008-09-03"
             }
           )
@@ -319,6 +347,12 @@ RSpec.describe Usual::Example1::Serial do
                   premieredOn: "2008-09-03"
                 }
               ],
+              ratings: {
+                imdb: {
+                  value: 8.6,
+                  quantity: 324_000
+                }
+              },
               premieredOn: "2008-09-03"
             }
           )
@@ -376,6 +410,15 @@ RSpec.describe Usual::Example1::Serial do
         ]
       end
 
+      let(:ratings) do
+        Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Ratings.to_model(
+            value: 8.6,
+            quantity: 324_000
+          )
+        )
+      end
+
       context "when the data required for work is valid" do
         let(:serial) do
           Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
@@ -386,6 +429,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: Date.new(2008, 9, 3)
           )
@@ -404,6 +448,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: "2008-09-03" # THIS
           )
@@ -457,6 +502,15 @@ RSpec.describe Usual::Example1::Serial do
         ]
       end
 
+      let(:ratings) do
+        Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Ratings.to_model(
+            value: 8.6,
+            quantity: 324_000
+          )
+        )
+      end
+
       context "when the data required for work is valid" do
         let(:serial) do
           {
@@ -467,6 +521,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: Date.new(2008, 9, 3)
           }
@@ -485,6 +540,7 @@ RSpec.describe Usual::Example1::Serial do
             countries: countries,
             genres: genres,
             seasons: seasons,
+            ratings: ratings,
             unused_attribute: "NOTE: This attribute is redundant. It tests success and ignore.",
             premiered_on: "2008-09-03" # THIS
           }
@@ -515,6 +571,7 @@ RSpec.describe Usual::Example1::Serial do
               countries: be_present,
               genres: be_present,
               seasons: be_present,
+              ratings: be_present,
               premiered_on: Date.new(2008, 9, 3)
             )
           )
@@ -584,6 +641,20 @@ RSpec.describe Usual::Example1::Serial do
             )
           )
         end
+
+        specify "ratings", :aggregate_failures do
+          expect(perform.ratings).to be_a(Servactory::Result)
+          expect(perform.ratings).to an_instance_of(Datory::Result)
+
+          expect(perform.ratings).to(
+            have_attributes(
+              imdb: have_attributes(
+                value: 8.6,
+                quantity: 324_000
+              )
+            )
+          )
+        end
       end
 
       describe "plural" do
@@ -605,6 +676,7 @@ RSpec.describe Usual::Example1::Serial do
                 countries: be_present,
                 genres: be_present,
                 seasons: be_present,
+                ratings: be_present,
                 premiered_on: Date.new(2008, 9, 3)
               )
             )
@@ -675,6 +747,20 @@ RSpec.describe Usual::Example1::Serial do
             )
           )
         end
+
+        specify "ratings", :aggregate_failures do
+          expect(perform.first.ratings).to be_a(Servactory::Result)
+          expect(perform.first.ratings).to an_instance_of(Datory::Result)
+
+          expect(perform.first.ratings).to(
+            have_attributes(
+              imdb: have_attributes(
+                value: 8.6,
+                quantity: 324_000
+              )
+            )
+          )
+        end
       end
     end
 
@@ -722,6 +808,12 @@ RSpec.describe Usual::Example1::Serial do
                 premieredOn: "2008-09-03"
               }
             ],
+            ratings: {
+              imdb: {
+                value: 8.6,
+                quantity: 324_000
+              }
+            },
             premieredOn: "2008-09-03"
           }
         end
@@ -766,6 +858,12 @@ RSpec.describe Usual::Example1::Serial do
                 premieredOn: "2008-09-03"
               }
             ],
+            ratings: {
+              imdb: {
+                value: 8.6,
+                quantity: 324_000
+              }
+            },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)
           }
         end
@@ -812,6 +910,12 @@ RSpec.describe Usual::Example1::Serial do
                 premieredOn: "2008-09-03"
               }
             ],
+            ratings: {
+              imdb: {
+                value: 8.6,
+                quantity: 324_000
+              }
+            },
             premieredOn: "2008-09-03"
           }.to_json
         end
@@ -856,6 +960,12 @@ RSpec.describe Usual::Example1::Serial do
                 premieredOn: "2008-09-03"
               }
             ],
+            ratings: {
+              imdb: {
+                value: 8.6,
+                quantity: 324_000
+              }
+            },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)
           }.to_json
         end
@@ -882,6 +992,7 @@ RSpec.describe Usual::Example1::Serial do
               | status      | String | status       | String                 |                          |
               | title       | String | title        | String                 |                          |
               | poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
+              | ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
               | countries   | Array  | countries    | Array                  | Usual::Example1::Country |
               | genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
               | seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
@@ -1066,6 +1177,26 @@ RSpec.describe Usual::Example1::Serial do
                   format: nil,
                   required: true,
                   include: Usual::Example1::Image
+                }
+              },
+              ratings: {
+                from: {
+                  consists_of: false,
+                  format: nil,
+                  max: nil,
+                  min: nil,
+                  name: :ratings,
+                  type: Hash
+                },
+                to: {
+                  consists_of: false,
+                  format: nil,
+                  include: Usual::Example1::Ratings,
+                  max: nil,
+                  min: nil,
+                  name: :ratings,
+                  required: true,
+                  type: [Datory::Result, Hash]
                 }
               },
               countries: {

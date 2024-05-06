@@ -10,6 +10,8 @@ module Usual
 
       one :poster, include: Image
 
+      one :ratings, include: Ratings
+
       many :countries, include: Country
       many :genres, include: Genre
       many :seasons, include: Season
