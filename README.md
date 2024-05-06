@@ -3,7 +3,7 @@
   <a href="https://github.com/servactory/datory/releases"><img src="https://img.shields.io/github/release-date/servactory/datory" alt="Release Date"></a>
 </p>
 
-## Documentation (soon)
+## Documentation
 
 See [datory.servactory.com](https://datory.servactory.com) for documentation.
 
