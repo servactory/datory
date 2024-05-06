@@ -52,11 +52,8 @@ module Datory
         end
 
         def money(name, **options)
-          options_for_cents = options.merge(from: Integer)
-          options_for_currency = options.merge(from: [Symbol, String])
-
-          attribute(:"#{name}_cents", **options_for_cents)
-          attribute(:"#{name}_currency", **options_for_currency)
+          integer :"#{name}_cents", **options
+          string :"#{name}_currency", **options
         end
 
         def duration(name, **options)
@@ -93,6 +90,11 @@ module Datory
 
         def float(name, **options)
           options = options.merge(from: Float)
+          attribute(name, **options)
+        end
+
+        def boolean(name, **options)
+          options = options.merge(from: [TrueClass, FalseClass])
           attribute(name, **options)
         end
 

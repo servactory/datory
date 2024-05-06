@@ -337,17 +337,17 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                       Usual::Example2::Product                        |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute      | From             | To             | As               |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id             | String           | id             | String           |
-              | title          | String           | title          | String           |
-              | price_cents    | Integer          | price_cents    | Integer          |
-              | price_currency | [Symbol, String] | price_currency | [Symbol, String] |
-              | quantity       | Integer          | quantity       | Integer          |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |              Usual::Example2::Product               |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute      | From    | To             | As      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id             | String  | id             | String  |
+              | title          | String  | title          | String  |
+              | price_cents    | Integer | price_cents    | Integer |
+              | price_currency | String  | price_currency | String  |
+              | quantity       | Integer | quantity       | Integer |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -427,7 +427,7 @@ RSpec.describe Usual::Example2::Product do
               price_currency: {
                 from: {
                   name: :price_currency,
-                  type: [Symbol, String],
+                  type: String,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -435,7 +435,7 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :price_currency,
-                  type: [Symbol, String],
+                  type: String,
                   required: true,
                   min: nil, max: nil,
                   consists_of: false,

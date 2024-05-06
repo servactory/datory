@@ -2,10 +2,9 @@
 
 module Usual
   module Example1
-    class UserCompany < Datory::Base
+    class Country < Datory::Base
       string :name
-      string :catchPhrase, to: :catch_phrase
-      string :bs
+      string :iso2 # rubocop:disable Naming/VariableNumber
     end
   end
 end
