@@ -191,21 +191,21 @@ SerialDto.describe
 ```
 
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|                                        SerialDto                                        |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| Attribute   | From   | To           | As                     | Include                  |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| id          | String | id           | String                 |                          |
-| status      | String | status       | String                 |                          |
-| title       | String | title        | String                 |                          |
-| poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
-| ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
-| countries   | Array  | countries    | Array                  | Usual::Example1::Country |
-| genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
-| seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
-| premieredOn | String | premiered_on | Date                   |                          |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                                 SerialDto                                 |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Attribute   | From   | To           | As                     | Include    |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| id          | String | id           | String                 |            |
+| status      | String | status       | String                 |            |
+| title       | String | title        | String                 |            |
+| poster      | Hash   | poster       | [Datory::Result, Hash] | ImageDto   |
+| ratings     | Hash   | ratings      | [Datory::Result, Hash] | RatingsDto |
+| countries   | Array  | countries    | Array                  | CountryDto |
+| genres      | Array  | genres       | Array                  | GenreDto   |
+| seasons     | Array  | seasons      | Array                  | SeasonDto  |
+| premieredOn | String | premiered_on | Date                   |            |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 ## Contributing
