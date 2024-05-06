@@ -47,31 +47,38 @@ module Datory
         ########################################################################
 
         def uuid(name, **options)
+          options = options.slice(:to)
           options = options.merge(format: :uuid)
           string(name, **options)
         end
 
         def money(name, **options)
+          options = options.slice(:to)
+
           integer :"#{name}_cents", **options
           string :"#{name}_currency", **options
         end
 
         def duration(name, **options)
+          options = options.slice(:to)
           options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
           string(name, **options)
         end
 
         def date(name, **options)
+          options = options.slice(:to)
           options = options.merge(from: String, as: Date, format: { from: :date })
           string(name, **options)
         end
 
         def time(name, **options)
+          options = options.slice(:to)
           options = options.merge(from: String, as: Time, format: { from: :time })
           string(name, **options)
         end
 
         def datetime(name, **options)
+          options = options.slice(:to)
           options = options.merge(from: String, as: DateTime, format: { from: :datetime })
           string(name, **options)
         end
