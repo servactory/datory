@@ -3,19 +3,6 @@
 module Datory
   module Context
     module Workspace
-      def attributes
-        @attributes ||= Attributes.new(
-          context: self,
-          incoming_attributes: incoming_attributes,
-          collection_of_attributes: collection_of_attributes
-        )
-      end
-
-      private
-
-      attr_reader :incoming_attributes,
-                  :collection_of_attributes
-
       def _serialize(model:, collection_of_attributes:)
         serialize(
           model: model,
