@@ -26,6 +26,8 @@ module Datory
           Servactory::ToolKit::DynamicOptions::Max.use
         ]
 
+        i18n_root_key :datory
+
         predicate_methods_enabled false
       end
     end

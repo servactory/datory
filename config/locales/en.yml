@@ -1,5 +1,5 @@
 en:
-  servactory:
+  datory:
     common:
       undefined_method:
         missing_name: "[%{service_class_name}] %{error_text}"
