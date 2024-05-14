@@ -355,6 +355,32 @@ RSpec.describe Usual::Example2::Product do
     end
   end
 
+  describe "#table" do
+    describe "Usual::Example2::Product" do
+      subject(:perform) { Usual::Example2::Product.table } # rubocop:disable RSpec/DescribedClass
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |              Usual::Example2::Product               |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute      | From    | To             | As      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id             | String  | id             | String  |
+              | title          | String  | title          | String  |
+              | price_cents    | Integer | price_cents    | Integer |
+              | price_currency | String  | price_currency | String  |
+              | quantity       | Integer | quantity       | Integer |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+  end
+
   describe "#info" do
     describe "Usual::Example2::Product" do
       subject(:perform) { Usual::Example2::Product.info } # rubocop:disable RSpec/DescribedClass

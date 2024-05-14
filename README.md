@@ -186,6 +186,8 @@ SerialDto.info
 
 ### Describe
 
+Alias: `table`
+
 ```ruby
 SerialDto.describe
 ```
