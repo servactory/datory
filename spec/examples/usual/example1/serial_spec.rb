@@ -1090,6 +1090,121 @@ RSpec.describe Usual::Example1::Serial do
     end
   end
 
+  describe "#table" do
+    describe "Usual::Example1::Serial" do
+      subject(:perform) { Usual::Example1::Serial.table } # rubocop:disable RSpec/DescribedClass
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                 Usual::Example1::Serial                                 |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From   | To           | As                     | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String | id           | String                 |                          |
+              | status      | String | status       | String                 |                          |
+              | title       | String | title        | String                 |                          |
+              | poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
+              | ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
+              | countries   | Array  | countries    | Array                  | Usual::Example1::Country |
+              | genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
+              | seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
+              | premieredOn | String | premiered_on | Date                   |                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::Image" do
+      subject(:perform) { Usual::Example1::Image.table }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                         Usual::Example1::Image                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute | From                    | To      | As                      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | url       | String                  | url     | String                  |
+              | default   | [TrueClass, FalseClass] | default | [TrueClass, FalseClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::Country" do
+      subject(:perform) { Usual::Example1::Country.table }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |      Usual::Example1::Country      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute | From   | To   | As     |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | name      | String | name | String |
+              | iso2      | String | iso2 | String |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::Genre" do
+      subject(:perform) { Usual::Example1::Genre.table }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |       Usual::Example1::Genre       |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute | From   | To   | As     |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | name      | String | name | String |
+              | code      | String | code | String |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+
+    describe "Usual::Example1::Season" do
+      subject(:perform) { Usual::Example1::Season.table }
+
+      it do
+        expect { perform }.to(
+          output(
+            <<~TABLE
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |            Usual::Example1::Season             |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From    | To           | As      |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String  | id           | String  |
+              | number      | Integer | number       | Integer |
+              | premieredOn | String  | premiered_on | Date    |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            TABLE
+          ).to_stdout
+        )
+      end
+    end
+  end
+
   describe "#info" do
     describe "Usual::Example1::User" do
       subject(:perform) { Usual::Example1::Serial.info } # rubocop:disable RSpec/DescribedClass

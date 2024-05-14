@@ -54,6 +54,7 @@ module Datory
           collection_of_attributes: collection_of_attributes
         )
       end
+      alias table describe
 
       private
 
