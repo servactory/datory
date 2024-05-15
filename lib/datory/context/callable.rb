@@ -40,6 +40,11 @@ module Datory
              Datory::Service::Exceptions::Internal,
              Datory::Service::Exceptions::Output => e
         raise Datory::Exceptions::DeserializationError.new(message: e.message)
+      rescue JSON::ParserError => e
+        # TODO: Needs to be moved to I18n
+        message = "Failed to parse data for deserialization: #{e.message}"
+
+        raise Datory::Exceptions::DeserializationError.new(message: message, meta: { original_exception: e })
       end
 
       def to_model(**attributes)
