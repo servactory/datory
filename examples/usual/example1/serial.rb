@@ -3,7 +3,7 @@
 module Usual
   module Example1
     class Serial < Datory::Base
-      uuid :id
+      uuid! :id
 
       string! :status
       string! :title
@@ -16,7 +16,7 @@ module Usual
       many :genres, include: Genre
       many :seasons, include: Season
 
-      date :premieredOn, to: :premiered_on
+      date! :premieredOn, to: :premiered_on
     end
   end
 end

@@ -3,8 +3,8 @@
 module Usual
   module Example1
     class Season < Datory::Base
-      uuid :id
-      # uuid :serialId, to: :serial_id
+      uuid! :id
+      # uuid! :serialId, to: :serial_id
 
       integer! :number
 

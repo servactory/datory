@@ -3,11 +3,11 @@
 module Usual
   module Example2
     class Product < Datory::Base
-      uuid :id
+      uuid! :id
 
       string! :title
 
-      money :price
+      money! :price
 
       integer! :quantity, min: 1, max: 10
     end

@@ -46,24 +46,30 @@ module Datory
 
         ########################################################################
 
-        def uuid(name, **options)
+        def uuid!(name, **options)
           options = options.slice(:to)
           options = options.merge(format: :uuid)
           string(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `uuid!`
+        alias uuid uuid!
 
-        def money(name, **options)
+        def money!(name, **options)
           options = options.slice(:to)
 
           integer :"#{name}_cents", **options
           string :"#{name}_currency", **options
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `money!`
+        alias money money!
 
-        def duration(name, **options)
+        def duration!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
           string(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `duration!`
+        alias duration duration!
 
         def date!(name, **options)
           options = options.slice(:to)
@@ -80,17 +86,21 @@ module Datory
           string(name, **options)
         end
 
-        def time(name, **options)
+        def time!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Time, format: { from: :time })
           string(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `time!`
+        alias time time!
 
-        def datetime(name, **options)
+        def datetime!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: DateTime, format: { from: :datetime })
           string(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `datetime!`
+        alias datetime datetime!
 
         ########################################################################
 
