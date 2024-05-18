@@ -65,7 +65,16 @@ module Datory
           string(name, **options)
         end
 
-        def date(name, **options)
+        def date!(name, **options)
+          options = options.slice(:to)
+          options = options.merge(from: String, as: Date, format: { from: :date })
+          string(name, **options)
+        end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `date!`
+        alias date date!
+
+        # FIXME
+        def date?(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Date, format: { from: :date })
           string(name, **options)

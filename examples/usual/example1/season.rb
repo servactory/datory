@@ -10,7 +10,8 @@ module Usual
 
       # many :episodes, include: Episode
 
-      date :premieredOn, to: :premiered_on
+      date! :premieredOn, to: :premiered_on
+      date? :endedOn, to: :ended_on
     end
   end
 end

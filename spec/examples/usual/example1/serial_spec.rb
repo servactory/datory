@@ -105,7 +105,8 @@ RSpec.describe Usual::Example1::Serial do
           Usual::Example1::Season.to_model(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           )
         ]
       end
@@ -198,7 +199,8 @@ RSpec.describe Usual::Example1::Serial do
           {
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           }
         ]
       end
@@ -292,7 +294,8 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
-                  premieredOn: "2008-09-03"
+                  premieredOn: "2008-09-03",
+                  endedOn: "2008-11-26"
                 }
               ],
               ratings: {
@@ -347,7 +350,8 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
-                  premieredOn: "2008-09-03"
+                  premieredOn: "2008-09-03",
+                  endedOn: "2008-11-26"
                 }
               ],
               ratings: {
@@ -409,7 +413,8 @@ RSpec.describe Usual::Example1::Serial do
           Usual::Example1::Season.to_model(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           )
         ]
       end
@@ -502,7 +507,8 @@ RSpec.describe Usual::Example1::Serial do
           {
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           }
         ]
       end
@@ -643,7 +649,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               id: "27df8a44-556f-4e08-9984-4aa663b78f98",
               number: 1,
-              premiered_on: Date.new(2008, 9, 3)
+              premiered_on: Date.new(2008, 9, 3),
+              ended_on: Date.new(2008, 11, 26)
             )
           )
         end
@@ -750,7 +757,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               id: "27df8a44-556f-4e08-9984-4aa663b78f98",
               number: 1,
-              premiered_on: Date.new(2008, 9, 3)
+              premiered_on: Date.new(2008, 9, 3),
+              ended_on: Date.new(2008, 11, 26)
             )
           )
         end
@@ -813,7 +821,8 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
@@ -864,7 +873,8 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
@@ -917,7 +927,8 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
@@ -968,7 +979,8 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
@@ -1094,6 +1106,7 @@ RSpec.describe Usual::Example1::Serial do
               | id          | String  | id           | String  |
               | number      | Integer | number       | Integer |
               | premieredOn | String  | premiered_on | Date    |
+              | endedOn     | String  | ended_on     | Date    |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
@@ -1209,6 +1222,7 @@ RSpec.describe Usual::Example1::Serial do
               | id          | String  | id           | String  |
               | number      | Integer | number       | Integer |
               | premieredOn | String  | premiered_on | Date    |
+              | endedOn     | String  | ended_on     | Date    |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
