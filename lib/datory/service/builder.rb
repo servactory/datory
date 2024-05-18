@@ -15,10 +15,12 @@ module Datory
           ActiveSupport::Duration => ->(value) { value.iso8601 }
         },
         DESERIALIZATION: {
-          Symbol => ->(value) { value.to_sym },
-          String => ->(value) { value.to_s },
-          Integer => ->(value) { value.to_i },
-          Float => ->(value) { value.to_f },
+          # NOTE: These types do not need to be cast automatically:
+          # Symbol => ->(value) { value.to_sym },
+          # String => ->(value) { value.to_s },
+          # Integer => ->(value) { value.to_i },
+          # Float => ->(value) { value.to_f },
+          # NOTE: These types need to be cast automatically:
           Date => ->(value) { Date.parse(value) },
           Time => ->(value) { Time.parse(value) },
           DateTime => ->(value) { DateTime.parse(value) },
