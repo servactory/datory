@@ -5,8 +5,8 @@ module Usual
     class Serial < Datory::Base
       uuid :id
 
-      string :status
-      string :title
+      string! :status
+      string! :title
 
       one :poster, include: Image
 

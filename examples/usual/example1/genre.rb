@@ -3,8 +3,8 @@
 module Usual
   module Example1
     class Genre < Datory::Base
-      string :name
-      string :code
+      string! :name
+      string! :code
     end
   end
 end

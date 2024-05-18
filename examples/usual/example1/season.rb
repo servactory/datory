@@ -6,7 +6,7 @@ module Usual
       uuid :id
       # uuid :serialId, to: :serial_id
 
-      integer :number
+      integer! :number
 
       # many :episodes, include: Episode
 

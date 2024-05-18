@@ -114,7 +114,8 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.to_model(
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil
           )
         )
       end
@@ -206,7 +207,8 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.to_model(
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil
           )
         )
       end
@@ -296,7 +298,8 @@ RSpec.describe Usual::Example1::Serial do
               ratings: {
                 imdb: {
                   value: 8.6,
-                  quantity: 324_000
+                  quantity: 324_000,
+                  linkUrl: nil
                 }
               },
               premieredOn: "2008-09-03"
@@ -350,7 +353,8 @@ RSpec.describe Usual::Example1::Serial do
               ratings: {
                 imdb: {
                   value: 8.6,
-                  quantity: 324_000
+                  quantity: 324_000,
+                  linkUrl: nil
                 }
               },
               premieredOn: "2008-09-03"
@@ -412,9 +416,10 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:ratings) do
         Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil
           )
         )
       end
@@ -504,9 +509,10 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:ratings) do
         Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil
           )
         )
       end
@@ -650,7 +656,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                link_url: nil
               )
             )
           )
@@ -756,7 +763,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                link_url: nil
               )
             )
           )
@@ -811,7 +819,8 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: "2008-09-03"
@@ -861,7 +870,8 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)
@@ -913,7 +923,8 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: "2008-09-03"
@@ -963,7 +974,8 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)

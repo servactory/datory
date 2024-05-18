@@ -85,25 +85,48 @@ module Datory
 
         ########################################################################
 
-        def string(name, **options)
+        def string!(name, **options)
           options = options.merge(from: String)
           attribute(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `string!`
+        alias string string!
 
-        def integer(name, **options)
+        def string?(name, **options)
+          options = options.merge(from: [String, NilClass], as: [String, NilClass], required: false)
+          attribute(name, **options)
+        end
+
+        def integer!(name, **options)
           options = options.merge(from: Integer)
           attribute(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `integer!`
+        alias integer integer!
 
-        def float(name, **options)
+        def integer?(name, **options)
+          options = options.merge(from: [Integer, NilClass], as: [Integer, NilClass], required: false)
+          attribute(name, **options)
+        end
+
+        def float!(name, **options)
           options = options.merge(from: Float)
           attribute(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `float!`
+        alias float float!
 
-        def boolean(name, **options)
+        def float?(name, **options)
+          options = options.merge(from: [Float, NilClass], as: [Float, NilClass], required: false)
+          attribute(name, **options)
+        end
+
+        def boolean!(name, **options)
           options = options.merge(from: [TrueClass, FalseClass])
           attribute(name, **options)
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `boolean!`
+        alias boolean boolean!
 
         ########################################################################
 
