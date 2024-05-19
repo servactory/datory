@@ -77,7 +77,7 @@ module Datory
         def uuid!(name, **options)
           options = options.slice(:to)
           options = options.merge(format: :uuid)
-          string(name, **options)
+          string!(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `uuid!`
         alias uuid uuid!
@@ -87,18 +87,23 @@ module Datory
         def money!(name, **options)
           options = options.slice(:to)
 
-          integer :"#{name}_cents", **options
-          string :"#{name}_currency", **options
+          integer! :"#{name}_cents", **options
+          string! :"#{name}_currency", **options
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `money!`
         alias money money!
 
-        # TODO: Need to implement an optional version for `money`.
+        def money?(name, **options)
+          options = options.slice(:to)
+
+          integer? :"#{name}_cents", **options
+          string? :"#{name}_currency", **options
+        end
 
         def duration!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
-          string(name, **options)
+          string!(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `duration!`
         alias duration duration!
@@ -108,22 +113,21 @@ module Datory
         def date!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Date, format: { from: :date })
-          string(name, **options)
+          string!(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `date!`
         alias date date!
 
-        # FIXME: Need to add examples and tests
         def date?(name, **options)
           options = options.slice(:to)
-          options = options.merge(from: String, as: Date, format: { from: :date })
-          string(name, **options)
+          options = options.merge(from: [String, NilClass], as: Date, format: { from: :date }, required: false)
+          attribute(name, **options)
         end
 
         def time!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Time, format: { from: :time })
-          string(name, **options)
+          string!(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `time!`
         alias time time!
@@ -133,7 +137,7 @@ module Datory
         def datetime!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: DateTime, format: { from: :datetime })
-          string(name, **options)
+          string!(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `datetime!`
         alias datetime datetime!
