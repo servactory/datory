@@ -4,7 +4,7 @@ RSpec.describe Usual::Example3::Language do
   describe "#form" do
     shared_examples "successful results" do
       describe "singular" do
-        subject(:perform) { described_class.form(product) }
+        subject(:perform) { described_class.form(language) }
 
         it { expect(perform.target).to eq(described_class) }
         it { expect(perform.model).to be_present }
@@ -30,9 +30,9 @@ RSpec.describe Usual::Example3::Language do
       end
 
       describe "plural" do
-        subject(:perform) { described_class.form(products) }
+        subject(:perform) { described_class.form(languages) }
 
-        let(:products) { [product] }
+        let(:languages) { [language] }
 
         it { expect(perform.target).to eq(described_class) }
         it { expect(perform.model).to be_present }
@@ -59,7 +59,7 @@ RSpec.describe Usual::Example3::Language do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.form(product) }
+      subject(:perform) { described_class.form(language) }
 
       it { expect(perform.valid?).to be(false) }
 
@@ -68,7 +68,7 @@ RSpec.describe Usual::Example3::Language do
 
     describe "objects" do
       context "when the data required for work is valid" do
-        let(:product) do
+        let(:language) do
           Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
@@ -86,7 +86,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       context "when the data required for work is invalid" do
-        let(:product) do
+        let(:language) do
           Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
@@ -99,7 +99,7 @@ RSpec.describe Usual::Example3::Language do
 
     describe "hash" do
       context "when the data required for work is valid" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
@@ -113,7 +113,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       context "when the data required for work is invalid" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
@@ -128,7 +128,7 @@ RSpec.describe Usual::Example3::Language do
   describe "#serialize" do
     shared_examples "successful results" do
       describe "singular" do
-        subject(:perform) { described_class.serialize(product) }
+        subject(:perform) { described_class.serialize(language) }
 
         it do
           expect(perform).to match(
@@ -146,9 +146,9 @@ RSpec.describe Usual::Example3::Language do
       end
 
       describe "plural" do
-        subject(:perform) { described_class.serialize(products) }
+        subject(:perform) { described_class.serialize(languages) }
 
-        let(:products) { [product] }
+        let(:languages) { [language] }
 
         it do
           expect(perform).to contain_exactly(
@@ -167,14 +167,14 @@ RSpec.describe Usual::Example3::Language do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.serialize(product) }
+      subject(:perform) { described_class.serialize(language) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::SerializationError) }
     end
 
     describe "objects" do
       context "when the data required for work is valid" do
-        let(:product) do
+        let(:language) do
           Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
@@ -192,7 +192,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       context "when the data required for work is invalid" do
-        let(:product) do
+        let(:language) do
           Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
@@ -204,7 +204,7 @@ RSpec.describe Usual::Example3::Language do
     end
 
     describe "hash" do
-      let(:product) do
+      let(:language) do
         {
           id: "73031620-be3b-4088-9a78-5589ff7e1f61",
           name: "Ruby",
@@ -227,7 +227,7 @@ RSpec.describe Usual::Example3::Language do
       subject(:perform) { described_class.deserialize(json) }
 
       describe "singular" do
-        let(:json) { product }
+        let(:json) { language }
 
         specify "root", :aggregate_failures do
           expect(perform).to be_a(Servactory::Result)
@@ -243,7 +243,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       describe "plural" do
-        let(:json) { [product] }
+        let(:json) { [language] }
 
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
@@ -264,14 +264,14 @@ RSpec.describe Usual::Example3::Language do
     end
 
     shared_examples "unsuccessful results" do
-      subject(:perform) { described_class.deserialize(product) }
+      subject(:perform) { described_class.deserialize(language) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
     describe "hash" do
       context "when the data required for work is valid" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
@@ -285,7 +285,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       context "when the data required for work is invalid", skip: "Need to implement" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby"
@@ -298,7 +298,7 @@ RSpec.describe Usual::Example3::Language do
 
     describe "json" do
       context "when the data required for work is valid" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
@@ -312,7 +312,7 @@ RSpec.describe Usual::Example3::Language do
       end
 
       context "when the data required for work is invalid", skip: "Need to implement" do
-        let(:product) do
+        let(:language) do
           {
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
