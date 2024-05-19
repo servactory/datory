@@ -1342,7 +1342,7 @@ RSpec.describe Usual::Example1::Serial do
                   format: nil,
                   include: Usual::Example1::Ratings,
                   max: nil,
-                  min: nil,
+                  min: nil
                 }
               },
               countries: {

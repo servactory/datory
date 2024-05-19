@@ -8,7 +8,7 @@ module Datory
         base.include(Workspace)
       end
 
-      module ClassMethods
+      module ClassMethods # rubocop:disable Metrics/ModuleLength
         def inherited(child)
           super
 

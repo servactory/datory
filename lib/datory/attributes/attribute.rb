@@ -5,7 +5,7 @@ module Datory
     class Attribute
       attr_reader :from, :to
 
-      def initialize(name, **options) # rubocop:disable Metrics/MethodLength
+      def initialize(name, **options) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         @from = Options::From.new(
           name: name,
           type: options.fetch(:from),
@@ -31,7 +31,7 @@ module Datory
 
       ##########################################################################
 
-      def input_serialization_options # rubocop:disable Metrics/AbcSize
+      def input_serialization_options # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         hash = {
           as: to.name,
           type: to.type,
@@ -66,7 +66,7 @@ module Datory
 
       ##########################################################################
 
-      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         hash = {
           as: to.name,
           type: from.type,
