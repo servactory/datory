@@ -155,7 +155,16 @@ module Datory
         # NOTE: This will most likely be marked as deprecated in the future in favor of `datetime!`
         alias datetime datetime!
 
-        # TODO: Need to implement an optional version for `datetime`.
+        def datetime?(name, **options)
+          options = options.slice(:to)
+          options = options.merge(
+            from: [String, NilClass],
+            as: [DateTime, NilClass],
+            format: { from: :datetime },
+            required: false
+          )
+          attribute(name, **options)
+        end
 
         ########################################################################
 

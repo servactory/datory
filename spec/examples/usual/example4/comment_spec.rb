@@ -125,7 +125,8 @@ RSpec.describe Usual::Example4::Comment do
             {
               id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
               parentId: nil,
-              content: "Hello. This is my first comment here."
+              content: "Hello. This is my first comment here.",
+              publishedAt: nil
             }
           )
         end
@@ -141,7 +142,8 @@ RSpec.describe Usual::Example4::Comment do
             {
               id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
               parentId: nil,
-              content: "Hello. This is my first comment here."
+              content: "Hello. This is my first comment here.",
+              publishedAt: nil
             }
           )
         end
@@ -294,15 +296,16 @@ RSpec.describe Usual::Example4::Comment do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                    Usual::Example4::Comment                     |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute | From               | To        | As                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id        | String             | id        | String             |
-              | parentId  | [String, NilClass] | parent_id | [String, NilClass] |
-              | content   | String             | content   | String             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                        Usual::Example4::Comment                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From               | To           | As                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String             | id           | String               |
+              | parentId    | [String, NilClass] | parent_id    | [String, NilClass]   |
+              | content     | String             | content      | String               |
+              | publishedAt | [String, NilClass] | published_at | [DateTime, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -318,15 +321,16 @@ RSpec.describe Usual::Example4::Comment do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                    Usual::Example4::Comment                     |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute | From               | To        | As                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id        | String             | id        | String             |
-              | parentId  | [String, NilClass] | parent_id | [String, NilClass] |
-              | content   | String             | content   | String             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                        Usual::Example4::Comment                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From               | To           | As                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String             | id           | String               |
+              | parentId    | [String, NilClass] | parent_id    | [String, NilClass]   |
+              | content     | String             | content      | String               |
+              | publishedAt | [String, NilClass] | published_at | [DateTime, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -404,6 +408,27 @@ RSpec.describe Usual::Example4::Comment do
                   name: :content,
                   required: true,
                   type: String
+                }
+              },
+              publishedAt: {
+                from: {
+                  consists_of: false,
+                  format: :datetime,
+                  max: nil,
+                  min: nil,
+                  name: :publishedAt,
+                  type: [String, NilClass]
+                },
+                to: {
+                  consists_of: false,
+                  default: nil,
+                  format: nil,
+                  include: nil,
+                  max: nil,
+                  min: nil,
+                  name: :published_at,
+                  required: false,
+                  type: [DateTime, NilClass]
                 }
               }
             }
