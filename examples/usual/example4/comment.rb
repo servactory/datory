@@ -9,6 +9,8 @@ module Usual
 
       string! :content
 
+      time? :editedAt, to: :edited_at
+
       datetime? :publishedAt, to: :published_at
     end
   end

@@ -126,6 +126,7 @@ RSpec.describe Usual::Example4::Comment do
               id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
               parentId: nil,
               content: "Hello. This is my first comment here.",
+              editedAt: nil,
               publishedAt: nil
             }
           )
@@ -143,6 +144,7 @@ RSpec.describe Usual::Example4::Comment do
               id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
               parentId: nil,
               content: "Hello. This is my first comment here.",
+              editedAt: nil,
               publishedAt: nil
             }
           )
@@ -304,6 +306,7 @@ RSpec.describe Usual::Example4::Comment do
               | id          | String             | id           | String               |
               | parentId    | [String, NilClass] | parent_id    | [String, NilClass]   |
               | content     | String             | content      | String               |
+              | editedAt    | [String, NilClass] | edited_at    | [Time, NilClass]     |
               | publishedAt | [String, NilClass] | published_at | [DateTime, NilClass] |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
@@ -329,6 +332,7 @@ RSpec.describe Usual::Example4::Comment do
               | id          | String             | id           | String               |
               | parentId    | [String, NilClass] | parent_id    | [String, NilClass]   |
               | content     | String             | content      | String               |
+              | editedAt    | [String, NilClass] | edited_at    | [Time, NilClass]     |
               | publishedAt | [String, NilClass] | published_at | [DateTime, NilClass] |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
@@ -408,6 +412,27 @@ RSpec.describe Usual::Example4::Comment do
                   name: :content,
                   required: true,
                   type: String
+                }
+              },
+              editedAt: {
+                from: {
+                  consists_of: false,
+                  format: :time,
+                  max: nil,
+                  min: nil,
+                  name: :editedAt,
+                  type: [String, NilClass]
+                },
+                to: {
+                  consists_of: false,
+                  default: nil,
+                  format: nil,
+                  include: nil,
+                  max: nil,
+                  min: nil,
+                  name: :edited_at,
+                  required: false,
+                  type: [Time, NilClass]
                 }
               },
               publishedAt: {
