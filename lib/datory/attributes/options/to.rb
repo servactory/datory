@@ -4,10 +4,11 @@ module Datory
   module Attributes
     module Options
       class To < Base
-        attr_reader :required, :include_class
+        attr_reader :required, :default, :include_class
 
-        def initialize(name:, type:, required:, consists_of:, min:, max:, format:, include_class:)
+        def initialize(name:, type:, required:, default:, consists_of:, min:, max:, format:, include_class:)
           @required = required
+          @default = default
           @include_class = include_class
 
           format = format.fetch(:to, nil) if format.is_a?(Hash)
@@ -18,6 +19,7 @@ module Datory
         def info
           super.merge(
             required: required,
+            default: default,
             include: include_class
           )
         end

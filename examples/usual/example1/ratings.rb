@@ -3,7 +3,7 @@
 module Usual
   module Example1
     class Ratings < Datory::Base
-      one :imdb, include: Rating
+      one! :imdb, include: Rating
     end
   end
 end

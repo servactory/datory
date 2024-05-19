@@ -20,6 +20,7 @@ module Datory
           type: options.fetch(:as, @from.type),
           # TODO: It is necessary to implement NilClass support for optional
           required: options.fetch(:required, true),
+          default: options.fetch(:default, nil),
           consists_of: @from.consists_of,
           min: @from.min,
           max: @from.max,
@@ -35,6 +36,7 @@ module Datory
           as: to.name,
           type: to.type,
           required: to.required,
+          default: to.default,
           consists_of: to.consists_of
         }
 
@@ -69,6 +71,7 @@ module Datory
           as: to.name,
           type: from.type,
           required: to.required,
+          default: to.default,
           consists_of: from.consists_of,
           prepare: (lambda do |value:|
             return value unless to.include_class.present?

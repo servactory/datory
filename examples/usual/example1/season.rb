@@ -8,7 +8,7 @@ module Usual
 
       integer! :number
 
-      # many :episodes, include: Episode
+      # many! :episodes, include: Episode
 
       date! :premieredOn, to: :premiered_on
       date? :endedOn, to: :ended_on

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Usual::Example2::Product do
+RSpec.describe Usual::Example3::Language do
   describe "#form" do
     shared_examples "successful results" do
       describe "singular" do
@@ -17,7 +17,7 @@ RSpec.describe Usual::Example2::Product do
         it :aggregate_failures do
           expect { perform.update(id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
             change { perform.serialize.fetch(:id) }
-              .from("55363a14-aa9a-4eba-9276-7f7cec432123")
+              .from("73031620-be3b-4088-9a78-5589ff7e1f61")
               .to("5baebc74-f680-4598-b077-7a5c13dd1543")
           )
 
@@ -45,7 +45,7 @@ RSpec.describe Usual::Example2::Product do
         it :aggregate_failures do
           expect { perform.update_by(0, id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
             change { perform.serialize[0].fetch(:id) }
-              .from("55363a14-aa9a-4eba-9276-7f7cec432123")
+              .from("73031620-be3b-4088-9a78-5589ff7e1f61")
               .to("5baebc74-f680-4598-b077-7a5c13dd1543")
           )
 
@@ -69,12 +69,16 @@ RSpec.describe Usual::Example2::Product do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: 999_00,
-            price_currency: "USD",
-            quantity: 5
+          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            current: current_version
+          )
+        end
+
+        let(:current_version) do
+          Usual::Example3::Version.to_model(
+            name: "3.3.1"
           )
         end
 
@@ -83,12 +87,9 @@ RSpec.describe Usual::Example2::Product do
 
       context "when the data required for work is invalid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: "999.00",
-            price_currency: "USD",
-            quantity: 5
+          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: 123 # THIS
           )
         end
 
@@ -100,11 +101,11 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is valid" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: 999_00,
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            current: {
+              name: "3.3.1"
+            }
           }
         end
 
@@ -114,11 +115,8 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is invalid" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: "999.00",
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: 123 # THIS
           }
         end
 
@@ -135,11 +133,13 @@ RSpec.describe Usual::Example2::Product do
         it do
           expect(perform).to match(
             {
-              id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-              title: "iPhone 15 Pro",
-              price_cents: 999_00,
-              price_currency: "USD",
-              quantity: 5
+              id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+              name: "Ruby",
+              currentVersion: {
+                name: "3.3.1"
+              },
+              # lastEOLVersion: nil,
+              previousVersions: []
             }
           )
         end
@@ -153,11 +153,13 @@ RSpec.describe Usual::Example2::Product do
         it do
           expect(perform).to contain_exactly(
             {
-              id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-              title: "iPhone 15 Pro",
-              price_cents: 999_00,
-              price_currency: "USD",
-              quantity: 5
+              id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+              name: "Ruby",
+              currentVersion: {
+                name: "3.3.1"
+              },
+              # lastEOLVersion: nil,
+              previousVersions: []
             }
           )
         end
@@ -173,12 +175,16 @@ RSpec.describe Usual::Example2::Product do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: 999_00,
-            price_currency: "USD",
-            quantity: 5
+          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            current: current_version
+          )
+        end
+
+        let(:current_version) do
+          Usual::Example3::Version.to_model(
+            name: "3.3.1"
           )
         end
 
@@ -187,12 +193,9 @@ RSpec.describe Usual::Example2::Product do
 
       context "when the data required for work is invalid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: "999.00",
-            price_currency: "USD",
-            quantity: 5
+          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: 123 # THIS
           )
         end
 
@@ -203,11 +206,15 @@ RSpec.describe Usual::Example2::Product do
     describe "hash" do
       let(:product) do
         {
-          id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-          title: "iPhone 15 Pro",
-          price_cents: 999_00,
-          price_currency: "USD",
-          quantity: 5
+          id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+          name: "Ruby",
+          current: current_version
+        }
+      end
+
+      let(:current_version) do
+        {
+          name: "3.3.1"
         }
       end
 
@@ -228,11 +235,8 @@ RSpec.describe Usual::Example2::Product do
 
           expect(perform).to(
             have_attributes(
-              id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-              title: "iPhone 15 Pro",
-              price_cents: 999_00,
-              price_currency: "USD",
-              quantity: 5
+              id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+              name: "Ruby"
             )
           )
         end
@@ -250,11 +254,8 @@ RSpec.describe Usual::Example2::Product do
           expect(perform).to(
             all(
               have_attributes(
-                id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-                title: "iPhone 15 Pro",
-                price_cents: 999_00,
-                price_currency: "USD",
-                quantity: 5
+                id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+                name: "Ruby"
               )
             )
           )
@@ -272,11 +273,11 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is valid" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: 999_00,
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            currentVersion: {
+              name: "3.3.1"
+            }
           }
         end
 
@@ -286,11 +287,8 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is invalid", skip: "Need to implement" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: "999.00",
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby"
           }
         end
 
@@ -302,11 +300,11 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is valid" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: 999_00,
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            currentVersion: {
+              name: "3.3.1"
+            }
           }.to_json
         end
 
@@ -316,11 +314,11 @@ RSpec.describe Usual::Example2::Product do
       context "when the data required for work is invalid", skip: "Need to implement" do
         let(:product) do
           {
-            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
-            title: "iPhone 15 Pro",
-            price_cents: "999.00",
-            price_currency: "USD",
-            quantity: 5
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            currentVersion: {
+              name: "3.3.1"
+            }
           }.to_json
         end
 
@@ -330,24 +328,23 @@ RSpec.describe Usual::Example2::Product do
   end
 
   describe "#describe" do
-    describe "Usual::Example2::Product" do
-      subject(:perform) { Usual::Example2::Product.describe } # rubocop:disable RSpec/DescribedClass
+    describe "Usual::Example3::Language" do
+      subject(:perform) { Usual::Example3::Language.describe } # rubocop:disable RSpec/DescribedClass
 
       it do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |              Usual::Example2::Product               |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute      | From    | To             | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id             | String  | id             | String  |
-              | title          | String  | title          | String  |
-              | price_cents    | Integer | price_cents    | Integer |
-              | price_currency | String  | price_currency | String  |
-              | quantity       | Integer | quantity       | Integer |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                Usual::Example3::Language                                 |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From   | To       | As                     | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String | id       | String                 |                          |
+              | name             | String | name     | String                 |                          |
+              | currentVersion   | Hash   | current  | [Datory::Result, Hash] | Usual::Example3::Version |
+              | previousVersions | Array  | previous | Array                  | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -356,24 +353,23 @@ RSpec.describe Usual::Example2::Product do
   end
 
   describe "#table" do
-    describe "Usual::Example2::Product" do
-      subject(:perform) { Usual::Example2::Product.table } # rubocop:disable RSpec/DescribedClass
+    describe "Usual::Example3::Language" do
+      subject(:perform) { Usual::Example3::Language.table } # rubocop:disable RSpec/DescribedClass
 
       it do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |              Usual::Example2::Product               |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute      | From    | To             | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id             | String  | id             | String  |
-              | title          | String  | title          | String  |
-              | price_cents    | Integer | price_cents    | Integer |
-              | price_currency | String  | price_currency | String  |
-              | quantity       | Integer | quantity       | Integer |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                Usual::Example3::Language                                 |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From   | To       | As                     | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String | id       | String                 |                          |
+              | name             | String | name     | String                 |                          |
+              | currentVersion   | Hash   | current  | [Datory::Result, Hash] | Usual::Example3::Version |
+              | previousVersions | Array  | previous | Array                  | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -382,8 +378,8 @@ RSpec.describe Usual::Example2::Product do
   end
 
   describe "#info" do
-    describe "Usual::Example2::Product" do
-      subject(:perform) { Usual::Example2::Product.info } # rubocop:disable RSpec/DescribedClass
+    describe "Usual::Example3::Language" do
+      subject(:perform) { Usual::Example3::Language.info } # rubocop:disable RSpec/DescribedClass
 
       it :aggregate_failures do
         expect(perform).to be_instance_of(Datory::Info::Result)
@@ -411,9 +407,9 @@ RSpec.describe Usual::Example2::Product do
                   include: nil
                 }
               },
-              title: {
+              name: {
                 from: {
-                  name: :title,
+                  name: :name,
                   type: String,
                   min: nil,
                   max: nil,
@@ -421,7 +417,7 @@ RSpec.describe Usual::Example2::Product do
                   format: nil
                 },
                 to: {
-                  name: :title,
+                  name: :name,
                   type: String,
                   required: true,
                   default: nil,
@@ -432,66 +428,67 @@ RSpec.describe Usual::Example2::Product do
                   include: nil
                 }
               },
-              price_cents: {
+              currentVersion: {
                 from: {
-                  name: :price_cents,
-                  type: Integer,
+                  name: :currentVersion,
+                  type: Hash,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil
                 },
                 to: {
-                  name: :price_cents,
-                  type: Integer,
+                  name: :current,
+                  type: [Datory::Result, Hash],
                   required: true,
                   default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil,
-                  include: nil
+                  include: Usual::Example3::Version
                 }
               },
-              price_currency: {
+              # lastEOLVersion: {
+              #   from: {
+              #     name: :lastEOLVersion,
+              #     type: Hash,
+              #     min: nil,
+              #     max: nil,
+              #     consists_of: false,
+              #     format: nil
+              #   },
+              #   to: {
+              #     name: :last_eol,
+              #     type: [Datory::Result, Hash],
+              #     required: true,
+              #     default: nil,
+              #     min: nil,
+              #     max: nil,
+              #     consists_of: false,
+              #     format: nil,
+              #     include: Usual::Example3::Version
+              #   }
+              # },
+              previousVersions: {
                 from: {
-                  name: :price_currency,
-                  type: String,
+                  name: :previousVersions,
+                  type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: false,
+                  consists_of: [Datory::Result, Hash],
                   format: nil
                 },
                 to: {
-                  name: :price_currency,
-                  type: String,
-                  required: true,
-                  default: nil,
-                  min: nil, max: nil,
-                  consists_of: false,
+                  name: :previous,
+                  type: Array,
+                  required: false,
+                  default: [],
+                  min: nil,
+                  max: nil,
+                  consists_of: [Datory::Result, Hash],
                   format: nil,
-                  include: nil
-                }
-              },
-              quantity: {
-                from: {
-                  name: :quantity,
-                  type: Integer,
-                  min: 1,
-                  max: 10,
-                  consists_of: false,
-                  format: nil
-                },
-                to: {
-                  name: :quantity,
-                  type: Integer,
-                  required: true,
-                  default: nil,
-                  min: 1,
-                  max: 10,
-                  consists_of: false,
-                  format: nil,
-                  include: nil
+                  include: Usual::Example3::Version
                 }
               }
             }

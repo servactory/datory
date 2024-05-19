@@ -23,7 +23,7 @@ module Datory
 
         ########################################################################
 
-        def one(name, include:, to: nil)
+        def one!(name, include:, to: nil)
           attribute(
             name,
             to: to.presence || name,
@@ -32,8 +32,21 @@ module Datory
             as: [Datory::Result, Hash]
           )
         end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `one!`
+        alias one one!
 
-        def many(name, include:, to: nil)
+        def one?(name, include:, to: nil)
+          attribute(
+            name,
+            to: to.presence || name,
+            from: [Hash, NilClass],
+            include: include,
+            as: [Datory::Result, Hash, NilClass],
+            required: false
+          )
+        end
+
+        def many!(name, include:, to: nil)
           attribute(
             name,
             to: to.presence || name,
@@ -41,6 +54,21 @@ module Datory
             consists_of: [Datory::Result, Hash],
             include: include,
             as: Array
+          )
+        end
+        # NOTE: This will most likely be marked as deprecated in the future in favor of `many!`
+        alias many many!
+
+        def many?(name, include:, to: nil)
+          attribute(
+            name,
+            to: to.presence || name,
+            from: Array,
+            consists_of: [Datory::Result, Hash],
+            include: include,
+            as: Array,
+            required: false,
+            default: []
           )
         end
 
