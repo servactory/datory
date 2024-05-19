@@ -122,7 +122,7 @@ module Datory
         def date!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Date, format: { from: :date })
-          string!(name, **options)
+          attribute(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `date!`
         alias date date!
@@ -136,7 +136,7 @@ module Datory
         def time!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: Time, format: { from: :time })
-          string!(name, **options)
+          attribute(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `time!`
         alias time time!
@@ -146,7 +146,7 @@ module Datory
         def datetime!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: DateTime, format: { from: :datetime })
-          string!(name, **options)
+          attribute(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `datetime!`
         alias datetime datetime!
