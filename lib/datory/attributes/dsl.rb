@@ -103,12 +103,21 @@ module Datory
         def duration!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
-          string!(name, **options)
+          attribute(name, **options)
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `duration!`
         alias duration duration!
 
-        # TODO: Need to implement an optional version for `duration`.
+        def duration?(name, **options)
+          options = options.slice(:to)
+          options = options.merge(
+            from: [String, NilClass],
+            as: [ActiveSupport::Duration, NilClass],
+            format: { from: :duration },
+            required: false
+          )
+          attribute(name, **options)
+        end
 
         def date!(name, **options)
           options = options.slice(:to)

@@ -11,6 +11,8 @@ module Usual
       money? :discount
 
       integer! :quantity, min: 1, max: 10
+
+      duration? :installment_duration
     end
   end
 end

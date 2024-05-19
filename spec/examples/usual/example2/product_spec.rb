@@ -141,7 +141,8 @@ RSpec.describe Usual::Example2::Product do
               price_currency: "USD",
               discount_cents: nil,
               discount_currency: nil,
-              quantity: 5
+              quantity: 5,
+              installment_duration: nil
             }
           )
         end
@@ -161,7 +162,8 @@ RSpec.describe Usual::Example2::Product do
               price_currency: "USD",
               discount_cents: nil,
               discount_currency: nil,
-              quantity: 5
+              quantity: 5,
+              installment_duration: nil
             }
           )
         end
@@ -341,19 +343,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                             Usual::Example2::Product                              |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute         | From                | To                | As                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id                | String              | id                | String              |
-              | title             | String              | title             | String              |
-              | price_cents       | Integer             | price_cents       | Integer             |
-              | price_currency    | String              | price_currency    | String              |
-              | discount_cents    | [Integer, NilClass] | discount_cents    | [Integer, NilClass] |
-              | discount_currency | [String, NilClass]  | discount_currency | [String, NilClass]  |
-              | quantity          | Integer             | quantity          | Integer             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                         |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute            | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                   | String              | id                   | String                              |
+              | title                | String              | title                | String                              |
+              | price_cents          | Integer             | price_cents          | Integer                             |
+              | price_currency       | String              | price_currency       | String                              |
+              | discount_cents       | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency    | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity             | Integer             | quantity             | Integer                             |
+              | installment_duration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -369,19 +372,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                             Usual::Example2::Product                              |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute         | From                | To                | As                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id                | String              | id                | String              |
-              | title             | String              | title             | String              |
-              | price_cents       | Integer             | price_cents       | Integer             |
-              | price_currency    | String              | price_currency    | String              |
-              | discount_cents    | [Integer, NilClass] | discount_cents    | [Integer, NilClass] |
-              | discount_currency | [String, NilClass]  | discount_currency | [String, NilClass]  |
-              | quantity          | Integer             | quantity          | Integer             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                         |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute            | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                   | String              | id                   | String                              |
+              | title                | String              | title                | String                              |
+              | price_cents          | Integer             | price_cents          | Integer                             |
+              | price_currency       | String              | price_currency       | String                              |
+              | discount_cents       | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency    | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity             | Integer             | quantity             | Integer                             |
+              | installment_duration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -543,6 +547,27 @@ RSpec.describe Usual::Example2::Product do
                   consists_of: false,
                   format: nil,
                   include: nil
+                }
+              },
+              installment_duration: {
+                from: {
+                  consists_of: false,
+                  format: :duration,
+                  max: nil,
+                  min: nil,
+                  name: :installment_duration,
+                  type: [String, NilClass]
+                },
+                to: {
+                  consists_of: false,
+                  default: nil,
+                  format: nil,
+                  include: nil,
+                  max: nil,
+                  min: nil,
+                  name: :installment_duration,
+                  required: false,
+                  type: [ActiveSupport::Duration, NilClass]
                 }
               }
             }
