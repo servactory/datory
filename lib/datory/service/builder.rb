@@ -65,7 +65,12 @@ module Datory
           value = inputs.public_send(deserialized_name)
 
           if value.present?
-            value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(attribute.to.type, ->(v) { v }).call(value)
+            type = attribute.to.type
+
+            # NOTE: For optional attributes.
+            type = type.excluding([NilClass]).first if type.is_a?(Array)
+
+            value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value)
           end
 
           outputs.public_send(:"#{deserialized_name}=", value)
