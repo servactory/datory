@@ -82,7 +82,11 @@ module Datory
         # NOTE: This will most likely be marked as deprecated in the future in favor of `uuid!`
         alias uuid uuid!
 
-        # TODO: Need to implement an optional version for `uuid`.
+        def uuid?(name, **options)
+          options = options.slice(:to)
+          options = options.merge(format: :uuid)
+          string?(name, **options)
+        end
 
         def money!(name, **options)
           options = options.slice(:to)
