@@ -15,16 +15,16 @@ RSpec.describe Usual::Example3::Language do
         it { expect(perform.serialize).to be_present }
 
         it :aggregate_failures do
-          expect { perform.update(id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
+          expect { perform.update(id: "b04b96fd-5c39-4677-98bb-0f82edcf7f14") }.to(
             change { perform.serialize.fetch(:id) }
               .from("73031620-be3b-4088-9a78-5589ff7e1f61")
-              .to("5baebc74-f680-4598-b077-7a5c13dd1543")
+              .to("b04b96fd-5c39-4677-98bb-0f82edcf7f14")
           )
 
-          expect { perform.update(id: "a88e0182-e0c9-466a-9816-7321699de97b") }.to(
+          expect { perform.update(id: "181dc995-e6da-43ee-b082-c9968cdcdd74") }.to(
             change { perform.serialize.fetch(:id) }
-              .from("5baebc74-f680-4598-b077-7a5c13dd1543")
-              .to("a88e0182-e0c9-466a-9816-7321699de97b")
+              .from("b04b96fd-5c39-4677-98bb-0f82edcf7f14")
+              .to("181dc995-e6da-43ee-b082-c9968cdcdd74")
           )
         end
       end
@@ -43,16 +43,16 @@ RSpec.describe Usual::Example3::Language do
         it { expect(perform.serialize).to be_present }
 
         it :aggregate_failures do
-          expect { perform.update_by(0, id: "5baebc74-f680-4598-b077-7a5c13dd1543") }.to(
+          expect { perform.update_by(0, id: "b04b96fd-5c39-4677-98bb-0f82edcf7f14") }.to(
             change { perform.serialize[0].fetch(:id) }
               .from("73031620-be3b-4088-9a78-5589ff7e1f61")
-              .to("5baebc74-f680-4598-b077-7a5c13dd1543")
+              .to("b04b96fd-5c39-4677-98bb-0f82edcf7f14")
           )
 
-          expect { perform.update_by(0, id: "a88e0182-e0c9-466a-9816-7321699de97b") }.to(
+          expect { perform.update_by(0, id: "181dc995-e6da-43ee-b082-c9968cdcdd74") }.to(
             change { perform.serialize[0].fetch(:id) }
-              .from("5baebc74-f680-4598-b077-7a5c13dd1543")
-              .to("a88e0182-e0c9-466a-9816-7321699de97b")
+              .from("b04b96fd-5c39-4677-98bb-0f82edcf7f14")
+              .to("181dc995-e6da-43ee-b082-c9968cdcdd74")
           )
         end
       end
