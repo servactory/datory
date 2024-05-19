@@ -7,6 +7,27 @@ module Usual
 
       string! :name
 
+      # TODO: Need to prepare this example:
+      # {
+      #   versions: {
+      #     current: {},
+      #     maintenance: {
+      #       normal: {
+      #         last: {},
+      #         all: []
+      #       },
+      #       security: {
+      #         last: {},
+      #         all: []
+      #       }
+      #     },
+      #     eol: {
+      #       last: {},
+      #       all: []
+      #     }
+      #   }
+      # }
+
       one! :currentVersion, to: :current, include: Version
       one? :lastEOLVersion, to: :last_eol, include: Version
 
