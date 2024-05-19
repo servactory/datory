@@ -68,7 +68,7 @@ module Datory
             type = attribute.to.type
 
             # NOTE: For optional attributes.
-            type = type.excluding([NilClass]).first if type.is_a?(Array)
+            type = (type - [NilClass]).first if type.is_a?(Array)
 
             value = TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value)
           end
