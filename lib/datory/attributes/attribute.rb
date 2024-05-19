@@ -79,6 +79,8 @@ module Datory
             if [Set, Array].include?(from.type)
               value.map { |item| to.include_class.deserialize(**item) }
             else
+              return nil if value.nil? # When `one` is optional and not passed
+
               to.include_class.deserialize(**value)
             end
           end)

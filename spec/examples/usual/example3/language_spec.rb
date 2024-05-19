@@ -138,7 +138,7 @@ RSpec.describe Usual::Example3::Language do
               currentVersion: {
                 name: "3.3.1"
               },
-              # lastEOLVersion: nil,
+              lastEOLVersion: nil,
               previousVersions: []
             }
           )
@@ -158,7 +158,7 @@ RSpec.describe Usual::Example3::Language do
               currentVersion: {
                 name: "3.3.1"
               },
-              # lastEOLVersion: nil,
+              lastEOLVersion: nil,
               previousVersions: []
             }
           )
@@ -335,16 +335,17 @@ RSpec.describe Usual::Example3::Language do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                Usual::Example3::Language                                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute        | From   | To       | As                     | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id               | String | id       | String                 |                          |
-              | name             | String | name     | String                 |                          |
-              | currentVersion   | Hash   | current  | [Datory::Result, Hash] | Usual::Example3::Version |
-              | previousVersions | Array  | previous | Array                  | Usual::Example3::Version |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                          Usual::Example3::Language                                           |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From             | To       | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String           | id       | String                           |                          |
+              | name             | String           | name     | String                           |                          |
+              | currentVersion   | Hash             | current  | [Datory::Result, Hash]           | Usual::Example3::Version |
+              | lastEOLVersion   | [Hash, NilClass] | last_eol | [Datory::Result, Hash, NilClass] | Usual::Example3::Version |
+              | previousVersions | Array            | previous | Array                            | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -360,16 +361,17 @@ RSpec.describe Usual::Example3::Language do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                Usual::Example3::Language                                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute        | From   | To       | As                     | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id               | String | id       | String                 |                          |
-              | name             | String | name     | String                 |                          |
-              | currentVersion   | Hash   | current  | [Datory::Result, Hash] | Usual::Example3::Version |
-              | previousVersions | Array  | previous | Array                  | Usual::Example3::Version |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                          Usual::Example3::Language                                           |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From             | To       | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String           | id       | String                           |                          |
+              | name             | String           | name     | String                           |                          |
+              | currentVersion   | Hash             | current  | [Datory::Result, Hash]           | Usual::Example3::Version |
+              | lastEOLVersion   | [Hash, NilClass] | last_eol | [Datory::Result, Hash, NilClass] | Usual::Example3::Version |
+              | previousVersions | Array            | previous | Array                            | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -449,27 +451,27 @@ RSpec.describe Usual::Example3::Language do
                   include: Usual::Example3::Version
                 }
               },
-              # lastEOLVersion: {
-              #   from: {
-              #     name: :lastEOLVersion,
-              #     type: Hash,
-              #     min: nil,
-              #     max: nil,
-              #     consists_of: false,
-              #     format: nil
-              #   },
-              #   to: {
-              #     name: :last_eol,
-              #     type: [Datory::Result, Hash],
-              #     required: true,
-              #     default: nil,
-              #     min: nil,
-              #     max: nil,
-              #     consists_of: false,
-              #     format: nil,
-              #     include: Usual::Example3::Version
-              #   }
-              # },
+              lastEOLVersion: {
+                from: {
+                  name: :lastEOLVersion,
+                  type: [Hash, NilClass],
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :last_eol,
+                  type: [Datory::Result, Hash, NilClass],
+                  required: false,
+                  default: nil,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: Usual::Example3::Version
+                }
+              },
               previousVersions: {
                 from: {
                   name: :previousVersions,

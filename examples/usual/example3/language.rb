@@ -8,7 +8,7 @@ module Usual
       string! :name
 
       one! :currentVersion, to: :current, include: Version
-      # one? :lastEOLVersion, to: :last_eol, include: Version
+      one? :lastEOLVersion, to: :last_eol, include: Version
 
       many? :previousVersions, to: :previous, include: Version
     end
