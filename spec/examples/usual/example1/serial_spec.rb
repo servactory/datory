@@ -116,7 +116,7 @@ RSpec.describe Usual::Example1::Serial do
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
             quantity: 324_000,
-            link_url: nil
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -210,7 +210,7 @@ RSpec.describe Usual::Example1::Serial do
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
             quantity: 324_000,
-            link_url: nil
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -424,7 +424,7 @@ RSpec.describe Usual::Example1::Serial do
           imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
             quantity: 324_000,
-            link_url: nil
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -518,7 +518,7 @@ RSpec.describe Usual::Example1::Serial do
           imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
             quantity: 324_000,
-            link_url: nil
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -664,7 +664,7 @@ RSpec.describe Usual::Example1::Serial do
               imdb: have_attributes(
                 value: 8.6,
                 quantity: 324_000,
-                link_url: nil
+                link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
           )
@@ -772,7 +772,7 @@ RSpec.describe Usual::Example1::Serial do
               imdb: have_attributes(
                 value: 8.6,
                 quantity: 324_000,
-                link_url: nil
+                link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
           )
