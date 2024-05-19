@@ -12,7 +12,7 @@ module Usual
 
       integer! :quantity, min: 1, max: 10
 
-      duration? :installment_duration
+      duration? :installmentDuration, to: :installment_duration
     end
   end
 end

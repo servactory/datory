@@ -142,7 +142,7 @@ RSpec.describe Usual::Example2::Product do
               discount_cents: nil,
               discount_currency: nil,
               quantity: 5,
-              installment_duration: nil
+              installmentDuration: nil
             }
           )
         end
@@ -163,7 +163,7 @@ RSpec.describe Usual::Example2::Product do
               discount_cents: nil,
               discount_currency: nil,
               quantity: 5,
-              installment_duration: nil
+              installmentDuration: nil
             }
           )
         end
@@ -343,20 +343,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                        Usual::Example2::Product                                         |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute            | From                | To                   | As                                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id                   | String              | id                   | String                              |
-              | title                | String              | title                | String                              |
-              | price_cents          | Integer             | price_cents          | Integer                             |
-              | price_currency       | String              | price_currency       | String                              |
-              | discount_cents       | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
-              | discount_currency    | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
-              | quantity             | Integer             | quantity             | Integer                             |
-              | installment_duration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute           | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                  | String              | id                   | String                              |
+              | title               | String              | title                | String                              |
+              | price_cents         | Integer             | price_cents          | Integer                             |
+              | price_currency      | String              | price_currency       | String                              |
+              | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency   | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity            | Integer             | quantity             | Integer                             |
+              | installmentDuration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -372,20 +372,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                        Usual::Example2::Product                                         |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute            | From                | To                   | As                                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id                   | String              | id                   | String                              |
-              | title                | String              | title                | String                              |
-              | price_cents          | Integer             | price_cents          | Integer                             |
-              | price_currency       | String              | price_currency       | String                              |
-              | discount_cents       | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
-              | discount_currency    | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
-              | quantity             | Integer             | quantity             | Integer                             |
-              | installment_duration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute           | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                  | String              | id                   | String                              |
+              | title               | String              | title                | String                              |
+              | price_cents         | Integer             | price_cents          | Integer                             |
+              | price_currency      | String              | price_currency       | String                              |
+              | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency   | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity            | Integer             | quantity             | Integer                             |
+              | installmentDuration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -549,13 +549,13 @@ RSpec.describe Usual::Example2::Product do
                   include: nil
                 }
               },
-              installment_duration: {
+              installmentDuration: {
                 from: {
                   consists_of: false,
                   format: :duration,
                   max: nil,
                   min: nil,
-                  name: :installment_duration,
+                  name: :installmentDuration,
                   type: [String, NilClass]
                 },
                 to: {
