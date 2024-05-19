@@ -136,7 +136,9 @@ RSpec.describe Usual::Example3::Language do
               id: "73031620-be3b-4088-9a78-5589ff7e1f61",
               name: "Ruby",
               currentVersion: {
-                name: "3.3.1"
+                name: "3.3.1",
+                releasedAt: nil,
+                endedAt: nil
               },
               lastEOLVersion: nil,
               previousVersions: []
@@ -156,7 +158,9 @@ RSpec.describe Usual::Example3::Language do
               id: "73031620-be3b-4088-9a78-5589ff7e1f61",
               name: "Ruby",
               currentVersion: {
-                name: "3.3.1"
+                name: "3.3.1",
+                releasedAt: nil,
+                endedAt: nil
               },
               lastEOLVersion: nil,
               previousVersions: []

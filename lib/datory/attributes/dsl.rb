@@ -133,7 +133,12 @@ module Datory
 
         def date?(name, **options)
           options = options.slice(:to)
-          options = options.merge(from: [String, NilClass], as: Date, format: { from: :date }, required: false)
+          options = options.merge(
+            from: [String, NilClass],
+            as: [Date, NilClass],
+            format: { from: :date },
+            required: false
+          )
           attribute(name, **options)
         end
 
