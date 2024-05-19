@@ -82,6 +82,8 @@ module Datory
         # NOTE: This will most likely be marked as deprecated in the future in favor of `uuid!`
         alias uuid uuid!
 
+        # TODO: Need to implement an optional version for `uuid`.
+
         def money!(name, **options)
           options = options.slice(:to)
 
@@ -91,6 +93,8 @@ module Datory
         # NOTE: This will most likely be marked as deprecated in the future in favor of `money!`
         alias money money!
 
+        # TODO: Need to implement an optional version for `money`.
+
         def duration!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: ActiveSupport::Duration, format: { from: :duration })
@@ -98,6 +102,8 @@ module Datory
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `duration!`
         alias duration duration!
+
+        # TODO: Need to implement an optional version for `duration`.
 
         def date!(name, **options)
           options = options.slice(:to)
@@ -122,6 +128,8 @@ module Datory
         # NOTE: This will most likely be marked as deprecated in the future in favor of `time!`
         alias time time!
 
+        # TODO: Need to implement an optional version for `time`.
+
         def datetime!(name, **options)
           options = options.slice(:to)
           options = options.merge(from: String, as: DateTime, format: { from: :datetime })
@@ -129,6 +137,8 @@ module Datory
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `datetime!`
         alias datetime datetime!
+
+        # TODO: Need to implement an optional version for `datetime`.
 
         ########################################################################
 
