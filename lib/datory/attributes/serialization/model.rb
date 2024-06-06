@@ -47,6 +47,14 @@ module Datory
           self
         end
 
+        def add(key, value)
+          self.class.send(:attr_accessor, key)
+
+          instance_variable_set(:"@#{key}", value)
+
+          self
+        end
+
         def parse(data) # rubocop:disable Metrics/MethodLength
           data.instance_variables.to_h do |key|
             value = data.instance_variable_get(key)

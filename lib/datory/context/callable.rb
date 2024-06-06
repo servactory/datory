@@ -67,7 +67,8 @@ module Datory
         context.send(
           :_serialize,
           model: model,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_setters: collection_of_setters
         )
       end
 
@@ -75,7 +76,8 @@ module Datory
         context.send(
           :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_getters: collection_of_getters
         )
       end
 
