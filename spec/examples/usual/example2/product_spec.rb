@@ -137,7 +137,7 @@ RSpec.describe Usual::Example2::Product do
             {
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
-              formatted_title: "The New iPhone 15 Pro (from setter)",
+              formattedTitle: "The New iPhone 15 Pro (from setter)",
               price_cents: 999_00,
               price_currency: "USD",
               discount_cents: nil,
@@ -159,7 +159,7 @@ RSpec.describe Usual::Example2::Product do
             {
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
-              formatted_title: "The New iPhone 15 Pro (from setter)",
+              formattedTitle: "The New iPhone 15 Pro (from setter)",
               price_cents: 999_00,
               price_currency: "USD",
               discount_cents: nil,
@@ -354,7 +354,7 @@ RSpec.describe Usual::Example2::Product do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id                  | String              | id                   | String                              |
               | title               | String              | title                | String                              |
-              | formatted_title     | String              | formatted_title      | String                              |
+              | formattedTitle      | String              | formatted_title      | String                              |
               | price_cents         | Integer             | price_cents          | Integer                             |
               | price_currency      | String              | price_currency       | String                              |
               | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
@@ -384,7 +384,7 @@ RSpec.describe Usual::Example2::Product do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id                  | String              | id                   | String                              |
               | title               | String              | title                | String                              |
-              | formatted_title     | String              | formatted_title      | String                              |
+              | formattedTitle      | String              | formatted_title      | String                              |
               | price_cents         | Integer             | price_cents          | Integer                             |
               | price_currency      | String              | price_currency       | String                              |
               | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
@@ -450,9 +450,9 @@ RSpec.describe Usual::Example2::Product do
                   include: nil
                 }
               },
-              formatted_title: {
+              formattedTitle: {
                 from: {
-                  name: :formatted_title,
+                  name: :formattedTitle,
                   type: String,
                   min: nil,
                   max: nil,

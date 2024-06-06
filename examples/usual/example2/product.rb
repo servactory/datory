@@ -6,7 +6,7 @@ module Usual
       uuid! :id
 
       string! :title
-      string! :formatted_title
+      string! :formattedTitle, to: :formatted_title
 
       money! :price
       money? :discount
@@ -15,7 +15,7 @@ module Usual
 
       duration? :installmentDuration, to: :installment_duration
 
-      getter :formatted_title do |attributes:|
+      getter :formattedTitle do |attributes:|
         "The New #{attributes.fetch(:title)} (from getter)"
       end
 
