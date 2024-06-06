@@ -5,7 +5,7 @@ module Datory
     module Workspace
       private
 
-      def serialize(model:, collection_of_attributes:)
+      def serialize(model:, collection_of_attributes:, **)
         super
 
         return nil if model.nil? # NOTE: When `one` is optional and not passed
@@ -18,7 +18,7 @@ module Datory
         )
       end
 
-      def deserialize(incoming_attributes:, collection_of_attributes:)
+      def deserialize(incoming_attributes:, collection_of_attributes:, **)
         super
 
         Deserialization::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
