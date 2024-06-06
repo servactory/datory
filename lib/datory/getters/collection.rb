@@ -9,10 +9,6 @@ module Datory
       def initialize(collection = Set.new)
         @collection = collection
       end
-
-      # def find_by(name:)
-      #   find { |getter| getter.name == name }
-      # end
     end
   end
 end
