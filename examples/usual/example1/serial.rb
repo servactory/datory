@@ -3,20 +3,20 @@
 module Usual
   module Example1
     class Serial < Datory::Base
-      uuid :id
+      uuid! :id
 
-      string :status
-      string :title
+      string! :status
+      string! :title
 
-      one :poster, include: Image
+      one! :poster, include: Image
 
-      one :ratings, include: Ratings
+      one! :ratings, include: Ratings
 
-      many :countries, include: Country
-      many :genres, include: Genre
-      many :seasons, include: Season
+      many! :countries, include: Country
+      many! :genres, include: Genre
+      many! :seasons, include: Season
 
-      date :premieredOn, to: :premiered_on
+      date! :premieredOn, to: :premiered_on
     end
   end
 end

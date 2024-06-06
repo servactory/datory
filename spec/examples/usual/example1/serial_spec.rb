@@ -105,7 +105,8 @@ RSpec.describe Usual::Example1::Serial do
           Usual::Example1::Season.to_model(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           )
         ]
       end
@@ -114,7 +115,8 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.to_model(
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -197,7 +199,8 @@ RSpec.describe Usual::Example1::Serial do
           {
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           }
         ]
       end
@@ -206,7 +209,8 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.to_model(
           imdb: Usual::Example1::Ratings.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -290,13 +294,15 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
-                  premieredOn: "2008-09-03"
+                  premieredOn: "2008-09-03",
+                  endedOn: "2008-11-26"
                 }
               ],
               ratings: {
                 imdb: {
                   value: 8.6,
-                  quantity: 324_000
+                  quantity: 324_000,
+                  linkUrl: nil
                 }
               },
               premieredOn: "2008-09-03"
@@ -344,13 +350,15 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
-                  premieredOn: "2008-09-03"
+                  premieredOn: "2008-09-03",
+                  endedOn: "2008-11-26"
                 }
               ],
               ratings: {
                 imdb: {
                   value: 8.6,
-                  quantity: 324_000
+                  quantity: 324_000,
+                  linkUrl: nil
                 }
               },
               premieredOn: "2008-09-03"
@@ -405,16 +413,18 @@ RSpec.describe Usual::Example1::Serial do
           Usual::Example1::Season.to_model(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           )
         ]
       end
 
       let(:ratings) do
         Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -497,16 +507,18 @@ RSpec.describe Usual::Example1::Serial do
           {
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
-            premiered_on: Date.new(2008, 9, 3)
+            premiered_on: Date.new(2008, 9, 3),
+            ended_on: Date.new(2008, 11, 26)
           }
         ]
       end
 
       let(:ratings) do
         Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+          imdb: Usual::Example1::Rating.to_model(
             value: 8.6,
-            quantity: 324_000
+            quantity: 324_000,
+            link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
       end
@@ -637,7 +649,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               id: "27df8a44-556f-4e08-9984-4aa663b78f98",
               number: 1,
-              premiered_on: Date.new(2008, 9, 3)
+              premiered_on: Date.new(2008, 9, 3),
+              ended_on: Date.new(2008, 11, 26)
             )
           )
         end
@@ -650,7 +663,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
           )
@@ -743,7 +757,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               id: "27df8a44-556f-4e08-9984-4aa663b78f98",
               number: 1,
-              premiered_on: Date.new(2008, 9, 3)
+              premiered_on: Date.new(2008, 9, 3),
+              ended_on: Date.new(2008, 11, 26)
             )
           )
         end
@@ -756,7 +771,8 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
           )
@@ -805,13 +821,15 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: "2008-09-03"
@@ -855,13 +873,15 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)
@@ -907,13 +927,15 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: "2008-09-03"
@@ -957,13 +979,15 @@ RSpec.describe Usual::Example1::Serial do
               {
                 id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                 number: 1,
-                premieredOn: "2008-09-03"
+                premieredOn: "2008-09-03",
+                endedOn: "2008-11-26"
               }
             ],
             ratings: {
               imdb: {
                 value: 8.6,
-                quantity: 324_000
+                quantity: 324_000,
+                linkUrl: nil
               }
             },
             premieredOn: DateTime.new(2023, 4, 14, 15, 16, 17)
@@ -1074,15 +1098,16 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |            Usual::Example1::Season             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From    | To           | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String  | id           | String  |
-              | number      | Integer | number       | Integer |
-              | premieredOn | String  | premiered_on | Date    |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                      Usual::Example1::Season                       |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From               | To           | As               |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String             | id           | String           |
+              | number      | Integer            | number       | Integer          |
+              | premieredOn | String             | premiered_on | Date             |
+              | endedOn     | [String, NilClass] | ended_on     | [Date, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1189,15 +1214,16 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |            Usual::Example1::Season             |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From    | To           | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String  | id           | String  |
-              | number      | Integer | number       | Integer |
-              | premieredOn | String  | premiered_on | Date    |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                      Usual::Example1::Season                       |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From               | To           | As               |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String             | id           | String           |
+              | number      | Integer            | number       | Integer          |
+              | premieredOn | String             | premiered_on | Date             |
+              | endedOn     | [String, NilClass] | ended_on     | [Date, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1226,11 +1252,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :id,
                   type: String,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: :uuid,
-                  required: true,
                   include: nil
                 }
               },
@@ -1246,11 +1273,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :status,
                   type: String,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil,
-                  required: true,
                   include: nil
                 }
               },
@@ -1266,11 +1294,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :title,
                   type: String,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil,
-                  required: true,
                   include: nil
                 }
               },
@@ -1286,11 +1315,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :poster,
                   type: [Datory::Result, Hash],
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil,
-                  required: true,
                   include: Usual::Example1::Image
                 }
               },
@@ -1304,14 +1334,15 @@ RSpec.describe Usual::Example1::Serial do
                   type: Hash
                 },
                 to: {
+                  name: :ratings,
+                  type: [Datory::Result, Hash],
+                  required: true,
+                  default: nil,
                   consists_of: false,
                   format: nil,
                   include: Usual::Example1::Ratings,
                   max: nil,
-                  min: nil,
-                  name: :ratings,
-                  required: true,
-                  type: [Datory::Result, Hash]
+                  min: nil
                 }
               },
               countries: {
@@ -1326,11 +1357,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :countries,
                   type: Array,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: [Datory::Result, Hash],
                   format: nil,
-                  required: true,
                   include: Usual::Example1::Country
                 }
               },
@@ -1346,11 +1378,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :genres,
                   type: Array,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: [Datory::Result, Hash],
                   format: nil,
-                  required: true,
                   include: Usual::Example1::Genre
                 }
               },
@@ -1366,11 +1399,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :seasons,
                   type: Array,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: [Datory::Result, Hash],
                   format: nil,
-                  required: true,
                   include: Usual::Example1::Season
                 }
               },
@@ -1386,11 +1420,12 @@ RSpec.describe Usual::Example1::Serial do
                 to: {
                   name: :premiered_on,
                   type: Date,
+                  required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
                   format: nil,
-                  required: true,
                   include: nil
                 }
               }

@@ -139,7 +139,10 @@ RSpec.describe Usual::Example2::Product do
               title: "iPhone 15 Pro",
               price_cents: 999_00,
               price_currency: "USD",
-              quantity: 5
+              discount_cents: nil,
+              discount_currency: nil,
+              quantity: 5,
+              installmentDuration: nil
             }
           )
         end
@@ -157,7 +160,10 @@ RSpec.describe Usual::Example2::Product do
               title: "iPhone 15 Pro",
               price_cents: 999_00,
               price_currency: "USD",
-              quantity: 5
+              discount_cents: nil,
+              discount_currency: nil,
+              quantity: 5,
+              installmentDuration: nil
             }
           )
         end
@@ -337,17 +343,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |              Usual::Example2::Product               |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute      | From    | To             | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id             | String  | id             | String  |
-              | title          | String  | title          | String  |
-              | price_cents    | Integer | price_cents    | Integer |
-              | price_currency | String  | price_currency | String  |
-              | quantity       | Integer | quantity       | Integer |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute           | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                  | String              | id                   | String                              |
+              | title               | String              | title                | String                              |
+              | price_cents         | Integer             | price_cents          | Integer                             |
+              | price_currency      | String              | price_currency       | String                              |
+              | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency   | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity            | Integer             | quantity             | Integer                             |
+              | installmentDuration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -363,17 +372,20 @@ RSpec.describe Usual::Example2::Product do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |              Usual::Example2::Product               |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute      | From    | To             | As      |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id             | String  | id             | String  |
-              | title          | String  | title          | String  |
-              | price_cents    | Integer | price_cents    | Integer |
-              | price_currency | String  | price_currency | String  |
-              | quantity       | Integer | quantity       | Integer |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                        Usual::Example2::Product                                        |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute           | From                | To                   | As                                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id                  | String              | id                   | String                              |
+              | title               | String              | title                | String                              |
+              | price_cents         | Integer             | price_cents          | Integer                             |
+              | price_currency      | String              | price_currency       | String                              |
+              | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
+              | discount_currency   | [String, NilClass]  | discount_currency    | [String, NilClass]                  |
+              | quantity            | Integer             | quantity             | Integer                             |
+              | installmentDuration | [String, NilClass]  | installment_duration | [ActiveSupport::Duration, NilClass] |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -403,6 +415,7 @@ RSpec.describe Usual::Example2::Product do
                   name: :id,
                   type: String,
                   required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -423,6 +436,7 @@ RSpec.describe Usual::Example2::Product do
                   name: :title,
                   type: String,
                   required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -443,6 +457,7 @@ RSpec.describe Usual::Example2::Product do
                   name: :price_cents,
                   type: Integer,
                   required: true,
+                  default: nil,
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -463,7 +478,51 @@ RSpec.describe Usual::Example2::Product do
                   name: :price_currency,
                   type: String,
                   required: true,
-                  min: nil, max: nil,
+                  default: nil,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
+              },
+              discount_cents: {
+                from: {
+                  name: :discount_cents,
+                  type: [Integer, NilClass],
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :discount_cents,
+                  type: [Integer, NilClass],
+                  required: false,
+                  default: nil,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
+              },
+              discount_currency: {
+                from: {
+                  name: :discount_currency,
+                  type: [String, NilClass],
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :discount_currency,
+                  type: [String, NilClass],
+                  required: false,
+                  default: nil,
+                  min: nil,
+                  max: nil,
                   consists_of: false,
                   format: nil,
                   include: nil
@@ -482,11 +541,33 @@ RSpec.describe Usual::Example2::Product do
                   name: :quantity,
                   type: Integer,
                   required: true,
+                  default: nil,
                   min: 1,
                   max: 10,
                   consists_of: false,
                   format: nil,
                   include: nil
+                }
+              },
+              installmentDuration: {
+                from: {
+                  consists_of: false,
+                  format: :duration,
+                  max: nil,
+                  min: nil,
+                  name: :installmentDuration,
+                  type: [String, NilClass]
+                },
+                to: {
+                  consists_of: false,
+                  default: nil,
+                  format: nil,
+                  include: nil,
+                  max: nil,
+                  min: nil,
+                  name: :installment_duration,
+                  required: false,
+                  type: [ActiveSupport::Duration, NilClass]
                 }
               }
             }

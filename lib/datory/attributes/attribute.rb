@@ -5,7 +5,7 @@ module Datory
     class Attribute
       attr_reader :from, :to
 
-      def initialize(name, **options) # rubocop:disable Metrics/MethodLength
+      def initialize(name, **options) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         @from = Options::From.new(
           name: name,
           type: options.fetch(:from),
@@ -20,6 +20,7 @@ module Datory
           type: options.fetch(:as, @from.type),
           # TODO: It is necessary to implement NilClass support for optional
           required: options.fetch(:required, true),
+          default: options.fetch(:default, nil),
           consists_of: @from.consists_of,
           min: @from.min,
           max: @from.max,
@@ -30,11 +31,12 @@ module Datory
 
       ##########################################################################
 
-      def input_serialization_options # rubocop:disable Metrics/AbcSize
+      def input_serialization_options # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
         hash = {
           as: to.name,
           type: to.type,
           required: to.required,
+          default: to.default,
           consists_of: to.consists_of
         }
 
@@ -64,11 +66,12 @@ module Datory
 
       ##########################################################################
 
-      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def input_deserialization_options # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         hash = {
           as: to.name,
           type: from.type,
           required: to.required,
+          default: to.default,
           consists_of: from.consists_of,
           prepare: (lambda do |value:|
             return value unless to.include_class.present?
@@ -76,6 +79,8 @@ module Datory
             if [Set, Array].include?(from.type)
               value.map { |item| to.include_class.deserialize(**item) }
             else
+              return nil if value.nil? # NOTE: When `one` is optional and not passed
+
               to.include_class.deserialize(**value)
             end
           end)

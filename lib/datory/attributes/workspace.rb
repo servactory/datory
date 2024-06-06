@@ -8,6 +8,8 @@ module Datory
       def serialize(model:, collection_of_attributes:)
         super
 
+        return nil if model.nil? # NOTE: When `one` is optional and not passed
+
         model = Serialization::ServiceBuilder.build!(self, model, collection_of_attributes)
 
         Serialization::Serializator.serialize(
