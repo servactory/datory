@@ -53,9 +53,9 @@ module Datory
 
             value =
               if value.is_a?(Set) || value.is_a?(Array)
-                value.map { |item| parse(item) }
+                value.map { |item| to_hash(item) }
               elsif value.is_a?(Datory::Attributes::Serialization::Model)
-                parse(value)
+                to_hash(value)
               else
                 value
               end
