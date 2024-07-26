@@ -3,6 +3,40 @@
 module Datory
   module Context
     module Workspace
+      def to_h(from = instance_variables)
+        from.to_h do |name|
+          value = instance_variable_get(name)
+
+          new_value = if value.is_a?(Set) || value.is_a?(Array)
+                        value.map(&:to_h)
+                      elsif value.is_a?(Datory::Base)
+                        value.to_h
+                      else
+                        value
+                      end
+
+          [name.to_s.sub(/^@/, "").to_sym, new_value]
+        end
+      end
+
+      def merge!(attributes)
+        attributes.each do |key, value|
+          instance_variable_set("@#{key}", value)
+          self.class.attr_reader(key)
+        end
+
+        self
+      end
+      alias merge merge!
+
+      def keys
+        instance_variables.map { |instance_variable| instance_variable.to_s.sub(/^@/, "").to_sym }
+      end
+
+      def delete(key)
+        remove_instance_variable(:"@#{key}")
+      end
+
       def _serialize(model:, collection_of_attributes:)
         serialize(
           model: model,
@@ -17,9 +51,10 @@ module Datory
         )
       end
 
-      def _to_model(attributes:)
+      def _to_model(attributes:, collection_of_attributes:)
         to_model(
-          attributes: attributes
+          attributes: attributes,
+          collection_of_attributes: collection_of_attributes
         )
       end
 
@@ -33,8 +68,9 @@ module Datory
         @collection_of_attributes = collection_of_attributes
       end
 
-      def to_model(attributes:)
-        @attributes = attributes
+      def to_model(**)
+        # @attributes = attributes
+        # @collection_of_attributes = collection_of_attributes
       end
     end
   end

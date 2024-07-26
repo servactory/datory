@@ -27,9 +27,9 @@ module Datory
           attribute(
             name,
             to: to.presence || name,
-            from: Hash,
+            from: [include, Hash],
             include: include,
-            as: [Datory::Result, Hash]
+            as: [include, Datory::Result, Hash]
           )
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `one!`
@@ -39,9 +39,9 @@ module Datory
           attribute(
             name,
             to: to.presence || name,
-            from: [Hash, NilClass],
+            from: [include, Hash, NilClass],
             include: include,
-            as: [Datory::Result, Hash, NilClass],
+            as: [include, Hash, NilClass],
             required: false
           )
         end
@@ -51,7 +51,7 @@ module Datory
             name,
             to: to.presence || name,
             from: Array,
-            consists_of: [Datory::Result, Hash],
+            consists_of: [include, Datory::Result, Hash],
             include: include,
             as: Array
           )
@@ -64,7 +64,7 @@ module Datory
             name,
             to: to.presence || name,
             from: Array,
-            consists_of: [Datory::Result, Hash],
+            consists_of: [include, Hash],
             include: include,
             as: Array,
             required: false,

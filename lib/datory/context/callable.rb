@@ -82,7 +82,8 @@ module Datory
       def _to_model(context, **attributes)
         context.send(
           :_to_model,
-          attributes: attributes
+          attributes: attributes,
+          collection_of_attributes: collection_of_attributes
         )
       end
     end
