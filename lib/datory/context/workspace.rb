@@ -5,22 +5,6 @@ module Datory
     module Workspace
       private
 
-      def to_hash(from = instance_variables)
-        from.to_h do |name|
-          value = instance_variable_get(name)
-
-          new_value = if value.is_a?(Set) || value.is_a?(Array)
-                        value.map { |nested_value| nested_value.send(:to_hash) }
-                      elsif value.is_a?(Datory::Base)
-                        value.send(:to_hash)
-                      else
-                        value
-                      end
-
-          [name.to_s.sub(/^@/, "").to_sym, new_value]
-        end
-      end
-
       def merge!(attributes)
         attributes.each do |key, value|
           instance_variable_set(:"@#{key}", value)
