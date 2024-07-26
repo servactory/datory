@@ -3,17 +3,19 @@
 module Datory
   module Context
     module Workspace
-      def _serialize(model:, collection_of_attributes:)
+      def _serialize(model:, collection_of_attributes:, collection_of_setters:)
         serialize(
           model: model,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_setters: collection_of_setters
         )
       end
 
-      def _deserialize(incoming_attributes:, collection_of_attributes:)
+      def _deserialize(incoming_attributes:, collection_of_attributes:, collection_of_getters:)
         deserialize(
           incoming_attributes: incoming_attributes,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_getters: collection_of_getters
         )
       end
 
@@ -23,14 +25,16 @@ module Datory
         )
       end
 
-      def serialize(model:, collection_of_attributes:, **)
+      def serialize(model:, collection_of_attributes:, collection_of_setters:, **)
         @model = model
         @collection_of_attributes = collection_of_attributes
+        @collection_of_setters = collection_of_setters
       end
 
-      def deserialize(incoming_attributes:, collection_of_attributes:, **)
+      def deserialize(incoming_attributes:, collection_of_attributes:, collection_of_getters:, **)
         @incoming_attributes = incoming_attributes
         @collection_of_attributes = collection_of_attributes
+        @collection_of_getters = collection_of_getters
       end
 
       def to_model(attributes:)
