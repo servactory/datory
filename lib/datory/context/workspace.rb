@@ -70,10 +70,7 @@ module Datory
         @collection_of_attributes = collection_of_attributes
       end
 
-      def to_model(**)
-        # @attributes = attributes
-        # @collection_of_attributes = collection_of_attributes
-      end
+      def to_model(**); end
     end
   end
 end
