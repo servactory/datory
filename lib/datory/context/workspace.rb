@@ -19,10 +19,6 @@ module Datory
         instance_variables.map { |instance_variable| instance_variable.to_s.sub(/^@/, "").to_sym }
       end
 
-      def delete(key)
-        remove_instance_variable(:"@#{key}")
-      end
-
       def _serialize(model:, collection_of_attributes:)
         serialize(
           model: model,
