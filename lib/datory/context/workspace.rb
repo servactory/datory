@@ -3,14 +3,14 @@
 module Datory
   module Context
     module Workspace
-      def to_h(from = instance_variables)
+      def to_hash(from = instance_variables)
         from.to_h do |name|
           value = instance_variable_get(name)
 
           new_value = if value.is_a?(Set) || value.is_a?(Array)
-                        value.map(&:to_h)
+                        value.map(&:to_hash)
                       elsif value.is_a?(Datory::Base)
-                        value.to_h
+                        value.to_hash
                       else
                         value
                       end
