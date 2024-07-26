@@ -19,8 +19,7 @@ module Datory
         def build!
           ServiceFactory.create(@context.class, @collection_of_attributes)
 
-          attributes = Datory::Attributes::Serialization::Model.to_hash(@model) # FIXME
-          attributes = attributes.send(:to_hash) # FIXME
+          attributes = Datory::Attributes::Serialization::Model.to_hash(@model)
 
           unnecessary_attributes = attributes.keys.difference(@collection_of_attributes.internal_names)
 
