@@ -44,15 +44,9 @@ module Datory
         )
       end
 
-      def serialize(model:, collection_of_attributes:, **)
-        @model = model
-        @collection_of_attributes = collection_of_attributes
-      end
+      def serialize(**); end
 
-      def deserialize(incoming_attributes:, collection_of_attributes:, **)
-        @incoming_attributes = incoming_attributes
-        @collection_of_attributes = collection_of_attributes
-      end
+      def deserialize(**); end
 
       def to_model(**); end
     end
