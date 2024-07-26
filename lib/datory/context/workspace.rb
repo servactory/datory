@@ -3,6 +3,8 @@
 module Datory
   module Context
     module Workspace
+      private
+
       def to_hash(from = instance_variables)
         from.to_h do |name|
           value = instance_variable_get(name)
