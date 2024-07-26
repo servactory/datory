@@ -10,9 +10,9 @@ module Datory
           value = instance_variable_get(name)
 
           new_value = if value.is_a?(Set) || value.is_a?(Array)
-                        value.map(&:to_hash)
+                        value.map { |nested_value| nested_value.send(:to_hash) }
                       elsif value.is_a?(Datory::Base)
-                        value.to_hash
+                        value.send(:to_hash)
                       else
                         value
                       end
