@@ -23,7 +23,7 @@ module Datory
 
       def merge!(attributes)
         attributes.each do |key, value|
-          instance_variable_set("@#{key}", value)
+          instance_variable_set(:"@#{key}", value)
           self.class.attr_reader(key)
         end
 
