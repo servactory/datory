@@ -53,31 +53,17 @@ module Datory
         raise Datory::Exceptions::DeserializationError.new(message: message, meta: { original_exception: e })
       end
 
-      def new(_datory_to_model: true, **attributes)
+      def new(_datory_to_model: true, **attributes) # rubocop:disable Lint/UnderscorePrefixedVariableName
         context = super()
 
         return context unless _datory_to_model
 
         model_type = :serialization
 
-        puts
-        puts context.class.inspect
-        puts defined?(@@_datory_model_type).inspect
-        puts @@_datory_model_type.inspect if defined?(@@_datory_model_type)
-        puts @@_datory_model_type.fetch(context.class.name, :serialization).inspect if defined?(@@_datory_model_type)
-
         if defined?(@@_datory_model_type) && @@_datory_model_type[context.class.name].present?
           model_type = :deserialization if @@_datory_model_type.fetch(context.class.name, :serialization) == :deserialization
           @@_datory_model_type[context.class.name] = nil
         end
-
-        puts model_type.inspect
-        puts
-
-        # model_type = class_variable_defined?(:@@_datory_model_type) ? @@_datory_model_type : :serialization
-
-        # remove_instance_variable(:@_datory_model_type) if instance_variable_defined?(:@_datory_model_type)
-        # remove_class_variable(:@@_datory_model_type) if class_variable_defined?(:@@_datory_model_type)
 
         _to_model(context, model_type: model_type, **attributes)
       end

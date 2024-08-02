@@ -19,12 +19,6 @@ module Datory
           attribute_name = @model_type == :serialization ? attribute.to.name : attribute.from.name
           attribute_value = @attributes.fetch(attribute_name, nil)
 
-          # puts
-          # puts @context.class.inspect
-          # puts @model_type.inspect
-          # puts attribute_name.inspect
-          # puts
-
           if attribute_value.is_a?(Hash)
             # TODO
           else
