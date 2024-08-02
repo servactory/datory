@@ -41,13 +41,15 @@ module Datory
         #     assign_attribute_for(@context, name: attribute_name, value: attribute_value)
         #   end
         # end
+
+        @context
       end
 
       private
 
       def assign_attribute_for(context, name:, value:)
         context.instance_variable_set(:"@#{name}", value)
-        context.class.attr_reader(name)
+        context.class.attr_accessor(name)
       end
     end
   end
