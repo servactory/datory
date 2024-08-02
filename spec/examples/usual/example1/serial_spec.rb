@@ -786,6 +786,100 @@ RSpec.describe Usual::Example1::Serial do
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
+    describe "objects" do
+      let(:poster) do
+        Usual::Example1::Image[:deserialization].new(
+          url: "...",
+          default: true
+        )
+      end
+
+      let(:countries) do
+        [
+          Usual::Example1::Country[:deserialization].new(
+            name: "United States",
+            iso2: "us" # rubocop:disable Naming/VariableNumber
+          )
+        ]
+      end
+
+      let(:genres) do
+        [
+          Usual::Example1::Genre[:deserialization].new(
+            name: "Crime",
+            code: "crime"
+          ),
+          Usual::Example1::Genre[:deserialization].new(
+            name: "Drama",
+            code: "drama"
+          ),
+          Usual::Example1::Genre[:deserialization].new(
+            name: "Thriller",
+            code: "thriller"
+          )
+        ]
+      end
+
+      let(:seasons) do
+        [
+          Usual::Example1::Season[:deserialization].new(
+            id: "27df8a44-556f-4e08-9984-4aa663b78f98",
+            number: 1,
+            premieredOn: "2008-09-03", # THIS
+            endedOn: "2008-11-26"
+          )
+        ]
+      end
+
+      let(:ratings) do
+        Usual::Example1::Ratings[:deserialization].new(
+          imdb: Usual::Example1::Rating[:deserialization].new(
+            value: 8.6,
+            quantity: 324_000,
+            linkUrl: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
+          )
+        )
+      end
+
+      context "when the data required for work is valid" do
+        let(:serial) do
+          Usual::Example1::Serial[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            title: "Sons of Anarchy",
+            status: "ended",
+            poster: poster,
+            countries: countries,
+            genres: genres,
+            seasons: seasons,
+            ratings: ratings,
+            unusedAttribute: "NOTE: This attribute is redundant. It tests success and ignore.",
+            premieredOn: "2008-09-03" # THIS
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:serial) do
+          Usual::Example1::Serial[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            title: "Sons of Anarchy",
+            status: "ended",
+            poster: poster,
+            countries: countries,
+            genres: genres,
+            seasons: seasons,
+            ratings: ratings,
+            unusedAttribute: "NOTE: This attribute is redundant. It tests success and ignore.",
+            premieredOn: Date.new(2008, 9, 3) # THIS
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
+    end
+
     describe "hash" do
       context "when the data required for work is valid" do
         let(:serial) do

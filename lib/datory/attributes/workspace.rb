@@ -24,10 +24,10 @@ module Datory
         Deserialization::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
       end
 
-      def to_model(attributes:, collection_of_attributes:)
+      def to_model(model_type:, attributes:, collection_of_attributes:)
         super
 
-        Model.build!(self, attributes, collection_of_attributes)
+        Model.build!(self, model_type, attributes, collection_of_attributes)
 
         self
       end

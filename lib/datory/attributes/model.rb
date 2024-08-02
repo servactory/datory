@@ -7,16 +7,23 @@ module Datory
         new(...).build!
       end
 
-      def initialize(context, attributes, collection_of_attributes)
+      def initialize(context, model_type, attributes, collection_of_attributes)
         @context = context
+        @model_type = model_type
         @attributes = attributes
         @collection_of_attributes = collection_of_attributes
       end
 
       def build!
         @collection_of_attributes.each do |attribute|
-          attribute_name = attribute.to.name
+          attribute_name = @model_type == :serialization ? attribute.to.name : attribute.from.name
           attribute_value = @attributes.fetch(attribute_name, nil)
+
+          # puts
+          # puts @context.class.inspect
+          # puts @model_type.inspect
+          # puts attribute_name.inspect
+          # puts
 
           if attribute_value.is_a?(Hash)
             # TODO
@@ -48,6 +55,8 @@ module Datory
       private
 
       def assign_attribute_for(context, name:, value:)
+        return if context.instance_variable_defined?(:"@#{name}")
+
         context.instance_variable_set(:"@#{name}", value)
         context.class.attr_accessor(name)
       end

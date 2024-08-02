@@ -33,8 +33,9 @@ module Datory
         )
       end
 
-      def _to_model(attributes:, collection_of_attributes:)
+      def _to_model(model_type:, attributes:, collection_of_attributes:)
         to_model(
+          model_type: model_type,
           attributes: attributes,
           collection_of_attributes: collection_of_attributes
         )

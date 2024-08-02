@@ -241,6 +241,30 @@ RSpec.describe Usual::Example4::Comment do
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
+    describe "objects" do
+      context "when the data required for work is valid" do
+        let(:comment) do
+          Usual::Example4::Comment[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
+            content: "Hello. This is my first comment here."
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:comment) do
+          Usual::Example4::Comment[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
+            content: 123 # THIS
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
+    end
+
     describe "hash" do
       context "when the data required for work is valid" do
         let(:comment) do

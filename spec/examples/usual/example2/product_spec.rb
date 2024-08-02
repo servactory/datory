@@ -274,6 +274,36 @@ RSpec.describe Usual::Example2::Product do
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
     end
 
+    describe "objects" do
+      context "when the data required for work is valid" do
+        let(:product) do
+          Usual::Example2::Product[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: 999_00,
+            price_currency: "USD",
+            quantity: 5
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:product) do
+          Usual::Example2::Product[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: "999.00",
+            price_currency: "USD",
+            quantity: 5
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
+    end
+
     describe "hash" do
       context "when the data required for work is valid" do
         let(:product) do
