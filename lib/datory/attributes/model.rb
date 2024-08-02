@@ -20,7 +20,7 @@ module Datory
             #
             # nested_result =
             #   if nested_attribute.present?
-            #     nested_attribute.to.include_class.to_model(**attribute_value)
+            #     nested_attribute.to.include_class.new(**attribute_value)
             #   else
             #     attribute_value
             #   end

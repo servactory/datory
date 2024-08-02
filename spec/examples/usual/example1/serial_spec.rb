@@ -68,7 +68,7 @@ RSpec.describe Usual::Example1::Serial do
 
     describe "objects" do
       let(:poster) do
-        Usual::Example1::Image.to_model(
+        Usual::Example1::Image.new(
           url: "...",
           default: true
         )
@@ -76,7 +76,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:countries) do
         [
-          Usual::Example1::Country.to_model(
+          Usual::Example1::Country.new(
             name: "United States",
             iso2: "us" # rubocop:disable Naming/VariableNumber
           )
@@ -85,15 +85,15 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:genres) do
         [
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Crime",
             code: "crime"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Drama",
             code: "drama"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Thriller",
             code: "thriller"
           )
@@ -102,7 +102,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:seasons) do
         [
-          Usual::Example1::Season.to_model(
+          Usual::Example1::Season.new(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
             premiered_on: Date.new(2008, 9, 3),
@@ -112,8 +112,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -123,7 +123,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is valid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -142,7 +142,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is invalid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -206,8 +206,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -376,7 +376,7 @@ RSpec.describe Usual::Example1::Serial do
 
     describe "objects" do
       let(:poster) do
-        Usual::Example1::Image.to_model(
+        Usual::Example1::Image.new(
           url: "...",
           default: true
         )
@@ -384,7 +384,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:countries) do
         [
-          Usual::Example1::Country.to_model(
+          Usual::Example1::Country.new(
             name: "United States",
             iso2: "us" # rubocop:disable Naming/VariableNumber
           )
@@ -393,15 +393,15 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:genres) do
         [
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Crime",
             code: "crime"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Drama",
             code: "drama"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Thriller",
             code: "thriller"
           )
@@ -410,7 +410,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:seasons) do
         [
-          Usual::Example1::Season.to_model(
+          Usual::Example1::Season.new(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
             premiered_on: Date.new(2008, 9, 3),
@@ -420,8 +420,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -431,7 +431,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is valid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -450,7 +450,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is invalid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -514,8 +514,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.

@@ -13,7 +13,7 @@ module Datory
             serialize(model_item)
           end
         else
-          context = send(:new)
+          context = send(:new, _datory_to_model: false)
           model = Datory::Attributes::Serialization::Model.prepare(model)
           _serialize(context, model)
         end
@@ -32,7 +32,7 @@ module Datory
             deserialize(item)
           end
         else
-          context = send(:new)
+          context = send(:new, _datory_to_model: false)
 
           _deserialize(context, **parsed_data)
         end
@@ -47,8 +47,10 @@ module Datory
         raise Datory::Exceptions::DeserializationError.new(message: message, meta: { original_exception: e })
       end
 
-      def to_model(**attributes)
-        context = send(:new)
+      def new(_datory_to_model: true, **attributes)
+        context = super()
+
+        return context unless _datory_to_model
 
         _to_model(context, **attributes)
       end
