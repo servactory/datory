@@ -25,16 +25,16 @@ module Datory
 
       def deserialize(data) # rubocop:disable Metrics/MethodLength
         # TODO: Need to improve this place by adding more checks and an error exception.
-        parsed_data = data.is_a?(String) ? JSON.parse(data) : data
+        prepared_data = data.is_a?(String) ? JSON.parse(data) : data
 
-        if [Set, Array].include?(parsed_data.class)
-          parsed_data.map do |item|
+        if [Set, Array].include?(prepared_data.class)
+          prepared_data.map do |item|
             deserialize(item)
           end
         else
           context = send(:new, _datory_to_model: false)
 
-          _deserialize(context, **parsed_data)
+          _deserialize(context, **prepared_data)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
