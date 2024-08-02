@@ -23,9 +23,9 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(json) # rubocop:disable Metrics/MethodLength
+      def deserialize(data) # rubocop:disable Metrics/MethodLength
         # TODO: Need to improve this place by adding more checks and an error exception.
-        parsed_data = json.is_a?(String) ? JSON.parse(json) : json
+        parsed_data = data.is_a?(String) ? JSON.parse(data) : data
 
         if [Set, Array].include?(parsed_data.class)
           parsed_data.map do |item|
