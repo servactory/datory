@@ -23,7 +23,7 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(data) # rubocop:disable Metrics/MethodLength
+      def deserialize(data) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         prepared_data =
           if data.is_a?(Datory::Base)
             Datory::Attributes::Serialization::Model.to_hash(data)
