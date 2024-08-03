@@ -276,7 +276,7 @@ RSpec.describe Usual::Example3::Language do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:language) do
-          Usual::Example3::Language[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             currentVersion: current_version
@@ -284,7 +284,7 @@ RSpec.describe Usual::Example3::Language do
         end
 
         let(:current_version) do
-          Usual::Example3::Version[:deserialization].new(
+          Usual::Example3::Version.deserialization.new(
             name: "3.3.1"
           )
         end
@@ -294,7 +294,7 @@ RSpec.describe Usual::Example3::Language do
 
       context "when the data required for work is invalid" do
         let(:language) do
-          Usual::Example3::Language[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
           )

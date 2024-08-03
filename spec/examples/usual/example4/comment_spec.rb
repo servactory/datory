@@ -244,7 +244,7 @@ RSpec.describe Usual::Example4::Comment do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:comment) do
-          Usual::Example4::Comment[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: "Hello. This is my first comment here."
           )
@@ -255,7 +255,7 @@ RSpec.describe Usual::Example4::Comment do
 
       context "when the data required for work is invalid" do
         let(:comment) do
-          Usual::Example4::Comment[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: 123 # THIS
           )

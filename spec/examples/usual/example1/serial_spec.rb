@@ -788,7 +788,7 @@ RSpec.describe Usual::Example1::Serial do
 
     describe "objects" do
       let(:poster) do
-        Usual::Example1::Image[:deserialization].new(
+        Usual::Example1::Image.deserialization.new(
           url: "...",
           default: true
         )
@@ -796,7 +796,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:countries) do
         [
-          Usual::Example1::Country[:deserialization].new(
+          Usual::Example1::Country.deserialization.new(
             name: "United States",
             iso2: "us" # rubocop:disable Naming/VariableNumber
           )
@@ -805,15 +805,15 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:genres) do
         [
-          Usual::Example1::Genre[:deserialization].new(
+          Usual::Example1::Genre.deserialization.new(
             name: "Crime",
             code: "crime"
           ),
-          Usual::Example1::Genre[:deserialization].new(
+          Usual::Example1::Genre.deserialization.new(
             name: "Drama",
             code: "drama"
           ),
-          Usual::Example1::Genre[:deserialization].new(
+          Usual::Example1::Genre.deserialization.new(
             name: "Thriller",
             code: "thriller"
           )
@@ -822,7 +822,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:seasons) do
         [
-          Usual::Example1::Season[:deserialization].new(
+          Usual::Example1::Season.deserialization.new(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
             premieredOn: "2008-09-03", # THIS
@@ -832,8 +832,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings[:deserialization].new(
-          imdb: Usual::Example1::Rating[:deserialization].new(
+        Usual::Example1::Ratings.deserialization.new(
+          imdb: Usual::Example1::Rating.deserialization.new(
             value: 8.6,
             quantity: 324_000,
             linkUrl: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -843,7 +843,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is valid" do
         let(:serial) do
-          Usual::Example1::Serial[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -862,7 +862,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is invalid" do
         let(:serial) do
-          Usual::Example1::Serial[:deserialization].new( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.deserialization.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",

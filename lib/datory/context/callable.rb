@@ -76,13 +76,14 @@ module Datory
       end
       alias table describe
 
-      def [](type)
-        @@_datory_model_type =
-          if defined?(@@_datory_model_type)
-            @@_datory_model_type.merge({ name => type.to_sym })
-          else
-            { name => type.to_sym }
-          end
+      def serialization
+        assign_datory_model_type(:serialization)
+
+        self
+      end
+
+      def deserialization
+        assign_datory_model_type(:deserialization)
 
         self
       end
@@ -112,6 +113,15 @@ module Datory
           attributes: attributes,
           collection_of_attributes: collection_of_attributes
         )
+      end
+
+      def assign_datory_model_type(type)
+        @@_datory_model_type =
+          if defined?(@@_datory_model_type)
+            @@_datory_model_type.merge({ name => type })
+          else
+            { name => type }
+          end
       end
     end
   end
