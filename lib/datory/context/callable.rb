@@ -60,9 +60,9 @@ module Datory
 
         model_type = :serialization
 
-        if defined?(@@_datory_model_type) && @@_datory_model_type[context.class.name].present?
-          model_type = :deserialization if @@_datory_model_type.fetch(context.class.name, :serialization) == :deserialization
-          @@_datory_model_type[context.class.name] = nil
+        if defined?(@_datory_model_type) && @_datory_model_type[context.class.name].present?
+          model_type = @_datory_model_type.fetch(context.class.name)
+          @_datory_model_type.delete(context.class.name)
         end
 
         _to_model(context, model_type: model_type, **attributes)
@@ -116,12 +116,10 @@ module Datory
       end
 
       def assign_datory_model_type(type)
-        @@_datory_model_type =
-          if defined?(@@_datory_model_type)
-            @@_datory_model_type.merge({ name => type })
-          else
-            { name => type }
-          end
+        data = { name => type }
+
+        @_datory_model_type =
+          defined?(@_datory_model_type) ? @_datory_model_type.merge(data) : data
       end
     end
   end
