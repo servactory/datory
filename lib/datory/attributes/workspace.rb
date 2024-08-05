@@ -24,12 +24,12 @@ module Datory
         Deserialization::ServiceBuilder.build!(self, incoming_attributes, collection_of_attributes)
       end
 
-      def to_model(attributes:)
+      def to_model(direction:, attributes:, collection_of_attributes:)
         super
 
-        attributes.each do |attribute_name, attribute_value|
-          define_singleton_method(attribute_name) { attribute_value }
-        end
+        Model.build!(self, direction, attributes, collection_of_attributes)
+
+        self
       end
     end
   end

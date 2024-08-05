@@ -3,6 +3,22 @@
 module Datory
   module Context
     module Workspace
+      private
+
+      def merge!(attributes)
+        attributes.each do |key, value|
+          instance_variable_set(:"@#{key}", value)
+          self.class.attr_reader(key)
+        end
+
+        self
+      end
+      alias merge merge!
+
+      def keys
+        instance_variables.map { |instance_variable| instance_variable.to_s.sub(/^@/, "").to_sym }
+      end
+
       def _serialize(model:, collection_of_attributes:)
         serialize(
           model: model,
@@ -17,25 +33,19 @@ module Datory
         )
       end
 
-      def _to_model(attributes:)
+      def _to_model(direction:, attributes:, collection_of_attributes:)
         to_model(
-          attributes: attributes
+          direction: direction,
+          attributes: attributes,
+          collection_of_attributes: collection_of_attributes
         )
       end
 
-      def serialize(model:, collection_of_attributes:, **)
-        @model = model
-        @collection_of_attributes = collection_of_attributes
-      end
+      def serialize(**); end
 
-      def deserialize(incoming_attributes:, collection_of_attributes:, **)
-        @incoming_attributes = incoming_attributes
-        @collection_of_attributes = collection_of_attributes
-      end
+      def deserialize(**); end
 
-      def to_model(attributes:)
-        @attributes = attributes
-      end
+      def to_model(**); end
     end
   end
 end

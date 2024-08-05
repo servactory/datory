@@ -69,7 +69,7 @@ RSpec.describe Usual::Example3::Language do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:language) do
-          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             current: current_version
@@ -77,7 +77,7 @@ RSpec.describe Usual::Example3::Language do
         end
 
         let(:current_version) do
-          Usual::Example3::Version.to_model(
+          Usual::Example3::Version.new(
             name: "3.3.1"
           )
         end
@@ -87,7 +87,7 @@ RSpec.describe Usual::Example3::Language do
 
       context "when the data required for work is invalid" do
         let(:language) do
-          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
           )
@@ -179,7 +179,7 @@ RSpec.describe Usual::Example3::Language do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:language) do
-          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             current: current_version
@@ -187,7 +187,7 @@ RSpec.describe Usual::Example3::Language do
         end
 
         let(:current_version) do
-          Usual::Example3::Version.to_model(
+          Usual::Example3::Version.new(
             name: "3.3.1"
           )
         end
@@ -197,7 +197,7 @@ RSpec.describe Usual::Example3::Language do
 
       context "when the data required for work is invalid" do
         let(:language) do
-          Usual::Example3::Language.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example3::Language.new( # rubocop:disable RSpec/DescribedClass
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: 123 # THIS
           )
@@ -234,8 +234,8 @@ RSpec.describe Usual::Example3::Language do
         let(:json) { language }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example3::Language) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example3::Language) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -252,8 +252,8 @@ RSpec.describe Usual::Example3::Language do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example3::Language) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example3::Language) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(
@@ -271,6 +271,37 @@ RSpec.describe Usual::Example3::Language do
       subject(:perform) { described_class.deserialize(language) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
+    end
+
+    describe "objects" do
+      context "when the data required for work is valid" do
+        let(:language) do
+          Usual::Example3::Language.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: "Ruby",
+            currentVersion: current_version
+          )
+        end
+
+        let(:current_version) do
+          Usual::Example3::Version.deserialization.new(
+            name: "3.3.1"
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:language) do
+          Usual::Example3::Language.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "73031620-be3b-4088-9a78-5589ff7e1f61",
+            name: 123 # THIS
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
     describe "hash" do
@@ -339,17 +370,17 @@ RSpec.describe Usual::Example3::Language do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                          Usual::Example3::Language                                           |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute        | From             | To       | As                               | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id               | String           | id       | String                           |                          |
-              | name             | String           | name     | String                           |                          |
-              | currentVersion   | Hash             | current  | [Datory::Result, Hash]           | Usual::Example3::Version |
-              | lastEOLVersion   | [Hash, NilClass] | last_eol | [Datory::Result, Hash, NilClass] | Usual::Example3::Version |
-              | previousVersions | Array            | previous | Array                            | Usual::Example3::Version |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                            Usual::Example3::Language                                                             |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From                                       | To       | As                                         | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String                                     | id       | String                                     |                          |
+              | name             | String                                     | name     | String                                     |                          |
+              | currentVersion   | [Usual::Example3::Version, Hash]           | current  | [Usual::Example3::Version, Hash]           | Usual::Example3::Version |
+              | lastEOLVersion   | [Usual::Example3::Version, Hash, NilClass] | last_eol | [Usual::Example3::Version, Hash, NilClass] | Usual::Example3::Version |
+              | previousVersions | Array                                      | previous | Array                                      | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -365,17 +396,17 @@ RSpec.describe Usual::Example3::Language do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                          Usual::Example3::Language                                           |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute        | From             | To       | As                               | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id               | String           | id       | String                           |                          |
-              | name             | String           | name     | String                           |                          |
-              | currentVersion   | Hash             | current  | [Datory::Result, Hash]           | Usual::Example3::Version |
-              | lastEOLVersion   | [Hash, NilClass] | last_eol | [Datory::Result, Hash, NilClass] | Usual::Example3::Version |
-              | previousVersions | Array            | previous | Array                            | Usual::Example3::Version |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                            Usual::Example3::Language                                                             |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute        | From                                       | To       | As                                         | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id               | String                                     | id       | String                                     |                          |
+              | name             | String                                     | name     | String                                     |                          |
+              | currentVersion   | [Usual::Example3::Version, Hash]           | current  | [Usual::Example3::Version, Hash]           | Usual::Example3::Version |
+              | lastEOLVersion   | [Usual::Example3::Version, Hash, NilClass] | last_eol | [Usual::Example3::Version, Hash, NilClass] | Usual::Example3::Version |
+              | previousVersions | Array                                      | previous | Array                                      | Usual::Example3::Version |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -437,7 +468,7 @@ RSpec.describe Usual::Example3::Language do
               currentVersion: {
                 from: {
                   name: :currentVersion,
-                  type: Hash,
+                  type: [Usual::Example3::Version, Hash],
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -445,7 +476,7 @@ RSpec.describe Usual::Example3::Language do
                 },
                 to: {
                   name: :current,
-                  type: [Datory::Result, Hash],
+                  type: [Usual::Example3::Version, Hash],
                   required: true,
                   default: nil,
                   min: nil,
@@ -458,7 +489,7 @@ RSpec.describe Usual::Example3::Language do
               lastEOLVersion: {
                 from: {
                   name: :lastEOLVersion,
-                  type: [Hash, NilClass],
+                  type: [Usual::Example3::Version, Hash, NilClass],
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -466,7 +497,7 @@ RSpec.describe Usual::Example3::Language do
                 },
                 to: {
                   name: :last_eol,
-                  type: [Datory::Result, Hash, NilClass],
+                  type: [Usual::Example3::Version, Hash, NilClass],
                   required: false,
                   default: nil,
                   min: nil,
@@ -482,7 +513,7 @@ RSpec.describe Usual::Example3::Language do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example3::Version, Hash],
                   format: nil
                 },
                 to: {
@@ -492,7 +523,7 @@ RSpec.describe Usual::Example3::Language do
                   default: [],
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example3::Version, Hash],
                   format: nil,
                   include: Usual::Example3::Version
                 }
