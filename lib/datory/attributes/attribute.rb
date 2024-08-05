@@ -51,8 +51,8 @@ module Datory
 
       def output_serialization_options # rubocop:disable Metrics/AbcSize
         hash = {
-          consists_of: to.consists_of == Hash ? Datory::Result : from.consists_of,
-          type: to.type == Datory::Result ? Hash : from.type
+          consists_of: from.consists_of,
+          type: from.type
         }
 
         hash[:min] = from.min if from.min.present?
@@ -97,8 +97,8 @@ module Datory
 
       def output_deserialization_options # rubocop:disable Metrics/AbcSize
         hash = {
-          consists_of: from.consists_of == Hash ? Datory::Result : to.consists_of,
-          type: from.type == Hash ? Datory::Result : to.type
+          consists_of: to.consists_of,
+          type: to.type
         }
 
         hash[:min] = to.min if to.min.present?

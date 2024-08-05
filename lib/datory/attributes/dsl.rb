@@ -29,7 +29,7 @@ module Datory
             to: to.presence || name,
             from: [include, Hash],
             include: include,
-            as: [include, Datory::Result, Hash]
+            as: [include, Hash]
           )
         end
         # NOTE: This will most likely be marked as deprecated in the future in favor of `one!`
@@ -51,7 +51,7 @@ module Datory
             name,
             to: to.presence || name,
             from: Array,
-            consists_of: [include, Datory::Result, Hash],
+            consists_of: [include, Hash],
             include: include,
             as: Array
           )

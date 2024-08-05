@@ -58,14 +58,16 @@ module Datory
 
         return context unless _datory_to_model
 
-        model_type = :serialization
+        direction = :serialization
 
         if defined?(@_datory_model_type) && @_datory_model_type[context.class.name].present?
-          model_type = @_datory_model_type.fetch(context.class.name)
+          direction = @_datory_model_type.fetch(context.class.name)
           @_datory_model_type.delete(context.class.name)
         end
 
-        _to_model(context, model_type: model_type, **attributes)
+        direction = direction.to_s.inquiry
+
+        _to_model(context, direction: direction, **attributes)
       end
 
       def describe
@@ -106,10 +108,10 @@ module Datory
         )
       end
 
-      def _to_model(context, model_type:, **attributes)
+      def _to_model(context, direction:, **attributes)
         context.send(
           :_to_model,
-          model_type: model_type,
+          direction: direction,
           attributes: attributes,
           collection_of_attributes: collection_of_attributes
         )

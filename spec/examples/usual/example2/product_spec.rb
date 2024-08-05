@@ -229,8 +229,8 @@ RSpec.describe Usual::Example2::Product do
         let(:json) { product }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -250,8 +250,8 @@ RSpec.describe Usual::Example2::Product do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(

@@ -571,8 +571,8 @@ RSpec.describe Usual::Example1::Serial do
         let(:json) { serial }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -590,8 +590,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "poster", :aggregate_failures do
-          expect(perform.poster).to be_a(Servactory::Result)
-          expect(perform.poster).to an_instance_of(Datory::Result)
+          expect(perform.poster).to be_a(Usual::Example1::Image)
+          expect(perform.poster).to an_instance_of(Usual::Example1::Image)
 
           expect(perform.poster).to(
             have_attributes(
@@ -604,8 +604,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "countries", :aggregate_failures do
           expect(perform.countries).to be_an(Array)
 
-          expect(perform.countries).to all be_a(Servactory::Result)
-          expect(perform.countries).to all an_instance_of(Datory::Result)
+          expect(perform.countries).to all be_a(Usual::Example1::Country)
+          expect(perform.countries).to all an_instance_of(Usual::Example1::Country)
 
           expect(perform.countries.first).to(
             have_attributes(
@@ -616,8 +616,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "genres", :aggregate_failures do
-          expect(perform.genres).to all be_a(Servactory::Result)
-          expect(perform.genres).to all an_instance_of(Datory::Result)
+          expect(perform.genres).to all be_a(Usual::Example1::Genre)
+          expect(perform.genres).to all an_instance_of(Usual::Example1::Genre)
 
           expect(perform.genres.first).to(
             have_attributes(
@@ -642,8 +642,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "seasons", :aggregate_failures do
-          expect(perform.seasons).to all be_a(Servactory::Result)
-          expect(perform.seasons).to all an_instance_of(Datory::Result)
+          expect(perform.seasons).to all be_a(Usual::Example1::Season)
+          expect(perform.seasons).to all an_instance_of(Usual::Example1::Season)
 
           expect(perform.seasons.first).to(
             have_attributes(
@@ -656,8 +656,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "ratings", :aggregate_failures do
-          expect(perform.ratings).to be_a(Servactory::Result)
-          expect(perform.ratings).to an_instance_of(Datory::Result)
+          expect(perform.ratings).to be_a(Usual::Example1::Ratings)
+          expect(perform.ratings).to an_instance_of(Usual::Example1::Ratings)
 
           expect(perform.ratings).to(
             have_attributes(
@@ -677,8 +677,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(
@@ -698,8 +698,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "poster", :aggregate_failures do
-          expect(perform.first.poster).to be_a(Servactory::Result)
-          expect(perform.first.poster).to an_instance_of(Datory::Result)
+          expect(perform.first.poster).to be_a(Usual::Example1::Image)
+          expect(perform.first.poster).to an_instance_of(Usual::Example1::Image)
 
           expect(perform.first.poster).to(
             have_attributes(
@@ -712,8 +712,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "countries", :aggregate_failures do
           expect(perform.first.countries).to be_an(Array)
 
-          expect(perform.first.countries).to all be_a(Servactory::Result)
-          expect(perform.first.countries).to all an_instance_of(Datory::Result)
+          expect(perform.first.countries).to all be_a(Usual::Example1::Country)
+          expect(perform.first.countries).to all an_instance_of(Usual::Example1::Country)
 
           expect(perform.first.countries.first).to(
             have_attributes(
@@ -724,8 +724,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "genres", :aggregate_failures do
-          expect(perform.first.genres).to all be_a(Servactory::Result)
-          expect(perform.first.genres).to all an_instance_of(Datory::Result)
+          expect(perform.first.genres).to all be_a(Usual::Example1::Genre)
+          expect(perform.first.genres).to all an_instance_of(Usual::Example1::Genre)
 
           expect(perform.first.genres.first).to(
             have_attributes(
@@ -750,8 +750,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "seasons", :aggregate_failures do
-          expect(perform.first.seasons).to all be_a(Servactory::Result)
-          expect(perform.first.seasons).to all an_instance_of(Datory::Result)
+          expect(perform.first.seasons).to all be_a(Usual::Example1::Season)
+          expect(perform.first.seasons).to all an_instance_of(Usual::Example1::Season)
 
           expect(perform.first.seasons.first).to(
             have_attributes(
@@ -764,8 +764,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "ratings", :aggregate_failures do
-          expect(perform.first.ratings).to be_a(Servactory::Result)
-          expect(perform.first.ratings).to an_instance_of(Datory::Result)
+          expect(perform.first.ratings).to be_a(Usual::Example1::Ratings)
+          expect(perform.first.ratings).to an_instance_of(Usual::Example1::Ratings)
 
           expect(perform.first.ratings).to(
             have_attributes(
@@ -1101,21 +1101,21 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                                           Usual::Example1::Serial                                                           |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From                             | To           | As                                               | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String                           | id           | String                                           |                          |
-              | status      | String                           | status       | String                                           |                          |
-              | title       | String                           | title        | String                                           |                          |
-              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Datory::Result, Hash]   | Usual::Example1::Image   |
-              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Datory::Result, Hash] | Usual::Example1::Ratings |
-              | countries   | Array                            | countries    | Array                                            | Usual::Example1::Country |
-              | genres      | Array                            | genres       | Array                                            | Usual::Example1::Genre   |
-              | seasons     | Array                            | seasons      | Array                                            | Usual::Example1::Season  |
-              | premieredOn | String                           | premiered_on | Date                                             |                          |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                   Usual::Example1::Serial                                                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From                             | To           | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String                           | id           | String                           |                          |
+              | status      | String                           | status       | String                           |                          |
+              | title       | String                           | title        | String                           |                          |
+              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Hash]   | Usual::Example1::Image   |
+              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Hash] | Usual::Example1::Ratings |
+              | countries   | Array                            | countries    | Array                            | Usual::Example1::Country |
+              | genres      | Array                            | genres       | Array                            | Usual::Example1::Genre   |
+              | seasons     | Array                            | seasons      | Array                            | Usual::Example1::Season  |
+              | premieredOn | String                           | premiered_on | Date                             |                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1217,21 +1217,21 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                                           Usual::Example1::Serial                                                           |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From                             | To           | As                                               | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String                           | id           | String                                           |                          |
-              | status      | String                           | status       | String                                           |                          |
-              | title       | String                           | title        | String                                           |                          |
-              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Datory::Result, Hash]   | Usual::Example1::Image   |
-              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Datory::Result, Hash] | Usual::Example1::Ratings |
-              | countries   | Array                            | countries    | Array                                            | Usual::Example1::Country |
-              | genres      | Array                            | genres       | Array                                            | Usual::Example1::Genre   |
-              | seasons     | Array                            | seasons      | Array                                            | Usual::Example1::Season  |
-              | premieredOn | String                           | premiered_on | Date                                             |                          |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                   Usual::Example1::Serial                                                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From                             | To           | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String                           | id           | String                           |                          |
+              | status      | String                           | status       | String                           |                          |
+              | title       | String                           | title        | String                           |                          |
+              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Hash]   | Usual::Example1::Image   |
+              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Hash] | Usual::Example1::Ratings |
+              | countries   | Array                            | countries    | Array                            | Usual::Example1::Country |
+              | genres      | Array                            | genres       | Array                            | Usual::Example1::Genre   |
+              | seasons     | Array                            | seasons      | Array                            | Usual::Example1::Season  |
+              | premieredOn | String                           | premiered_on | Date                             |                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1408,7 +1408,7 @@ RSpec.describe Usual::Example1::Serial do
                 },
                 to: {
                   name: :poster,
-                  type: [Usual::Example1::Image, Datory::Result, Hash],
+                  type: [Usual::Example1::Image, Hash],
                   required: true,
                   default: nil,
                   min: nil,
@@ -1429,7 +1429,7 @@ RSpec.describe Usual::Example1::Serial do
                 },
                 to: {
                   name: :ratings,
-                  type: [Usual::Example1::Ratings, Datory::Result, Hash],
+                  type: [Usual::Example1::Ratings, Hash],
                   required: true,
                   default: nil,
                   consists_of: false,
@@ -1445,7 +1445,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Country, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Country, Hash],
                   format: nil
                 },
                 to: {
@@ -1455,7 +1455,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Country, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Country, Hash],
                   format: nil,
                   include: Usual::Example1::Country
                 }
@@ -1466,7 +1466,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Genre, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Genre, Hash],
                   format: nil
                 },
                 to: {
@@ -1476,7 +1476,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Genre, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Genre, Hash],
                   format: nil,
                   include: Usual::Example1::Genre
                 }
@@ -1487,7 +1487,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Season, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Season, Hash],
                   format: nil
                 },
                 to: {
@@ -1497,7 +1497,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Usual::Example1::Season, Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Season, Hash],
                   format: nil,
                   include: Usual::Example1::Season
                 }
