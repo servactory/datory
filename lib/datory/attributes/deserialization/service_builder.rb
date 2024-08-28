@@ -21,7 +21,7 @@ module Datory
 
           result = builder_class.call!(**@incoming_attributes)
 
-          @context.class.serialization.new(**result.to_hash)
+          @context.class.serialization.new(**result.to_h)
         end
 
         private
