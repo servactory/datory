@@ -52,37 +52,41 @@ form.serialize # => { ... }
 
 ```ruby
 class SerialDto < Datory::Base
-  uuid :id
+  uuid! :id
 
-  string :status
-  string :title
+  string! :status
+  string! :title
 
-  one :poster, include: ImageDto
+  one! :poster, include: ImageDto
 
-  one :ratings, include: RatingsDto
+  one! :ratings, include: RatingsDto
 
-  many :countries, include: CountryDto
-  many :genres, include: GenreDto
-  many :seasons, include: SeasonDto
+  many! :countries, include: CountryDto
+  many! :genres, include: GenreDto
+  many! :seasons, include: SeasonDto
 
-  date :premieredOn, to: :premiered_on
+  date! :premieredOn, to: :premiered_on
 end
 ```
 
 ```ruby
 class SeasonDto < Datory::Base
-  uuid :id
-  uuid :serial_id
+  uuid! :id
+  uuid! :serialId, to: :serial_id
 
-  integer :number
+  integer! :number
 
-  many :episodes, include: EpisodeDto
+  many! :episodes, include: EpisodeDto
 
-  date :premiered_on
+  date! :premieredOn, to: :premiered_on
+  date? :endedOn, to: :ended_on
 end
 ```
 
 ## Attribute declaration
+
+Using the `!` sign means that the attribute is required.
+The optionality of an attribute is indicated using the `?` sign.
 
 ### Basic
 
@@ -92,84 +96,84 @@ end
 attribute :uuid, from: String, to: :id, as: String, format: :uuid
 ```
 
-#### string
+#### string!
 
 ```ruby
-string :uuid, to: :id
+string! :uuid, to: :id
 ```
 
-#### integer
+#### integer!
 
 ```ruby
-integer :rating, min: 1, max: 10
+integer! :rating, min: 1, max: 10
 ```
 
-#### float
+#### float!
 
 ```ruby
-float :rating
+float! :rating
 ```
 
-#### boolean
+#### boolean!
 
 ```ruby
-boolean :default
+boolean! :default
 ```
 
 ### Helpers
 
-#### uuid
+#### uuid!
 
 It will also check that the value matches the UUID format.
 
 ```ruby
-uuid :id
+uuid! :id
 ```
 
-#### money
+#### money!
 
 It will prepare two attributes `*_cents` and `*_currency`.
 
 ```ruby
-money :box_office
+money! :box_office
 ```
 
-#### duration
+#### duration!
 
 ```ruby
-duration :episode_duration
+duration! :episode_duration
 ```
 
-#### date
+#### date!
 
 ```ruby
-date :premiered_on
+date! :premiered_on
 ```
 
-#### time
+#### time!
 
 ```ruby
-time :premiered_at
+time! :premiered_at
 ```
 
-#### datetime
+#### datetime!
 
 ```ruby
-time :premiered_at
+time! :premiered_at
 ```
 
 ### Nesting
 
-#### one
+#### one!
 
 ```ruby
-one :poster, include: ImageDto
+one! :poster, include: ImageDto
 ```
 
-#### many
+#### many!
 
 ```ruby
-many :seasons, include: SeasonDto
+many! :seasons, include: SeasonDto
 ```
 
 ## Object information
