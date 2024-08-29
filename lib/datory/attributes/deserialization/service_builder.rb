@@ -19,7 +19,9 @@ module Datory
         def build!
           ServiceFactory.create(@context.class, @collection_of_attributes)
 
-          builder_class.call!(**@incoming_attributes)
+          result = builder_class.call!(**@incoming_attributes)
+
+          @context.class.serialization.new(**result.to_h)
         end
 
         private
