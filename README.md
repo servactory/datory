@@ -185,7 +185,7 @@ SerialDto.info
 ```
 
 ```
-#<Datory::Info::Result:0x0000000124aa7bc8 @attributes={:id=>{:from=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid}, :to=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid, :required=>true, :include=>nil}}, :status=>{:from=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :title=>{:from=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}, :poster=>{:from=>{:name=>:poster, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:poster, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::Image}}, :ratings=>{:from=>{:name=>:ratings, :type=>Hash, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:ratings, :type=>[Datory::Result, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>Usual::Example1::Ratings}}, :countries=>{:from=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Country}}, :genres=>{:from=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Genre}}, :seasons=>{:from=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil}, :to=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Datory::Result, Hash], :format=>nil, :required=>true, :include=>Usual::Example1::Season}}, :premieredOn=>{:from=>{:name=>:premieredOn, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:date}, :to=>{:name=>:premiered_on, :type=>Date, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :include=>nil}}}>
+#<Datory::Info::Result:0x0000000128a33c38 @attributes={:id=>{:from=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid}, :to=>{:name=>:id, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:uuid, :required=>true, :default=>nil, :include=>nil}}, :status=>{:from=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:status, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :default=>nil, :include=>nil}}, :title=>{:from=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:title, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :default=>nil, :include=>nil}}, :poster=>{:from=>{:name=>:poster, :type=>[Usual::Example1::Image, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:poster, :type=>[Usual::Example1::Image, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :default=>nil, :include=>Usual::Example1::Image}}, :ratings=>{:from=>{:name=>:ratings, :type=>[Usual::Example1::Ratings, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil}, :to=>{:name=>:ratings, :type=>[Usual::Example1::Ratings, Hash], :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :default=>nil, :include=>Usual::Example1::Ratings}}, :countries=>{:from=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Country, Hash], :format=>nil}, :to=>{:name=>:countries, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Country, Hash], :format=>nil, :required=>true, :default=>nil, :include=>Usual::Example1::Country}}, :genres=>{:from=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Genre, Hash], :format=>nil}, :to=>{:name=>:genres, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Genre, Hash], :format=>nil, :required=>true, :default=>nil, :include=>Usual::Example1::Genre}}, :seasons=>{:from=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Season, Hash], :format=>nil}, :to=>{:name=>:seasons, :type=>Array, :min=>nil, :max=>nil, :consists_of=>[Usual::Example1::Season, Hash], :format=>nil, :required=>true, :default=>nil, :include=>Usual::Example1::Season}}, :premieredOn=>{:from=>{:name=>:premieredOn, :type=>String, :min=>nil, :max=>nil, :consists_of=>false, :format=>:date}, :to=>{:name=>:premiered_on, :type=>Date, :min=>nil, :max=>nil, :consists_of=>false, :format=>nil, :required=>true, :default=>nil, :include=>nil}}}>
 ```
 
 ### Describe
@@ -197,21 +197,21 @@ SerialDto.describe
 ```
 
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|                                 SerialDto                                 |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| Attribute   | From   | To           | As                     | Include    |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-| id          | String | id           | String                 |            |
-| status      | String | status       | String                 |            |
-| title       | String | title        | String                 |            |
-| poster      | Hash   | poster       | [Datory::Result, Hash] | ImageDto   |
-| ratings     | Hash   | ratings      | [Datory::Result, Hash] | RatingsDto |
-| countries   | Array  | countries    | Array                  | CountryDto |
-| genres      | Array  | genres       | Array                  | GenreDto   |
-| seasons     | Array  | seasons      | Array                  | SeasonDto  |
-| premieredOn | String | premiered_on | Date                   |            |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                                         SerialDto                                         |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| Attribute   | From                         | To                 | As         | Include    |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| id          | String                       | id                 | String     |            |
+| status      | String                       | status             | String     |            |
+| title       | String                       | title              | String     |            |
+| poster      | [ImageDto, Hash]   | poster  | [ImageDto, Hash]   | ImageDto   |            |
+| ratings     | [RatingsDto, Hash] | ratings | [RatingsDto, Hash] | RatingsDto |            |
+| countries   | Array                        | countries          | Array      | CountryDto |
+| genres      | Array                        | genres             | Array      | GenreDto   |
+| seasons     | Array                        | seasons            | Array      | SeasonDto  |
+| premieredOn | String                       | premiered_on       | Date       |            |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 ## Contributing
