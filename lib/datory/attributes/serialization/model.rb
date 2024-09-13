@@ -14,7 +14,7 @@ module Datory
 
         def prepare(data)
           if data.is_a?(Hash)
-            build(data)
+            build(data.deep_dup)
           else
             data
           end

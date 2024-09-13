@@ -120,6 +120,8 @@ RSpec.describe Usual::Example4::Comment do
       describe "singular" do
         subject(:perform) { described_class.serialize(comment) }
 
+        it { expect { perform }.not_to(change { comment }) }
+
         it do
           expect(perform).to match(
             {
@@ -137,6 +139,8 @@ RSpec.describe Usual::Example4::Comment do
         subject(:perform) { described_class.serialize(comments) }
 
         let(:comments) { [comment] }
+
+        it { expect { perform }.not_to(change { comments }) }
 
         it do
           expect(perform).to contain_exactly(

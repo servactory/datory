@@ -260,6 +260,8 @@ RSpec.describe Usual::Example1::Serial do
       describe "singular" do
         subject(:perform) { described_class.serialize(serial) }
 
+        it { expect { perform }.not_to(change { serial }) }
+
         it do
           expect(perform).to match(
             {
@@ -315,6 +317,8 @@ RSpec.describe Usual::Example1::Serial do
         subject(:perform) { described_class.serialize(serials) }
 
         let(:serials) { [serial] }
+
+        it { expect { perform }.not_to(change { serials }) }
 
         it do
           expect(perform).to contain_exactly(
@@ -514,13 +518,13 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.new(
-          imdb: Usual::Example1::Rating.new(
+        {
+          imdb: {
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
-          )
-        )
+          }
+        }
       end
 
       context "when the data required for work is valid" do

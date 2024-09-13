@@ -132,6 +132,8 @@ RSpec.describe Usual::Example2::Product do
       describe "singular" do
         subject(:perform) { described_class.serialize(product) }
 
+        it { expect { perform }.not_to(change { product }) }
+
         it do
           expect(perform).to match(
             {
@@ -152,6 +154,8 @@ RSpec.describe Usual::Example2::Product do
         subject(:perform) { described_class.serialize(products) }
 
         let(:products) { [product] }
+
+        it { expect { perform }.not_to(change { products }) }
 
         it do
           expect(perform).to contain_exactly(
