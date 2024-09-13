@@ -130,6 +130,8 @@ RSpec.describe Usual::Example3::Language do
       describe "singular" do
         subject(:perform) { described_class.serialize(language) }
 
+        it { expect { perform }.not_to(change { language }) }
+
         it do
           expect(perform).to match(
             {
@@ -151,6 +153,8 @@ RSpec.describe Usual::Example3::Language do
         subject(:perform) { described_class.serialize(languages) }
 
         let(:languages) { [language] }
+
+        it { expect { perform }.not_to(change { languages }) }
 
         it do
           expect(perform).to contain_exactly(
