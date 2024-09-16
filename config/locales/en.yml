@@ -9,40 +9,40 @@ en:
       cannot_be_overwritten: "[%{service_class_name}] The following methods cannot be overwritten: %{list_of_methods}"
     inputs:
       undefined:
-        getter: "[%{service_class_name}] Undefined serialization attribute `%{input_name}`"
-        setter: "[%{service_class_name}] Undefined serialization attribute `%{input_name}`"
+        getter: "[%{service_class_name}] Undefined attribute `%{input_name}`"
+        setter: "[%{service_class_name}] Undefined attribute `%{input_name}`"
       validations:
         inclusion:
           default_error: "[%{service_class_name}] Wrong value in `%{input_name}`, must be one of `%{input_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Serialization attribute `%{input_name}` must \"%{code}\""
-          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{input_name}` serialization attribute: %{exception_message}"
+          default_error: "[%{service_class_name}] Attribute `%{input_name}` must \"%{code}\""
+          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{input_name}` attribute: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Required element in serialization attribute collection `%{input_name}` is missing"
-              wrong_type: "[%{service_class_name}] Wrong serialization attribute collection type `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Wrong element type in serialization attribute collection `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              required: "[%{service_class_name}] Required element in attribute collection `%{input_name}` is missing"
+              wrong_type: "[%{service_class_name}] Wrong attribute collection type `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong element type in attribute collection `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Serialization attribute `%{input_name}` does not match `%{format_name}` format"
-              wrong_pattern: "[%{service_class_name}] Serialization attribute `%{input_name}` does not match `%{format_name}` format"
-              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for serialization attribute `%{input_name}`"
+              default: "[%{service_class_name}] Attribute `%{input_name}` does not match `%{format_name}` format"
+              wrong_pattern: "[%{service_class_name}] Attribute `%{input_name}` does not match `%{format_name}` format"
+              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for attribute `%{input_name}`"
             min:
-              default: "[%{service_class_name}] Serialization attribute `%{input_name}` received value `%{value}`, which is less than `%{option_value}`"
+              default: "[%{service_class_name}] Attribute `%{input_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Serialization attribute `%{input_name}` received value `%{value}`, which is greater than `%{option_value}`"
+              default: "[%{service_class_name}] Attribute `%{input_name}` received value `%{value}`, which is greater than `%{option_value}`"
         required:
           default_error:
-            default: "[%{service_class_name}] Required serialization attribute `%{input_name}` is missing"
+            default: "[%{service_class_name}] Required attribute `%{input_name}` is missing"
         type:
           default_error:
-            default: "[%{service_class_name}] Wrong type of serialization attribute `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+            default: "[%{service_class_name}] Wrong type of attribute `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in serialization attribute hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
       tools:
         find_unnecessary:
           error: "[%{service_class_name}] Unexpected attributes: `%{unnecessary_attributes}`"
         rules:
-          error: "[%{service_class_name}] Conflict in `%{input_name}` serialization attribute options: `%{conflict_code}`"
+          error: "[%{service_class_name}] Conflict in `%{input_name}` attribute options: `%{conflict_code}`"
     internals:
       undefined:
         getter: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"
@@ -73,29 +73,29 @@ en:
               wrong_element_type: "[%{service_class_name}] Wrong type in internal attribute hash `%{internal_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
     outputs:
       undefined:
-        getter: "[%{service_class_name}] Undefined deserialization attribute `%{output_name}`"
-        setter: "[%{service_class_name}] Undefined deserialization attribute `%{output_name}`"
+        getter: "[%{service_class_name}] Undefined attribute `%{output_name}`"
+        setter: "[%{service_class_name}] Undefined attribute `%{output_name}`"
       validations:
         inclusion:
           default_error: "[%{service_class_name}] Wrong value in `%{output_name}`, must be one of `%{output_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Deserialization attribute `%{output_name}` must \"%{code}\""
-          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{output_name}` deserialization attribute: %{exception_message}"
+          default_error: "[%{service_class_name}] Attribute `%{output_name}` must \"%{code}\""
+          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{output_name}` attribute: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Required element in deserialization attribute collection `%{output_name}` is missing"
-              wrong_type: "[%{service_class_name}] Wrong deserialization attribute collection type `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Wrong element type in deserialization attribute collection `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              required: "[%{service_class_name}] Required element in attribute collection `%{output_name}` is missing"
+              wrong_type: "[%{service_class_name}] Wrong attribute collection type `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong element type in attribute collection `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Deserialization attribute `%{output_name}` does not match `%{format_name}` format"
-              wrong_pattern: "[%{service_class_name}] Deserialization attribute `%{output_name}` does not match `%{format_name}` format"
-              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for deserialization attribute `%{output_name}`"
+              default: "[%{service_class_name}] Attribute `%{output_name}` does not match `%{format_name}` format"
+              wrong_pattern: "[%{service_class_name}] Attribute `%{output_name}` does not match `%{format_name}` format"
+              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for attribute `%{output_name}`"
             min:
-              default: "[%{service_class_name}] Deserialization attribute `%{output_name}` received value `%{value}`, which is less than `%{option_value}`"
+              default: "[%{service_class_name}] Attribute `%{output_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Deserialization attribute `%{output_name}` received value `%{value}`, which is greater than `%{option_value}`"
+              default: "[%{service_class_name}] Attribute `%{output_name}` received value `%{value}`, which is greater than `%{option_value}`"
         type:
           default_error:
-            default: "[%{service_class_name}] Wrong type of deserialization attribute `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
+            default: "[%{service_class_name}] Wrong type of attribute `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in deserialization attribute hash `%{output_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{output_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
