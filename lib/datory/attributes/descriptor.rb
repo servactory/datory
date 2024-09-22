@@ -26,7 +26,10 @@ module Datory
           row << attribute.from.type
           row << attribute.to.name
           row << attribute.to.type
-          row << (include_class if include_class <= Datory::Base) if collection_of_attributes.include_class_exist?
+
+          if collection_of_attributes.include_class_exist? && !include_class.nil?
+            row << (include_class if include_class.respond_to?(:<=) && include_class <= Datory::Base)
+          end
 
           rows << row
         end

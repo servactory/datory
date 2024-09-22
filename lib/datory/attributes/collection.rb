@@ -18,6 +18,10 @@ module Datory
         map { |attribute| attribute.to.name }
       end
 
+      def external_names
+        map { |attribute| attribute.from.name }
+      end
+
       def include_class_exist?
         @include_class_exist ||= filter do |attribute| # rubocop:disable Performance/Count
           include_class = attribute.to.include_class

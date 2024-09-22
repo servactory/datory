@@ -139,6 +139,7 @@ RSpec.describe Usual::Example2::Product do
             {
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
+              formattedTitle: "The New iPhone 15 Pro (from setter)",
               price_cents: 999_00,
               price_currency: "USD",
               discount_cents: nil,
@@ -162,6 +163,7 @@ RSpec.describe Usual::Example2::Product do
             {
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
+              formattedTitle: "The New iPhone 15 Pro (from setter)",
               price_cents: 999_00,
               price_currency: "USD",
               discount_cents: nil,
@@ -215,6 +217,7 @@ RSpec.describe Usual::Example2::Product do
         {
           id: "55363a14-aa9a-4eba-9276-7f7cec432123",
           title: "iPhone 15 Pro",
+          formatted_title: "The New iPhone 15 Pro (from setter)",
           price_cents: 999_00,
           price_currency: "USD",
           quantity: 5
@@ -240,6 +243,7 @@ RSpec.describe Usual::Example2::Product do
             have_attributes(
               id: "55363a14-aa9a-4eba-9276-7f7cec432123",
               title: "iPhone 15 Pro",
+              formatted_title: "The New iPhone 15 Pro (from getter)",
               price_cents: 999_00,
               price_currency: "USD",
               quantity: 5
@@ -384,6 +388,7 @@ RSpec.describe Usual::Example2::Product do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id                  | String              | id                   | String                              |
               | title               | String              | title                | String                              |
+              | formattedTitle      | String              | formatted_title      | String                              |
               | price_cents         | Integer             | price_cents          | Integer                             |
               | price_currency      | String              | price_currency       | String                              |
               | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
@@ -413,6 +418,7 @@ RSpec.describe Usual::Example2::Product do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id                  | String              | id                   | String                              |
               | title               | String              | title                | String                              |
+              | formattedTitle      | String              | formatted_title      | String                              |
               | price_cents         | Integer             | price_cents          | Integer                             |
               | price_currency      | String              | price_currency       | String                              |
               | discount_cents      | [Integer, NilClass] | discount_cents       | [Integer, NilClass]                 |
@@ -468,6 +474,27 @@ RSpec.describe Usual::Example2::Product do
                 },
                 to: {
                   name: :title,
+                  type: String,
+                  required: true,
+                  default: nil,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil,
+                  include: nil
+                }
+              },
+              formattedTitle: {
+                from: {
+                  name: :formattedTitle,
+                  type: String,
+                  min: nil,
+                  max: nil,
+                  consists_of: false,
+                  format: nil
+                },
+                to: {
+                  name: :formatted_title,
                   type: String,
                   required: true,
                   default: nil,

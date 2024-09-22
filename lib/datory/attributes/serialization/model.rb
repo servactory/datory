@@ -12,9 +12,9 @@ module Datory
           new.to_hash(...)
         end
 
-        def prepare(data)
+        def prepare(data, collection_of_attributes)
           if data.is_a?(Hash)
-            build(data.deep_dup)
+            build(collection_of_attributes, data.deep_dup)
           else
             data
           end
@@ -28,17 +28,34 @@ module Datory
           end
         end
 
-        def build(attributes = {}) # rubocop:disable Metrics/MethodLength
-          attributes.each do |key, value|
+        private
+
+        def define_setter(key, value)
+          self.class.send(:attr_accessor, key)
+
+          instance_variable_set(:"@#{key}", value)
+
+          self
+        end
+
+        def build(collection_of_attributes, attributes = {}) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+          additional_attributes = collection_of_attributes.internal_names.difference(attributes.keys).to_h do |key|
+            [key, nil]
+          end
+
+          attributes.merge(additional_attributes).each do |key, value|
             self.class.send(:attr_accessor, key)
 
             instance_variable_set(:"@#{key}", value)
 
             if value.is_a?(Array)
-              value.map! { |item| Datory::Attributes::Serialization::Model.prepare(item) }
+              value.map! { |item| Datory::Attributes::Serialization::Model.prepare(item, collection_of_attributes) }
               instance_variable_set(:"@#{key}", value)
             elsif value.is_a?(Hash)
-              instance_variable_set(:"@#{key}", Datory::Attributes::Serialization::Model.prepare(value))
+              instance_variable_set(
+                :"@#{key}",
+                Datory::Attributes::Serialization::Model.prepare(value, collection_of_attributes)
+              )
             else
               instance_variable_set(:"@#{key}", value)
             end

@@ -14,7 +14,7 @@ module Datory
           end
         else
           context = send(:new, _datory_to_model: false)
-          model = Datory::Attributes::Serialization::Model.prepare(model)
+          model = Datory::Attributes::Serialization::Model.prepare(model, collection_of_attributes)
           _serialize(context, model)
         end
       rescue Datory::Service::Exceptions::Input,
@@ -23,7 +23,7 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(data) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def deserialize(data) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/PerceivedComplexity
         prepared_data =
           if data.is_a?(Datory::Base)
             Datory::Attributes::Serialization::Model.to_hash(data)
@@ -39,6 +39,13 @@ module Datory
           end
         else
           context = send(:new, _datory_to_model: false)
+
+          additional_attributes =
+            collection_of_attributes.external_names.difference(prepared_data.symbolize_keys.keys).to_h do |key|
+              [key, nil]
+            end
+
+          prepared_data = prepared_data.merge(additional_attributes)
 
           _deserialize(context, **prepared_data)
         end
@@ -96,7 +103,8 @@ module Datory
         context.send(
           :_serialize,
           model: model,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_setters: collection_of_setters
         )
       end
 
@@ -104,7 +112,8 @@ module Datory
         context.send(
           :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_getters: collection_of_getters
         )
       end
 

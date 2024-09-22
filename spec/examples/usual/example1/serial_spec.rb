@@ -296,6 +296,7 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
+                  code: "s1",
                   premieredOn: "2008-09-03",
                   endedOn: "2008-11-26"
                 }
@@ -354,6 +355,7 @@ RSpec.describe Usual::Example1::Serial do
                 {
                   id: "27df8a44-556f-4e08-9984-4aa663b78f98",
                   number: 1,
+                  code: "s1",
                   premieredOn: "2008-09-03",
                   endedOn: "2008-11-26"
                 }
@@ -1203,6 +1205,7 @@ RSpec.describe Usual::Example1::Serial do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id          | String             | id           | String           |
               | number      | Integer            | number       | Integer          |
+              | code        | String             | code         | String           |
               | premieredOn | String             | premiered_on | Date             |
               | endedOn     | [String, NilClass] | ended_on     | [Date, NilClass] |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1319,6 +1322,7 @@ RSpec.describe Usual::Example1::Serial do
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               | id          | String             | id           | String           |
               | number      | Integer            | number       | Integer          |
+              | code        | String             | code         | String           |
               | premieredOn | String             | premiered_on | Date             |
               | endedOn     | [String, NilClass] | ended_on     | [Date, NilClass] |
               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

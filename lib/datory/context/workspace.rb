@@ -5,6 +5,14 @@ module Datory
     module Workspace
       private
 
+      def define_setter(key, value)
+        self.class.send(:attr_accessor, key)
+
+        instance_variable_set(:"@#{key}", value)
+
+        self
+      end
+
       def merge!(attributes)
         attributes.each do |key, value|
           instance_variable_set(:"@#{key}", value)
@@ -19,17 +27,19 @@ module Datory
         instance_variables.map { |instance_variable| instance_variable.to_s.sub(/^@/, "").to_sym }
       end
 
-      def _serialize(model:, collection_of_attributes:)
+      def _serialize(model:, collection_of_attributes:, collection_of_setters:)
         serialize(
           model: model,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_setters: collection_of_setters
         )
       end
 
-      def _deserialize(incoming_attributes:, collection_of_attributes:)
+      def _deserialize(incoming_attributes:, collection_of_attributes:, collection_of_getters:)
         deserialize(
           incoming_attributes: incoming_attributes,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes: collection_of_attributes,
+          collection_of_getters: collection_of_getters
         )
       end
 
