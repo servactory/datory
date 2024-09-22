@@ -14,10 +14,12 @@ module Usual
       date! :premieredOn, to: :premiered_on
       date? :endedOn, to: :ended_on
 
+      # deserialize
       getter :code do |attributes:|
         "s#{attributes.fetch(:number)}"
       end
 
+      # serialize
       setter :code do |attributes:|
         "s#{attributes.fetch(:number)}"
       end

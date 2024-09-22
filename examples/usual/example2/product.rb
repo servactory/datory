@@ -15,10 +15,12 @@ module Usual
 
       duration? :installmentDuration, to: :installment_duration
 
+      # deserialize
       getter :formattedTitle do |attributes:|
         "The New #{attributes.fetch(:title)} (from getter)"
       end
 
+      # serialize
       setter :formatted_title do |attributes:|
         "The New #{attributes.fetch(:title)} (from setter)"
       end
