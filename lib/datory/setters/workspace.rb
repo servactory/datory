@@ -11,7 +11,7 @@ module Datory
         collection_of_setters.each do |setter|
           hash = Datory::Attributes::Serialization::Model.to_hash(model)
 
-          model.add(setter.name, setter.block.call(attributes: hash))
+          model.send(:define_setter, setter.name, setter.block.call(attributes: hash))
         end
       end
     end

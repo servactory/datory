@@ -5,6 +5,14 @@ module Datory
     module Workspace
       private
 
+      def define_setter(key, value)
+        self.class.send(:attr_accessor, key)
+
+        instance_variable_set(:"@#{key}", value)
+
+        self
+      end
+
       def merge!(attributes)
         attributes.each do |key, value|
           instance_variable_set(:"@#{key}", value)
