@@ -14,14 +14,14 @@ module Datory
 
         def prepare(data)
           if data.is_a?(Hash)
-            build(data)
+            build(data.deep_dup)
           else
             data
           end
         end
 
         def to_hash(data)
-          if data.is_a?(Datory::Attributes::Serialization::Model)
+          if data.is_a?(Datory::Attributes::Serialization::Model) || data.is_a?(Datory::Base)
             parse(data)
           else
             data
@@ -60,9 +60,9 @@ module Datory
             value = data.instance_variable_get(key)
 
             value =
-              if value.is_a?(Array)
-                value.map! { |item| Datory::Attributes::Serialization::Model.to_hash(item) }
-              elsif value.is_a?(Datory::Attributes::Serialization::Model)
+              if value.is_a?(Set) || value.is_a?(Array)
+                value.map { |item| Datory::Attributes::Serialization::Model.to_hash(item) }
+              elsif value.is_a?(Datory::Attributes::Serialization::Model) || value.is_a?(Datory::Base)
                 Datory::Attributes::Serialization::Model.to_hash(value)
               else
                 value

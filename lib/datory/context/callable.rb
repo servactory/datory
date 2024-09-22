@@ -13,7 +13,7 @@ module Datory
             serialize(model_item)
           end
         else
-          context = send(:new)
+          context = send(:new, _datory_to_model: false)
           model = Datory::Attributes::Serialization::Model.prepare(model)
           _serialize(context, model)
         end
@@ -23,18 +23,24 @@ module Datory
         raise Datory::Exceptions::SerializationError.new(message: e.message)
       end
 
-      def deserialize(json) # rubocop:disable Metrics/MethodLength
-        # TODO: Need to improve this place by adding more checks and an error exception.
-        parsed_data = json.is_a?(String) ? JSON.parse(json) : json
+      def deserialize(data) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        prepared_data =
+          if data.is_a?(Datory::Base)
+            Datory::Attributes::Serialization::Model.to_hash(data)
+          elsif data.is_a?(String)
+            JSON.parse(data)
+          else
+            data
+          end
 
-        if [Set, Array].include?(parsed_data.class)
-          parsed_data.map do |item|
+        if [Set, Array].include?(prepared_data.class)
+          prepared_data.map do |item|
             deserialize(item)
           end
         else
-          context = send(:new)
+          context = send(:new, _datory_to_model: false)
 
-          _deserialize(context, **parsed_data)
+          _deserialize(context, **prepared_data)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
@@ -47,10 +53,21 @@ module Datory
         raise Datory::Exceptions::DeserializationError.new(message: message, meta: { original_exception: e })
       end
 
-      def to_model(**attributes)
-        context = send(:new)
+      def new(_datory_to_model: true, **attributes) # rubocop:disable Lint/UnderscorePrefixedVariableName
+        context = super()
 
-        _to_model(context, **attributes)
+        return context unless _datory_to_model
+
+        direction = :serialization
+
+        if defined?(@_datory_model_type) && @_datory_model_type[context.class.name].present?
+          direction = @_datory_model_type.fetch(context.class.name)
+          @_datory_model_type.delete(context.class.name)
+        end
+
+        direction = direction.to_s.inquiry
+
+        _to_model(context, direction: direction, **attributes)
       end
 
       def describe
@@ -60,6 +77,18 @@ module Datory
         )
       end
       alias table describe
+
+      def serialization
+        assign_datory_model_type(:serialization)
+
+        self
+      end
+
+      def deserialization
+        assign_datory_model_type(:deserialization)
+
+        self
+      end
 
       private
 
@@ -81,11 +110,20 @@ module Datory
         )
       end
 
-      def _to_model(context, **attributes)
+      def _to_model(context, direction:, **attributes)
         context.send(
           :_to_model,
-          attributes: attributes
+          direction: direction,
+          attributes: attributes,
+          collection_of_attributes: collection_of_attributes
         )
+      end
+
+      def assign_datory_model_type(type)
+        data = { name => type }
+
+        @_datory_model_type =
+          defined?(@_datory_model_type) ? @_datory_model_type.merge(data) : data
       end
     end
   end

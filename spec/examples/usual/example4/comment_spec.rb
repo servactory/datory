@@ -69,7 +69,7 @@ RSpec.describe Usual::Example4::Comment do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:comment) do
-          Usual::Example4::Comment.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: "Hello. This is my first comment here."
           )
@@ -80,7 +80,7 @@ RSpec.describe Usual::Example4::Comment do
 
       context "when the data required for work is invalid" do
         let(:comment) do
-          Usual::Example4::Comment.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: 123 # THIS
           )
@@ -120,6 +120,8 @@ RSpec.describe Usual::Example4::Comment do
       describe "singular" do
         subject(:perform) { described_class.serialize(comment) }
 
+        it { expect { perform }.not_to(change { comment }) }
+
         it do
           expect(perform).to match(
             {
@@ -137,6 +139,8 @@ RSpec.describe Usual::Example4::Comment do
         subject(:perform) { described_class.serialize(comments) }
 
         let(:comments) { [comment] }
+
+        it { expect { perform }.not_to(change { comments }) }
 
         it do
           expect(perform).to contain_exactly(
@@ -161,7 +165,7 @@ RSpec.describe Usual::Example4::Comment do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:comment) do
-          Usual::Example4::Comment.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: "Hello. This is my first comment here."
           )
@@ -172,7 +176,7 @@ RSpec.describe Usual::Example4::Comment do
 
       context "when the data required for work is invalid" do
         let(:comment) do
-          Usual::Example4::Comment.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example4::Comment.new( # rubocop:disable RSpec/DescribedClass
             id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
             content: 123 # THIS
           )
@@ -202,8 +206,8 @@ RSpec.describe Usual::Example4::Comment do
         let(:json) { comment }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example4::Comment) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example4::Comment) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -220,8 +224,8 @@ RSpec.describe Usual::Example4::Comment do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example4::Comment) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example4::Comment) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(
@@ -239,6 +243,30 @@ RSpec.describe Usual::Example4::Comment do
       subject(:perform) { described_class.deserialize(comment) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
+    end
+
+    describe "objects" do
+      context "when the data required for work is valid" do
+        let(:comment) do
+          Usual::Example4::Comment.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
+            content: "Hello. This is my first comment here."
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:comment) do
+          Usual::Example4::Comment.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "f68a889c-0e2c-4f44-940b-cfb4aabea919",
+            content: 123 # THIS
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
     describe "hash" do

@@ -69,7 +69,7 @@ RSpec.describe Usual::Example2::Product do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example2::Product.new( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
             price_cents: 999_00,
@@ -83,7 +83,7 @@ RSpec.describe Usual::Example2::Product do
 
       context "when the data required for work is invalid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example2::Product.new( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
             price_cents: "999.00",
@@ -132,6 +132,8 @@ RSpec.describe Usual::Example2::Product do
       describe "singular" do
         subject(:perform) { described_class.serialize(product) }
 
+        it { expect { perform }.not_to(change { product }) }
+
         it do
           expect(perform).to match(
             {
@@ -153,6 +155,8 @@ RSpec.describe Usual::Example2::Product do
         subject(:perform) { described_class.serialize(products) }
 
         let(:products) { [product] }
+
+        it { expect { perform }.not_to(change { products }) }
 
         it do
           expect(perform).to contain_exactly(
@@ -181,7 +185,7 @@ RSpec.describe Usual::Example2::Product do
     describe "objects" do
       context "when the data required for work is valid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example2::Product.new( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
             price_cents: 999_00,
@@ -195,7 +199,7 @@ RSpec.describe Usual::Example2::Product do
 
       context "when the data required for work is invalid" do
         let(:product) do
-          Usual::Example2::Product.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example2::Product.new( # rubocop:disable RSpec/DescribedClass
             id: "55363a14-aa9a-4eba-9276-7f7cec432123",
             title: "iPhone 15 Pro",
             price_cents: "999.00",
@@ -232,8 +236,8 @@ RSpec.describe Usual::Example2::Product do
         let(:json) { product }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -254,8 +258,8 @@ RSpec.describe Usual::Example2::Product do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example2::Product) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(
@@ -276,6 +280,36 @@ RSpec.describe Usual::Example2::Product do
       subject(:perform) { described_class.deserialize(product) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
+    end
+
+    describe "objects" do
+      context "when the data required for work is valid" do
+        let(:product) do
+          Usual::Example2::Product.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: 999_00,
+            price_currency: "USD",
+            quantity: 5
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:product) do
+          Usual::Example2::Product.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "55363a14-aa9a-4eba-9276-7f7cec432123",
+            title: "iPhone 15 Pro",
+            price_cents: "999.00",
+            price_currency: "USD",
+            quantity: 5
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
     describe "hash" do

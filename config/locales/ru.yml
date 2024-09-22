@@ -9,40 +9,40 @@ ru:
       cannot_be_overwritten: "[%{service_class_name}] Нельзя перезаписать следующие методы: %{list_of_methods}"
     inputs:
       undefined:
-        getter: "[%{service_class_name}] Неизвестный входящий атрибут сериализации `%{input_name}`"
-        setter: "[%{service_class_name}] Неизвестный входящий атрибут сериализации `%{input_name}`"
+        getter: "[%{service_class_name}] Неизвестный атрибут `%{input_name}`"
+        setter: "[%{service_class_name}] Неизвестный атрибут `%{input_name}`"
       validations:
         inclusion:
           default_error: "[%{service_class_name}] Неправильное значение в `%{input_name}`, должно быть одним из `%{input_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Атрибут сериализации `%{input_name}` должен \"%{code}\""
-          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` атрибута сериализации `%{input_name}`: %{exception_message}"
+          default_error: "[%{service_class_name}] Атрибут `%{input_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` атрибута `%{input_name}`: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции атрибута сериализации `%{input_name}`"
-              wrong_type: "[%{service_class_name}] Неправильный тип коллекции атрибута сериализации `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции атрибута сериализации `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции атрибута `%{input_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции атрибута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции атрибута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Атрибут сериализации `%{input_name}` не соответствует формату `%{format_name}`"
-              wrong_pattern: "[%{service_class_name}] Атрибут сериализации `%{input_name}` не соответствует формату `%{format_name}`"
-              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у атрибута сериализации `%{input_name}`"
+              default: "[%{service_class_name}] Атрибут `%{input_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Атрибут `%{input_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у атрибута `%{input_name}`"
             min:
-              default: "[%{service_class_name}] Атрибут сериализации `%{input_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+              default: "[%{service_class_name}] Атрибут `%{input_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Атрибут сериализации `%{input_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+              default: "[%{service_class_name}] Атрибут `%{input_name}` получил значение `%{value}`, которое больше `%{option_value}`"
         required:
           default_error:
-            default: "[%{service_class_name}] Обязательный атрибут сериализации `%{input_name}` отсутствует"
+            default: "[%{service_class_name}] Обязательный атрибут `%{input_name}` отсутствует"
         type:
           default_error:
-            default: "[%{service_class_name}] Неправильный тип атрибута сериализации `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            default: "[%{service_class_name}] Неправильный тип атрибута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше атрибута сериализации `%{input_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше атрибута `%{input_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
       tools:
         find_unnecessary:
           error: "[%{service_class_name}] Неожиданные атрибуты: `%{unnecessary_attributes}`"
         rules:
-          error: "[%{service_class_name}] Конфликт в опциях атрибута сериализации `%{input_name}`: `%{conflict_code}`"
+          error: "[%{service_class_name}] Конфликт в опциях атрибута `%{input_name}`: `%{conflict_code}`"
     internals:
       undefined:
         getter: "[%{service_class_name}] Неизвестный внутренний атрибут `%{internal_name}`"
@@ -73,29 +73,29 @@ ru:
               wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше внутреннего атрибута `%{internal_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
     outputs:
       undefined:
-        getter: "[%{service_class_name}] Неизвестный атрибут десериализации `%{output_name}`"
-        setter: "[%{service_class_name}] Неизвестный атрибут десериализации `%{output_name}`"
+        getter: "[%{service_class_name}] Неизвестный атрибут `%{output_name}`"
+        setter: "[%{service_class_name}] Неизвестный атрибут `%{output_name}`"
       validations:
         inclusion:
           default_error: "[%{service_class_name}] Неправильное значение в `%{output_name}`, должно быть одним из `%{output_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Атрибут десериализации `%{output_name}` должен \"%{code}\""
-          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` атрибута десериализации `%{output_name}`: %{exception_message}"
+          default_error: "[%{service_class_name}] Атрибут `%{output_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` атрибута `%{output_name}`: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции атрибута десериализации `%{output_name}`"
-              wrong_type: "[%{service_class_name}] Неправильный тип коллекции атрибута десериализации `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции атрибута десериализации `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции атрибута `%{output_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Атрибут десериализации `%{output_name}` не соответствует формату `%{format_name}`"
-              wrong_pattern: "[%{service_class_name}] Атрибут десериализации `%{output_name}` не соответствует формату `%{format_name}`"
-              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у атрибута десериализации `%{output_name}`"
+              default: "[%{service_class_name}] Атрибут `%{output_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Атрибут `%{output_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у атрибута `%{output_name}`"
             min:
-              default: "[%{service_class_name}] Атрибут десериализации `%{output_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+              default: "[%{service_class_name}] Атрибут `%{output_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Атрибут десериализации `%{output_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+              default: "[%{service_class_name}] Атрибут `%{output_name}` получил значение `%{value}`, которое больше `%{option_value}`"
         type:
           default_error:
-            default: "[%{service_class_name}] Неправильный тип атрибута десериализации `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            default: "[%{service_class_name}] Неправильный тип атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше атрибута десериализации `%{output_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше атрибута `%{output_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"

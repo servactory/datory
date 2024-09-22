@@ -68,7 +68,7 @@ RSpec.describe Usual::Example1::Serial do
 
     describe "objects" do
       let(:poster) do
-        Usual::Example1::Image.to_model(
+        Usual::Example1::Image.new(
           url: "...",
           default: true
         )
@@ -76,7 +76,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:countries) do
         [
-          Usual::Example1::Country.to_model(
+          Usual::Example1::Country.new(
             name: "United States",
             iso2: "us" # rubocop:disable Naming/VariableNumber
           )
@@ -85,15 +85,15 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:genres) do
         [
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Crime",
             code: "crime"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Drama",
             code: "drama"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Thriller",
             code: "thriller"
           )
@@ -102,7 +102,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:seasons) do
         [
-          Usual::Example1::Season.to_model(
+          Usual::Example1::Season.new(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
             premiered_on: Date.new(2008, 9, 3),
@@ -112,8 +112,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -123,7 +123,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is valid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -142,7 +142,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is invalid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -206,8 +206,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Ratings.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -259,6 +259,8 @@ RSpec.describe Usual::Example1::Serial do
     shared_examples "successful results" do
       describe "singular" do
         subject(:perform) { described_class.serialize(serial) }
+
+        it { expect { perform }.not_to(change { serial }) }
 
         it do
           expect(perform).to match(
@@ -315,6 +317,8 @@ RSpec.describe Usual::Example1::Serial do
         subject(:perform) { described_class.serialize(serials) }
 
         let(:serials) { [serial] }
+
+        it { expect { perform }.not_to(change { serials }) }
 
         it do
           expect(perform).to contain_exactly(
@@ -376,7 +380,7 @@ RSpec.describe Usual::Example1::Serial do
 
     describe "objects" do
       let(:poster) do
-        Usual::Example1::Image.to_model(
+        Usual::Example1::Image.new(
           url: "...",
           default: true
         )
@@ -384,7 +388,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:countries) do
         [
-          Usual::Example1::Country.to_model(
+          Usual::Example1::Country.new(
             name: "United States",
             iso2: "us" # rubocop:disable Naming/VariableNumber
           )
@@ -393,15 +397,15 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:genres) do
         [
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Crime",
             code: "crime"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Drama",
             code: "drama"
           ),
-          Usual::Example1::Genre.to_model(
+          Usual::Example1::Genre.new(
             name: "Thriller",
             code: "thriller"
           )
@@ -410,7 +414,7 @@ RSpec.describe Usual::Example1::Serial do
 
       let(:seasons) do
         [
-          Usual::Example1::Season.to_model(
+          Usual::Example1::Season.new(
             id: "27df8a44-556f-4e08-9984-4aa663b78f98",
             number: 1,
             premiered_on: Date.new(2008, 9, 3),
@@ -420,8 +424,8 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        Usual::Example1::Ratings.new(
+          imdb: Usual::Example1::Rating.new(
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
@@ -431,7 +435,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is valid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -450,7 +454,7 @@ RSpec.describe Usual::Example1::Serial do
 
       context "when the data required for work is invalid" do
         let(:serial) do
-          Usual::Example1::Serial.to_model( # rubocop:disable RSpec/DescribedClass
+          Usual::Example1::Serial.new( # rubocop:disable RSpec/DescribedClass
             id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
             title: "Sons of Anarchy",
             status: "ended",
@@ -514,13 +518,13 @@ RSpec.describe Usual::Example1::Serial do
       end
 
       let(:ratings) do
-        Usual::Example1::Ratings.to_model(
-          imdb: Usual::Example1::Rating.to_model(
+        {
+          imdb: {
             value: 8.6,
             quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
-          )
-        )
+          }
+        }
       end
 
       context "when the data required for work is valid" do
@@ -571,8 +575,8 @@ RSpec.describe Usual::Example1::Serial do
         let(:json) { serial }
 
         specify "root", :aggregate_failures do
-          expect(perform).to be_a(Servactory::Result)
-          expect(perform).to an_instance_of(Datory::Result)
+          expect(perform).to be_a(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to an_instance_of(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             have_attributes(
@@ -590,8 +594,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "poster", :aggregate_failures do
-          expect(perform.poster).to be_a(Servactory::Result)
-          expect(perform.poster).to an_instance_of(Datory::Result)
+          expect(perform.poster).to be_a(Usual::Example1::Image)
+          expect(perform.poster).to an_instance_of(Usual::Example1::Image)
 
           expect(perform.poster).to(
             have_attributes(
@@ -604,8 +608,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "countries", :aggregate_failures do
           expect(perform.countries).to be_an(Array)
 
-          expect(perform.countries).to all be_a(Servactory::Result)
-          expect(perform.countries).to all an_instance_of(Datory::Result)
+          expect(perform.countries).to all be_a(Usual::Example1::Country)
+          expect(perform.countries).to all an_instance_of(Usual::Example1::Country)
 
           expect(perform.countries.first).to(
             have_attributes(
@@ -616,8 +620,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "genres", :aggregate_failures do
-          expect(perform.genres).to all be_a(Servactory::Result)
-          expect(perform.genres).to all an_instance_of(Datory::Result)
+          expect(perform.genres).to all be_a(Usual::Example1::Genre)
+          expect(perform.genres).to all an_instance_of(Usual::Example1::Genre)
 
           expect(perform.genres.first).to(
             have_attributes(
@@ -642,8 +646,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "seasons", :aggregate_failures do
-          expect(perform.seasons).to all be_a(Servactory::Result)
-          expect(perform.seasons).to all an_instance_of(Datory::Result)
+          expect(perform.seasons).to all be_a(Usual::Example1::Season)
+          expect(perform.seasons).to all an_instance_of(Usual::Example1::Season)
 
           expect(perform.seasons.first).to(
             have_attributes(
@@ -656,8 +660,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "ratings", :aggregate_failures do
-          expect(perform.ratings).to be_a(Servactory::Result)
-          expect(perform.ratings).to an_instance_of(Datory::Result)
+          expect(perform.ratings).to be_a(Usual::Example1::Ratings)
+          expect(perform.ratings).to an_instance_of(Usual::Example1::Ratings)
 
           expect(perform.ratings).to(
             have_attributes(
@@ -677,8 +681,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "root", :aggregate_failures do
           expect(perform).to be_an(Array)
 
-          expect(perform).to all be_a(Servactory::Result)
-          expect(perform).to all an_instance_of(Datory::Result)
+          expect(perform).to all be_a(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
+          expect(perform).to all an_instance_of(Usual::Example1::Serial) # rubocop:disable RSpec/DescribedClass
 
           expect(perform).to(
             all(
@@ -698,8 +702,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "poster", :aggregate_failures do
-          expect(perform.first.poster).to be_a(Servactory::Result)
-          expect(perform.first.poster).to an_instance_of(Datory::Result)
+          expect(perform.first.poster).to be_a(Usual::Example1::Image)
+          expect(perform.first.poster).to an_instance_of(Usual::Example1::Image)
 
           expect(perform.first.poster).to(
             have_attributes(
@@ -712,8 +716,8 @@ RSpec.describe Usual::Example1::Serial do
         specify "countries", :aggregate_failures do
           expect(perform.first.countries).to be_an(Array)
 
-          expect(perform.first.countries).to all be_a(Servactory::Result)
-          expect(perform.first.countries).to all an_instance_of(Datory::Result)
+          expect(perform.first.countries).to all be_a(Usual::Example1::Country)
+          expect(perform.first.countries).to all an_instance_of(Usual::Example1::Country)
 
           expect(perform.first.countries.first).to(
             have_attributes(
@@ -724,8 +728,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "genres", :aggregate_failures do
-          expect(perform.first.genres).to all be_a(Servactory::Result)
-          expect(perform.first.genres).to all an_instance_of(Datory::Result)
+          expect(perform.first.genres).to all be_a(Usual::Example1::Genre)
+          expect(perform.first.genres).to all an_instance_of(Usual::Example1::Genre)
 
           expect(perform.first.genres.first).to(
             have_attributes(
@@ -750,8 +754,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "seasons", :aggregate_failures do
-          expect(perform.first.seasons).to all be_a(Servactory::Result)
-          expect(perform.first.seasons).to all an_instance_of(Datory::Result)
+          expect(perform.first.seasons).to all be_a(Usual::Example1::Season)
+          expect(perform.first.seasons).to all an_instance_of(Usual::Example1::Season)
 
           expect(perform.first.seasons.first).to(
             have_attributes(
@@ -764,8 +768,8 @@ RSpec.describe Usual::Example1::Serial do
         end
 
         specify "ratings", :aggregate_failures do
-          expect(perform.first.ratings).to be_a(Servactory::Result)
-          expect(perform.first.ratings).to an_instance_of(Datory::Result)
+          expect(perform.first.ratings).to be_a(Usual::Example1::Ratings)
+          expect(perform.first.ratings).to an_instance_of(Usual::Example1::Ratings)
 
           expect(perform.first.ratings).to(
             have_attributes(
@@ -784,6 +788,100 @@ RSpec.describe Usual::Example1::Serial do
       subject(:perform) { described_class.deserialize(serial) }
 
       it { expect { perform }.to raise_error(Datory::Exceptions::DeserializationError) }
+    end
+
+    describe "objects" do
+      let(:poster) do
+        Usual::Example1::Image.deserialization.new(
+          url: "...",
+          default: true
+        )
+      end
+
+      let(:countries) do
+        [
+          Usual::Example1::Country.deserialization.new(
+            name: "United States",
+            iso2: "us" # rubocop:disable Naming/VariableNumber
+          )
+        ]
+      end
+
+      let(:genres) do
+        [
+          Usual::Example1::Genre.deserialization.new(
+            name: "Crime",
+            code: "crime"
+          ),
+          Usual::Example1::Genre.deserialization.new(
+            name: "Drama",
+            code: "drama"
+          ),
+          Usual::Example1::Genre.deserialization.new(
+            name: "Thriller",
+            code: "thriller"
+          )
+        ]
+      end
+
+      let(:seasons) do
+        [
+          Usual::Example1::Season.deserialization.new(
+            id: "27df8a44-556f-4e08-9984-4aa663b78f98",
+            number: 1,
+            premieredOn: "2008-09-03", # THIS
+            endedOn: "2008-11-26"
+          )
+        ]
+      end
+
+      let(:ratings) do
+        Usual::Example1::Ratings.deserialization.new(
+          imdb: Usual::Example1::Rating.deserialization.new(
+            value: 8.6,
+            quantity: 324_000,
+            linkUrl: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
+          )
+        )
+      end
+
+      context "when the data required for work is valid" do
+        let(:serial) do
+          Usual::Example1::Serial.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            title: "Sons of Anarchy",
+            status: "ended",
+            poster: poster,
+            countries: countries,
+            genres: genres,
+            seasons: seasons,
+            ratings: ratings,
+            unusedAttribute: "NOTE: This attribute is redundant. It tests success and ignore.",
+            premieredOn: "2008-09-03" # THIS
+          )
+        end
+
+        it_behaves_like "successful results"
+      end
+
+      context "when the data required for work is invalid" do
+        let(:serial) do
+          Usual::Example1::Serial.deserialization.new( # rubocop:disable RSpec/DescribedClass
+            id: "5eb3c7c2-2fbf-4266-9de9-36c6df823edd",
+            title: "Sons of Anarchy",
+            status: "ended",
+            poster: poster,
+            countries: countries,
+            genres: genres,
+            seasons: seasons,
+            ratings: ratings,
+            unusedAttribute: "NOTE: This attribute is redundant. It tests success and ignore.",
+            premieredOn: Date.new(2008, 9, 3) # THIS
+          )
+        end
+
+        it_behaves_like "unsuccessful results"
+      end
     end
 
     describe "hash" do
@@ -1007,21 +1105,21 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                 Usual::Example1::Serial                                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From   | To           | As                     | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String | id           | String                 |                          |
-              | status      | String | status       | String                 |                          |
-              | title       | String | title        | String                 |                          |
-              | poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
-              | ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
-              | countries   | Array  | countries    | Array                  | Usual::Example1::Country |
-              | genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
-              | seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
-              | premieredOn | String | premiered_on | Date                   |                          |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                   Usual::Example1::Serial                                                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From                             | To           | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String                           | id           | String                           |                          |
+              | status      | String                           | status       | String                           |                          |
+              | title       | String                           | title        | String                           |                          |
+              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Hash]   | Usual::Example1::Image   |
+              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Hash] | Usual::Example1::Ratings |
+              | countries   | Array                            | countries    | Array                            | Usual::Example1::Country |
+              | genres      | Array                            | genres       | Array                            | Usual::Example1::Genre   |
+              | seasons     | Array                            | seasons      | Array                            | Usual::Example1::Season  |
+              | premieredOn | String                           | premiered_on | Date                             |                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1123,21 +1221,21 @@ RSpec.describe Usual::Example1::Serial do
         expect { perform }.to(
           output(
             <<~TABLE
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              |                                 Usual::Example1::Serial                                 |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | Attribute   | From   | To           | As                     | Include                  |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              | id          | String | id           | String                 |                          |
-              | status      | String | status       | String                 |                          |
-              | title       | String | title        | String                 |                          |
-              | poster      | Hash   | poster       | [Datory::Result, Hash] | Usual::Example1::Image   |
-              | ratings     | Hash   | ratings      | [Datory::Result, Hash] | Usual::Example1::Ratings |
-              | countries   | Array  | countries    | Array                  | Usual::Example1::Country |
-              | genres      | Array  | genres       | Array                  | Usual::Example1::Genre   |
-              | seasons     | Array  | seasons      | Array                  | Usual::Example1::Season  |
-              | premieredOn | String | premiered_on | Date                   |                          |
-              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              |                                                   Usual::Example1::Serial                                                   |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | Attribute   | From                             | To           | As                               | Include                  |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              | id          | String                           | id           | String                           |                          |
+              | status      | String                           | status       | String                           |                          |
+              | title       | String                           | title        | String                           |                          |
+              | poster      | [Usual::Example1::Image, Hash]   | poster       | [Usual::Example1::Image, Hash]   | Usual::Example1::Image   |
+              | ratings     | [Usual::Example1::Ratings, Hash] | ratings      | [Usual::Example1::Ratings, Hash] | Usual::Example1::Ratings |
+              | countries   | Array                            | countries    | Array                            | Usual::Example1::Country |
+              | genres      | Array                            | genres       | Array                            | Usual::Example1::Genre   |
+              | seasons     | Array                            | seasons      | Array                            | Usual::Example1::Season  |
+              | premieredOn | String                           | premiered_on | Date                             |                          |
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             TABLE
           ).to_stdout
         )
@@ -1306,7 +1404,7 @@ RSpec.describe Usual::Example1::Serial do
               poster: {
                 from: {
                   name: :poster,
-                  type: Hash,
+                  type: [Usual::Example1::Image, Hash],
                   min: nil,
                   max: nil,
                   consists_of: false,
@@ -1314,7 +1412,7 @@ RSpec.describe Usual::Example1::Serial do
                 },
                 to: {
                   name: :poster,
-                  type: [Datory::Result, Hash],
+                  type: [Usual::Example1::Image, Hash],
                   required: true,
                   default: nil,
                   min: nil,
@@ -1331,11 +1429,11 @@ RSpec.describe Usual::Example1::Serial do
                   max: nil,
                   min: nil,
                   name: :ratings,
-                  type: Hash
+                  type: [Usual::Example1::Ratings, Hash]
                 },
                 to: {
                   name: :ratings,
-                  type: [Datory::Result, Hash],
+                  type: [Usual::Example1::Ratings, Hash],
                   required: true,
                   default: nil,
                   consists_of: false,
@@ -1351,7 +1449,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Country, Hash],
                   format: nil
                 },
                 to: {
@@ -1361,7 +1459,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Country, Hash],
                   format: nil,
                   include: Usual::Example1::Country
                 }
@@ -1372,7 +1470,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Genre, Hash],
                   format: nil
                 },
                 to: {
@@ -1382,7 +1480,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Genre, Hash],
                   format: nil,
                   include: Usual::Example1::Genre
                 }
@@ -1393,7 +1491,7 @@ RSpec.describe Usual::Example1::Serial do
                   type: Array,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Season, Hash],
                   format: nil
                 },
                 to: {
@@ -1403,7 +1501,7 @@ RSpec.describe Usual::Example1::Serial do
                   default: nil,
                   min: nil,
                   max: nil,
-                  consists_of: [Datory::Result, Hash],
+                  consists_of: [Usual::Example1::Season, Hash],
                   format: nil,
                   include: Usual::Example1::Season
                 }

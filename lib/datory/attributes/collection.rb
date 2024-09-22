@@ -4,14 +4,14 @@ module Datory
   module Attributes
     class Collection
       extend Forwardable
-      def_delegators :@collection, :<<, :each, :map, :filter, :to_h, :merge
+      def_delegators :@collection, :<<, :each, :map, :filter, :to_h, :merge, :find
 
       def initialize(collection = Set.new)
         @collection = collection
       end
 
-      def names
-        map(&:name)
+      def find_by(name:)
+        find { |attribute| attribute.from.name == name }
       end
 
       def internal_names
