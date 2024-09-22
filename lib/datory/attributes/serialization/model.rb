@@ -28,6 +28,16 @@ module Datory
           end
         end
 
+        private
+
+        def define_setter(key, value)
+          self.class.send(:attr_accessor, key)
+
+          instance_variable_set(:"@#{key}", value)
+
+          self
+        end
+
         def build(attributes = {}) # rubocop:disable Metrics/MethodLength
           attributes.each do |key, value|
             self.class.send(:attr_accessor, key)
@@ -62,16 +72,6 @@ module Datory
 
             [key.to_s.delete_prefix("@").to_sym, value]
           end
-        end
-
-        private
-
-        def define_setter(key, value)
-          self.class.send(:attr_accessor, key)
-
-          instance_variable_set(:"@#{key}", value)
-
-          self
         end
       end
     end
