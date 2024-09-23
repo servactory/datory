@@ -3,7 +3,7 @@
 module Datory
   module VERSION
     MAJOR = 2
-    MINOR = 1
+    MINOR = 2
     PATCH = 0
     PRE = "rc1"
 
