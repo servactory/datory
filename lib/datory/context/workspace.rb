@@ -3,6 +3,14 @@
 module Datory
   module Context
     module Workspace
+      class Actor
+        attr_reader :class_name
+
+        def initialize(context)
+          @class_name = context.class.name
+        end
+      end
+
       private
 
       def merge!(attributes)
@@ -46,6 +54,11 @@ module Datory
       def deserialize(**); end
 
       def to_model(**); end
+
+      # NOTE: To maintain context compatibility in Servactory exceptions.
+      def servactory_service_info
+        @servactory_service_info ||= self.class::Actor.new(self)
+      end
     end
   end
 end

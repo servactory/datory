@@ -8,22 +8,25 @@ module Datory
       end
 
       def serialize(model) # rubocop:disable Metrics/MethodLength
+        context = send(:new, _datory_to_model: false)
+
         if [Set, Array].include?(model.class)
           model.map do |model_item|
             serialize(model_item)
           end
         else
-          context = send(:new, _datory_to_model: false)
           model = Datory::Attributes::Serialization::Model.prepare(model)
           _serialize(context, model)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
              Datory::Service::Exceptions::Output => e
-        raise Datory::Exceptions::SerializationError.new(message: e.message)
+        raise Datory::Exceptions::SerializationError.new(context: e.send(:context), message: e.message)
       end
 
       def deserialize(data) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        context = send(:new, _datory_to_model: false)
+
         prepared_data =
           if data.is_a?(Datory::Base)
             Datory::Attributes::Serialization::Model.to_hash(data)
@@ -38,19 +41,21 @@ module Datory
             deserialize(item)
           end
         else
-          context = send(:new, _datory_to_model: false)
-
           _deserialize(context, **prepared_data)
         end
       rescue Datory::Service::Exceptions::Input,
              Datory::Service::Exceptions::Internal,
              Datory::Service::Exceptions::Output => e
-        raise Datory::Exceptions::DeserializationError.new(message: e.message)
+        raise Datory::Exceptions::DeserializationError.new(context: e.send(:context), message: e.message)
       rescue JSON::ParserError => e
         # TODO: Needs to be moved to I18n
         message = "Failed to parse data for deserialization: #{e.message}"
 
-        raise Datory::Exceptions::DeserializationError.new(message: message, meta: { original_exception: e })
+        raise Datory::Exceptions::DeserializationError.new(
+          context: context,
+          message: message,
+          meta: { original_exception: e }
+        )
       end
 
       def new(_datory_to_model: true, **attributes) # rubocop:disable Lint/UnderscorePrefixedVariableName
