@@ -348,6 +348,9 @@ RSpec.describe Usual::Example2::Product do
             price_currency: "USD",
             quantity: 5
           }.to_json
+
+          # EXAMPLE: To test exception.
+          # "invalid-json"
         end
 
         it_behaves_like "successful results"
