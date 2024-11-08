@@ -5,7 +5,7 @@ module Datory
     MAJOR = 2
     MINOR = 2
     PATCH = 0
-    PRE = "rc2"
+    PRE = nil
 
     STRING = [MAJOR, MINOR, PATCH, PRE].compact.join(".")
   end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datory (2.2.0.rc2)
+    datory (2.2.0)
       activesupport (>= 5.1, < 8.1)
       i18n (~> 1.14)
       servactory (>= 2.9.0)
