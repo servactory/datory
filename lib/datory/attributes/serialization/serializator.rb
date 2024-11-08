@@ -5,7 +5,7 @@ module Datory
     module Serialization
       class Serializator
         def self.serialize(model:, collection_of_attributes:)
-          new(collection_of_attributes: collection_of_attributes).serialize(model: model)
+          new(collection_of_attributes:).serialize(model:)
         end
 
         def initialize(collection_of_attributes:)

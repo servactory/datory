@@ -28,7 +28,7 @@ module Datory
             name,
             to: to.presence || name,
             from: [include, Hash],
-            include: include,
+            include:,
             as: [include, Hash]
           )
         end
@@ -40,7 +40,7 @@ module Datory
             name,
             to: to.presence || name,
             from: [include, Hash, NilClass],
-            include: include,
+            include:,
             as: [include, Hash, NilClass],
             required: false
           )
@@ -52,7 +52,7 @@ module Datory
             to: to.presence || name,
             from: Array,
             consists_of: [include, Hash],
-            include: include,
+            include:,
             as: Array
           )
         end
@@ -65,7 +65,7 @@ module Datory
             to: to.presence || name,
             from: Array,
             consists_of: [include, Hash],
-            include: include,
+            include:,
             as: Array,
             required: false,
             default: []

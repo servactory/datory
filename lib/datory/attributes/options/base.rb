@@ -17,12 +17,12 @@ module Datory
 
         def info
           {
-            name: name,
-            type: type,
-            min: min,
-            max: max,
-            consists_of: consists_of,
-            format: format
+            name:,
+            type:,
+            min:,
+            max:,
+            consists_of:,
+            format:
           }
         end
       end

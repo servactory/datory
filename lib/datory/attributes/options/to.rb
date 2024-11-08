@@ -13,13 +13,13 @@ module Datory
 
           format = format.fetch(:to, nil) if format.is_a?(Hash)
 
-          super(name: name, type: type, consists_of: consists_of, min: min, max: max, format: format)
+          super(name:, type:, consists_of:, min:, max:, format:)
         end
 
         def info
           super.merge(
-            required: required,
-            default: default,
+            required:,
+            default:,
             include: include_class
           )
         end

@@ -31,7 +31,7 @@ module Datory
           rows << row
         end
 
-        Datory::Console.print_table(title: service_class_name, headings: headings.uniq, rows: rows)
+        Datory::Console.print_table(title: service_class_name, headings: headings.uniq, rows:)
       end
     end
   end
