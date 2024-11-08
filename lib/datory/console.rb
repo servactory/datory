@@ -6,9 +6,9 @@ module Datory
   class Console
     def self.print_table(headings:, rows:, title: nil)
       table = Terminal::Table.new(
-        title: title,
-        headings: headings,
-        rows: rows,
+        title:,
+        headings:,
+        rows:,
         style: { border_x: "~", border_i: "~" }
       )
 

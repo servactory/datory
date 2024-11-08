@@ -5,14 +5,14 @@ module Datory
     class Builder < Base
       TRANSFORMATIONS = {
         SERIALIZATION: {
-          Symbol => ->(value) { value.to_sym },
-          String => ->(value) { value.to_s },
-          Integer => ->(value) { value.to_i },
-          Float => ->(value) { value.to_f },
-          Date => ->(value) { value.to_s },
-          Time => ->(value) { value.to_s },
-          DateTime => ->(value) { value.to_s },
-          ActiveSupport::Duration => ->(value) { value.iso8601 }
+          Symbol => lambda(&:to_sym),
+          String => lambda(&:to_s),
+          Integer => lambda(&:to_i),
+          Float => lambda(&:to_f),
+          Date => lambda(&:to_s),
+          Time => lambda(&:to_s),
+          DateTime => lambda(&:to_s),
+          ActiveSupport::Duration => lambda(&:iso8601)
         },
         DESERIALIZATION: {
           # NOTE: These types do not need to be cast automatically:

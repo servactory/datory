@@ -29,23 +29,23 @@ module Datory
 
       def _serialize(model:, collection_of_attributes:)
         serialize(
-          model: model,
-          collection_of_attributes: collection_of_attributes
+          model:,
+          collection_of_attributes:
         )
       end
 
       def _deserialize(incoming_attributes:, collection_of_attributes:)
         deserialize(
-          incoming_attributes: incoming_attributes,
-          collection_of_attributes: collection_of_attributes
+          incoming_attributes:,
+          collection_of_attributes:
         )
       end
 
       def _to_model(direction:, attributes:, collection_of_attributes:)
         to_model(
-          direction: direction,
-          attributes: attributes,
-          collection_of_attributes: collection_of_attributes
+          direction:,
+          attributes:,
+          collection_of_attributes:
         )
       end
 

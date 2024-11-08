@@ -2,7 +2,7 @@
 
 module Datory
   module Context
-    module Callable
+    module Callable # rubocop:disable Metrics/ModuleLength
       def form(model)
         Datory::Attributes::Form.new(self, model)
       end
@@ -52,8 +52,8 @@ module Datory
         message = "Failed to parse data for deserialization: #{e.message}"
 
         raise Datory::Exceptions::DeserializationError.new(
-          context: context,
-          message: message,
+          context:,
+          message:,
           meta: { original_exception: e }
         )
       end
@@ -72,13 +72,13 @@ module Datory
 
         direction = direction.to_s.inquiry
 
-        _to_model(context, direction: direction, **attributes)
+        _to_model(context, direction:, **attributes)
       end
 
       def describe
         Datory::Attributes::Descriptor.describe(
           service_class_name: name,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes:
         )
       end
       alias table describe
@@ -100,8 +100,8 @@ module Datory
       def _serialize(context, model)
         context.send(
           :_serialize,
-          model: model,
-          collection_of_attributes: collection_of_attributes
+          model:,
+          collection_of_attributes:
         )
       end
 
@@ -109,16 +109,16 @@ module Datory
         context.send(
           :_deserialize,
           incoming_attributes: attributes.symbolize_keys,
-          collection_of_attributes: collection_of_attributes
+          collection_of_attributes:
         )
       end
 
       def _to_model(context, direction:, **attributes)
         context.send(
           :_to_model,
-          direction: direction,
-          attributes: attributes,
-          collection_of_attributes: collection_of_attributes
+          direction:,
+          attributes:,
+          collection_of_attributes:
         )
       end
 

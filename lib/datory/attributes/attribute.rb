@@ -7,7 +7,7 @@ module Datory
 
       def initialize(name, **options) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         @from = Options::From.new(
-          name: name,
+          name:,
           type: options.fetch(:from),
           consists_of: options.fetch(:consists_of, false),
           min: options.fetch(:min, nil),
