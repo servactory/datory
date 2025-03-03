@@ -9,11 +9,9 @@ en:
       cannot_be_overwritten: "[%{service_class_name}] The following methods cannot be overwritten: %{list_of_methods}"
     inputs:
       undefined:
-        getter: "[%{service_class_name}] Undefined attribute `%{input_name}`"
-        setter: "[%{service_class_name}] Undefined attribute `%{input_name}`"
+        for_fetch: "[%{service_class_name}] Undefined attribute `%{input_name}`"
+        for_assign: "[%{service_class_name}] Undefined attribute `%{input_name}`"
       validations:
-        inclusion:
-          default_error: "[%{service_class_name}] Wrong value in `%{input_name}`, must be one of `%{input_inclusion}`"
         must:
           default_error: "[%{service_class_name}] Attribute `%{input_name}` must \"%{code}\""
           syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{input_name}` attribute: %{exception_message}"
@@ -26,18 +24,26 @@ en:
               default: "[%{service_class_name}] Attribute `%{input_name}` does not match `%{format_name}` format"
               wrong_pattern: "[%{service_class_name}] Attribute `%{input_name}` does not match `%{format_name}` format"
               unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for attribute `%{input_name}`"
+            inclusion:
+              default: "[%{service_class_name}] Wrong value in `%{input_name}`, must be one of `%{input_inclusion}`, got `%{value}`"
             min:
               default: "[%{service_class_name}] Attribute `%{input_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
               default: "[%{service_class_name}] Attribute `%{input_name}` received value `%{value}`, which is greater than `%{option_value}`"
+            multiple_of:
+              default: "[%{service_class_name}] Attribute `%{input_name}` has the value `%{value}`, which is not a multiple of `%{option_value}`"
+              blank: "[%{service_class_name}] Attribute `%{input_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+              divided_by_0: "[%{service_class_name}] Attribute `%{input_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+            schema:
+              wrong_type: "[%{service_class_name}] Wrong type of attribute `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_value: "[%{service_class_name}] Wrong value in attribute hash `%{input_name}`, expected value of type `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
         required:
           default_error:
             default: "[%{service_class_name}] Required attribute `%{input_name}` is missing"
         type:
           default_error:
             default: "[%{service_class_name}] Wrong type of attribute `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
-            for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
       tools:
         find_unnecessary:
           error: "[%{service_class_name}] Unexpected attributes: `%{unnecessary_attributes}`"
@@ -45,11 +51,9 @@ en:
           error: "[%{service_class_name}] Conflict in `%{input_name}` attribute options: `%{conflict_code}`"
     internals:
       undefined:
-        getter: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"
-        setter: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"
+        for_fetch: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"
+        for_assign: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"
       validations:
-        inclusion:
-          default_error: "[%{service_class_name}] Wrong value in `%{internal_name}`, must be one of `%{internal_inclusion}`"
         must:
           default_error: "[%{service_class_name}] Internal attribute `%{internal_name}` must \"%{code}\""
           syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{internal_name}` internal attribute: %{exception_message}"
@@ -62,22 +66,28 @@ en:
               default: "[%{service_class_name}] Internal attribute `%{internal_name}` does not match `%{format_name}` format"
               wrong_pattern: "[%{service_class_name}] Internal attribute `%{internal_name}` does not match `%{format_name}` format"
               unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for internal attribute `%{internal_name}`"
+            inclusion:
+              default: "[%{service_class_name}] Wrong value in `%{internal_name}`, must be one of `%{internal_inclusion}`, got `%{value}`"
             min:
               default: "[%{service_class_name}] Internal attribute `%{internal_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
               default: "[%{service_class_name}] Internal attribute `%{internal_name}` received value `%{value}`, which is greater than `%{option_value}`"
+            multiple_of:
+              default: "[%{service_class_name}] Internal attribute `%{internal_name}` has the value `%{value}`, which is not a multiple of `%{option_value}`"
+              blank: "[%{service_class_name}] Internal attribute `%{internal_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+              divided_by_0: "[%{service_class_name}] Internal attribute `%{internal_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+            schema:
+              wrong_type: "[%{service_class_name}] Wrong type of internal attribute `%{internal_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in internal attribute hash `%{internal_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_value: "[%{service_class_name}] Wrong value in internal attribute hash `%{internal_name}`, expected value of type `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
         type:
           default_error:
             default: "[%{service_class_name}] Wrong type of internal attribute `%{internal_name}`, expected `%{expected_type}`, got `%{given_type}`"
-            for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in internal attribute hash `%{internal_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
     outputs:
       undefined:
-        getter: "[%{service_class_name}] Undefined attribute `%{output_name}`"
-        setter: "[%{service_class_name}] Undefined attribute `%{output_name}`"
+        for_fetch: "[%{service_class_name}] Undefined attribute `%{output_name}`"
+        for_assign: "[%{service_class_name}] Undefined attribute `%{output_name}`"
       validations:
-        inclusion:
-          default_error: "[%{service_class_name}] Wrong value in `%{output_name}`, must be one of `%{output_inclusion}`"
         must:
           default_error: "[%{service_class_name}] Attribute `%{output_name}` must \"%{code}\""
           syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{output_name}` attribute: %{exception_message}"
@@ -90,12 +100,20 @@ en:
               default: "[%{service_class_name}] Attribute `%{output_name}` does not match `%{format_name}` format"
               wrong_pattern: "[%{service_class_name}] Attribute `%{output_name}` does not match `%{format_name}` format"
               unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for attribute `%{output_name}`"
+            inclusion:
+              default: "[%{service_class_name}] Wrong value in `%{output_name}`, must be one of `%{output_inclusion}`, got `%{value}`"
             min:
               default: "[%{service_class_name}] Attribute `%{output_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
               default: "[%{service_class_name}] Attribute `%{output_name}` received value `%{value}`, which is greater than `%{option_value}`"
+            multiple_of:
+              default: "[%{service_class_name}] Attribute `%{output_name}` has the value `%{value}`, which is not a multiple of `%{option_value}`"
+              blank: "[%{service_class_name}] Attribute `%{output_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+              divided_by_0: "[%{service_class_name}] Attribute `%{output_name}` has an invalid value `%{option_value}` in option `%{option_name}`"
+            schema:
+              wrong_type: "[%{service_class_name}] Wrong type of attribute `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{output_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_value: "[%{service_class_name}] Wrong value in attribute hash `%{output_name}`, expected value of type `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
         type:
           default_error:
             default: "[%{service_class_name}] Wrong type of attribute `%{output_name}`, expected `%{expected_type}`, got `%{given_type}`"
-            for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in attribute hash `%{output_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
