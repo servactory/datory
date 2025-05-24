@@ -5,22 +5,22 @@ module Datory
     class Builder < Base
       TRANSFORMATIONS = {
         SERIALIZATION: {
-          Symbol => lambda(&:to_sym),
-          String => lambda(&:to_s),
-          Integer => lambda(&:to_i),
-          Float => lambda(&:to_f),
-          Date => lambda(&:to_s),
-          Time => lambda(&:to_s),
-          DateTime => lambda(&:to_s),
-          ActiveSupport::Duration => lambda(&:iso8601)
+          Symbol => ->(value, type) { TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value) },
+          String => ->(value, type) { TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value) },
+          Integer => ->(value, type) { TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value) },
+          Float => ->(value, type) { TRANSFORMATIONS.fetch(:DESERIALIZATION).fetch(type, ->(v) { v }).call(value) },
+          Date => ->(value, _type) { value.to_s },
+          Time => ->(value, _type) { value.to_s },
+          DateTime => ->(value, _type) { value.to_s },
+          ActiveSupport::Duration => ->(value, _type) { value.iso8601 }
         },
         DESERIALIZATION: {
           # NOTE: These types do not need to be cast automatically:
+          String => lambda(&:to_s),
           # Symbol => ->(value) { value.to_sym },
-          # String => ->(value) { value.to_s },
-          # Integer => ->(value) { value.to_i },
-          # Float => ->(value) { value.to_f },
           # NOTE: These types need to be cast automatically:
+          Integer => lambda(&:to_i),
+          Float => lambda(&:to_f),
           Date => ->(value) { Date.parse(value) },
           Time => ->(value) { Time.parse(value) },
           DateTime => ->(value) { DateTime.parse(value) },
@@ -44,7 +44,9 @@ module Datory
         define_method(method_name) do
           value = inputs.public_send(deserialized_name)
 
-          value = TRANSFORMATIONS.fetch(:SERIALIZATION).fetch(value.class, ->(v) { v }).call(value)
+          type = Array(attribute.from.type).excluding(NilClass).first
+
+          value = TRANSFORMATIONS.fetch(:SERIALIZATION).fetch(value.class, ->(v, _t) { v }).call(value, type)
 
           outputs.public_send(:"#{serialized_name}=", value)
         end
