@@ -115,7 +115,9 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.new(
           imdb: Usual::Example1::Rating.new(
             value: 8.6,
+            old_value: 8.6,
             quantity: 324_000,
+            old_quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
@@ -209,7 +211,9 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.new(
           imdb: Usual::Example1::Rating.new(
             value: 8.6,
+            old_value: 8.6,
             quantity: 324_000,
+            old_quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
@@ -303,7 +307,9 @@ RSpec.describe Usual::Example1::Serial do
               ratings: {
                 imdb: {
                   value: 8.6,
+                  oldValue: "8.6",
                   quantity: 324_000,
+                  oldQuantity: "324000",
                   linkUrl: nil
                 }
               },
@@ -361,7 +367,9 @@ RSpec.describe Usual::Example1::Serial do
               ratings: {
                 imdb: {
                   value: 8.6,
+                  oldValue: "8.6",
                   quantity: 324_000,
+                  oldQuantity: "324000",
                   linkUrl: nil
                 }
               },
@@ -427,7 +435,9 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.new(
           imdb: Usual::Example1::Rating.new(
             value: 8.6,
+            old_value: 8.6,
             quantity: 324_000,
+            old_quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
@@ -521,7 +531,9 @@ RSpec.describe Usual::Example1::Serial do
         {
           imdb: {
             value: 8.6,
+            old_value: 8.6,
             quantity: 324_000,
+            old_quantity: 324_000,
             link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           }
         }
@@ -667,7 +679,9 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
+                old_value: 8.6,
                 quantity: 324_000,
+                old_quantity: 324_000,
                 link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
@@ -775,7 +789,9 @@ RSpec.describe Usual::Example1::Serial do
             have_attributes(
               imdb: have_attributes(
                 value: 8.6,
+                old_value: 8.6,
                 quantity: 324_000,
+                old_quantity: 324_000,
                 link_url: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
               )
             )
@@ -839,7 +855,9 @@ RSpec.describe Usual::Example1::Serial do
         Usual::Example1::Ratings.deserialization.new(
           imdb: Usual::Example1::Rating.deserialization.new(
             value: 8.6,
+            oldValue: "8.6",
             quantity: 324_000,
+            oldQuantity: "324000",
             linkUrl: nil # NOTE: This example explicitly passes the value `nil` for the optional attribute.
           )
         )
@@ -926,7 +944,9 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
+                oldValue: "8.6",
                 quantity: 324_000,
+                oldQuantity: "324000",
                 linkUrl: nil
               }
             },
@@ -978,7 +998,9 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
+                oldValue: "8.6",
                 quantity: 324_000,
+                oldQuantity: "324000",
                 linkUrl: nil
               }
             },
@@ -1032,7 +1054,9 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
+                oldValue: "8.6",
                 quantity: 324_000,
+                oldQuantity: "324000",
                 linkUrl: nil
               }
             },
@@ -1084,7 +1108,9 @@ RSpec.describe Usual::Example1::Serial do
             ratings: {
               imdb: {
                 value: 8.6,
+                oldValue: "8.6",
                 quantity: 324_000,
+                oldQuantity: "324000",
                 linkUrl: nil
               }
             },
