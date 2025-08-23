@@ -4,6 +4,7 @@ module Datory
   module Attributes
     class Collection
       extend Forwardable
+
       def_delegators :@collection, :<<, :each, :map, :filter, :to_h, :merge, :find
 
       def initialize(collection = Set.new)
