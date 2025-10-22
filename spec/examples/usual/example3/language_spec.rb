@@ -78,7 +78,7 @@ RSpec.describe Usual::Example3::Language do
 
         let(:current_version) do
           Usual::Example3::Version.new(
-            name: "3.4.5"
+            name: "3.4.7"
           )
         end
 
@@ -104,7 +104,7 @@ RSpec.describe Usual::Example3::Language do
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             current: {
-              name: "3.4.5"
+              name: "3.4.7"
             }
           }
         end
@@ -138,7 +138,7 @@ RSpec.describe Usual::Example3::Language do
               id: "73031620-be3b-4088-9a78-5589ff7e1f61",
               name: "Ruby",
               currentVersion: {
-                name: "3.4.5",
+                name: "3.4.7",
                 releasedAt: nil,
                 endedAt: nil
               },
@@ -162,7 +162,7 @@ RSpec.describe Usual::Example3::Language do
               id: "73031620-be3b-4088-9a78-5589ff7e1f61",
               name: "Ruby",
               currentVersion: {
-                name: "3.4.5",
+                name: "3.4.7",
                 releasedAt: nil,
                 endedAt: nil
               },
@@ -192,7 +192,7 @@ RSpec.describe Usual::Example3::Language do
 
         let(:current_version) do
           Usual::Example3::Version.new(
-            name: "3.4.5"
+            name: "3.4.7"
           )
         end
 
@@ -222,7 +222,7 @@ RSpec.describe Usual::Example3::Language do
 
       let(:current_version) do
         {
-          name: "3.4.5"
+          name: "3.4.7"
         }
       end
 
@@ -289,7 +289,7 @@ RSpec.describe Usual::Example3::Language do
 
         let(:current_version) do
           Usual::Example3::Version.deserialization.new(
-            name: "3.4.5"
+            name: "3.4.7"
           )
         end
 
@@ -315,7 +315,7 @@ RSpec.describe Usual::Example3::Language do
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             currentVersion: {
-              name: "3.4.5"
+              name: "3.4.7"
             }
           }
         end
@@ -342,7 +342,7 @@ RSpec.describe Usual::Example3::Language do
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             currentVersion: {
-              name: "3.4.5"
+              name: "3.4.7"
             }
           }.to_json
         end
@@ -356,7 +356,7 @@ RSpec.describe Usual::Example3::Language do
             id: "73031620-be3b-4088-9a78-5589ff7e1f61",
             name: "Ruby",
             currentVersion: {
-              name: "3.4.5"
+              name: "3.4.7"
             }
           }.to_json
         end
