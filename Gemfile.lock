@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datory (2.2.4)
+    datory (2.2.5)
       activesupport (>= 5.1)
       i18n (>= 1.14)
       servactory (>= 2.16)
@@ -11,14 +11,14 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (8.0.3)
+    activesupport (8.1.0)
       base64
-      benchmark (>= 0.3)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.3.1)
       connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
+      json
       logger (>= 1.4.2)
       minitest (>= 5.1)
       securerandom (>= 0.3)
@@ -30,7 +30,6 @@ GEM
       thor (>= 0.14.0)
     ast (2.4.3)
     base64 (0.3.0)
-    benchmark (0.5.0)
     bigdecimal (3.3.1)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.4)
@@ -108,8 +107,8 @@ GEM
       rubocop-rspec (~> 3.5)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    servactory (2.16.0)
-      activesupport (>= 5.1, < 8.1)
+    servactory (2.16.1)
+      activesupport (>= 5.1)
       base64 (>= 0.2)
       bigdecimal (>= 3.1)
       i18n (>= 1.14)
