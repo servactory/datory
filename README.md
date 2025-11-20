@@ -169,7 +169,7 @@ time! :premiered_at
 #### datetime!
 
 ```ruby
-time! :premiered_at
+datetime! :premiered_at
 ```
 
 ### Nesting
