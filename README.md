@@ -232,4 +232,4 @@ We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
 
 ## License
 
-Datory is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Datory is available as open source under the terms of the [MIT License](./LICENSE).
